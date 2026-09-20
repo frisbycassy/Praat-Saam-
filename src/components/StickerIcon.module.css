@@ -1,0 +1,47 @@
+.sticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  width: 100px;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  box-shadow: var(--shadow-sm);
+  border: 3px solid var(--color-surface);
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 1px;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.sticker:hover .iconCircle:not(.locked) {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.iconCircle.locked {
+  outline-color: var(--color-locked);
+  filter: grayscale(85%);
+  opacity: 0.5;
+}
+
+.plainIconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-locked);
+}
+
+.title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.locked .title {
+  color: var(--color-text-muted);
+}

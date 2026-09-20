@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getLevelForPoints, getNextLevel } from "../data/levels";
-import { badges } from "../data/badges";
+import { findSticker, getCurrentLevelForTopic } from "../data/stickers";
+import { topics } from "../data/topics";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import ProgressBar from "../components/ProgressBar";
-import BadgeIcon from "../components/BadgeIcon";
+import StickerIcon from "../components/StickerIcon";
 import Button from "../components/Button";
 import styles from "./Dashboard.module.css";
 
@@ -31,7 +32,7 @@ function Dashboard() {
     <div className={styles.page}>
       <BilingualText
         as="h1"
-        af={`Hallo, ${user.name}!`}
+        af={`Hallo, ${user.nickname || user.firstName || user.username}!`}
         en="Hello!"
       />
 
@@ -49,12 +50,25 @@ function Dashboard() {
       </Card>
 
       <Card className={styles.summaryCard}>
-        <BilingualText as="h3" af="My Kentekens" en="My Badges" />
-        <div className={styles.badgeRow}>
-          {badges.map((badge) => (
-            <BadgeIcon key={badge.id} badge={badge} unlocked={progress.badges.includes(badge.id)} />
-          ))}
+        <BilingualText as="h3" af="My Plakkers" en="My Stickers" />
+        <div className={styles.stickerRow}>
+          {topics.map((topic) => {
+            const currentLevel = getCurrentLevelForTopic(topic.id, progress.stickers);
+            const isUnlocked = currentLevel > 0;
+            const sticker = findSticker(`${topic.id}-${Math.max(currentLevel, 1)}`);
+            return (
+              <StickerIcon
+                key={topic.id}
+                sticker={sticker}
+                unlocked={isUnlocked}
+                label={isUnlocked ? `${topic.title} Vlak ${currentLevel}` : topic.title}
+              />
+            );
+          })}
         </div>
+        <Link to="/profiel" className={styles.stickerLink}>
+          Sien al my plakkers (See all my stickers) &rarr;
+        </Link>
       </Card>
 
       <Card className={styles.ctaCard}>
@@ -63,8 +77,8 @@ function Dashboard() {
           af="Gereed om te leer?"
           en="Ready to learn?"
         />
-        <Link to="/kwartale">
-          <Button>Gaan na die Kwartale (Go to the Terms)</Button>
+        <Link to="/onderwerpe">
+          <Button>Gaan na die Onderwerpe (Go to the Topics)</Button>
         </Link>
       </Card>
     </div>

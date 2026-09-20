@@ -5,8 +5,7 @@ import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import TermsOverview from "./pages/TermsOverview";
-import ThemeList from "./pages/ThemeList";
+import TopicsOverview from "./pages/TopicsOverview";
 import Lesson from "./pages/Lesson";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
@@ -29,23 +28,15 @@ function App() {
           }
         />
         <Route
-          path="/kwartale"
+          path="/onderwerpe"
           element={
             <ProtectedRoute>
-              <TermsOverview />
+              <TopicsOverview />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/kwartale/:termId"
-          element={
-            <ProtectedRoute>
-              <ThemeList />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/les/:themeId"
+          path="/onderwerp/:topicId"
           element={
             <ProtectedRoute>
               <Lesson />

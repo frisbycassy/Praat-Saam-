@@ -14,6 +14,7 @@
   --color-success: #2fae66;
   --color-danger: #e2544b;
   --color-locked: #c9c2d9;
+  --color-flame: #ff7a3d;
 
   /* Typography */
   --font-heading: "Baloo 2", "Nunito", sans-serif;
@@ -52,6 +53,7 @@
   --color-text-muted: #b3a9cb;
   --color-border: #3a3358;
   --color-locked: #4a4368;
+  --color-flame: #ff8f5a;
 }
 
 *,

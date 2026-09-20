@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.levels {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.levels > * {
+  flex-shrink: 0;
+}

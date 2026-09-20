@@ -53,6 +53,16 @@
   flex: 1;
 }
 
+.nameRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nameRow > * {
+  flex: 1;
+  min-width: 0;
+}
+
 .switchLine {
   text-align: center;
   font-size: 0.9rem;

@@ -14,10 +14,22 @@
   gap: var(--space-md);
 }
 
-.badgeRow {
+.stickerRow {
   display: flex;
   gap: var(--space-md);
   flex-wrap: wrap;
+}
+
+.stickerLink {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.stickerLink:hover {
+  text-decoration: underline;
 }
 
 .ctaCard {

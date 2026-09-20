@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getNewlyUnlockedStickerIds } from "../data/stickers";
 
 // TEMPORARY: progress is saved to local storage on this one device/browser
 // for now, the same way AuthContext works. Once Supabase is connected,
@@ -7,9 +8,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 const STORAGE_KEY = "praatsaam-progress";
 
 const defaultProgress = {
-  points: 0,
-  completedLessons: [],
-  badges: [],
+  points: 0, // overall total, drives the general Vlak/Level system
+  completedLessons: [], // topic ids finished at least once
+  topicPoints: {}, // per-topic point buckets, drives that topic's sticker level
+  stickers: [],
+  lessonBadges: [],
   streak: { count: 0, lastActiveDate: null },
 };
 
@@ -47,44 +50,45 @@ export function ProgressProvider({ children }) {
       const gap = lastActiveDate ? daysBetween(lastActiveDate, today) : null;
       const nextCount = gap === 1 ? count + 1 : 1;
 
-      const badges =
-        nextCount >= 3 && !current.badges.includes("vlam-3")
-          ? [...current.badges, "vlam-3"]
-          : current.badges;
-
-      return { ...current, badges, streak: { count: nextCount, lastActiveDate: today } };
+      return { ...current, streak: { count: nextCount, lastActiveDate: today } };
     });
   }
 
-  // Runs once when a learner finishes a quiz. Returns a summary (points
-  // earned, any newly unlocked badges) so the results screen can
-  // celebrate them, while also saving the update to progress.
-  function completeLesson(themeId, correctCount, totalQuestions) {
-    const isFirstTimeCompleting = !progress.completedLessons.includes(themeId);
+  // Runs once when a learner finishes a topic's quiz. Returns a summary
+  // (points earned, any newly unlocked stickers/badge) so the results
+  // screen can celebrate them, while also saving the update to progress.
+  function completeLesson(topicId, correctCount) {
+    const isFirstTimeCompleting = !progress.completedLessons.includes(topicId);
     const completionBonus = 20;
     const pointsEarned = correctCount * 10 + (isFirstTimeCompleting ? completionBonus : 0);
 
-    const badges = [...progress.badges];
-    const newlyUnlockedBadges = [];
-    if (isFirstTimeCompleting && !badges.includes("eerste-les")) {
-      badges.push("eerste-les");
-      newlyUnlockedBadges.push("eerste-les");
-    }
-    if (correctCount === totalQuestions && !badges.includes("volpunte")) {
-      badges.push("volpunte");
-      newlyUnlockedBadges.push("volpunte");
-    }
+    const nextPoints = progress.points + pointsEarned;
+    const nextCompletedLessons = isFirstTimeCompleting
+      ? [...progress.completedLessons, topicId]
+      : progress.completedLessons;
+    const nextTopicPoints = {
+      ...progress.topicPoints,
+      [topicId]: (progress.topicPoints[topicId] || 0) + pointsEarned,
+    };
+
+    const newlyUnlockedStickers = getNewlyUnlockedStickerIds(progress.stickers, nextTopicPoints);
+    const stickers = [...progress.stickers, ...newlyUnlockedStickers];
+
+    const newlyUnlockedLessonBadge = isFirstTimeCompleting ? `lesson-${topicId}` : null;
+    const lessonBadges = newlyUnlockedLessonBadge
+      ? [...progress.lessonBadges, newlyUnlockedLessonBadge]
+      : progress.lessonBadges;
 
     setProgress({
       ...progress,
-      points: progress.points + pointsEarned,
-      completedLessons: isFirstTimeCompleting
-        ? [...progress.completedLessons, themeId]
-        : progress.completedLessons,
-      badges,
+      points: nextPoints,
+      completedLessons: nextCompletedLessons,
+      topicPoints: nextTopicPoints,
+      stickers,
+      lessonBadges,
     });
 
-    return { pointsEarned, newlyUnlockedBadges };
+    return { pointsEarned, newlyUnlockedStickers, newlyUnlockedLessonBadge };
   }
 
   return (

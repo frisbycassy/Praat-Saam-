@@ -15,8 +15,8 @@ function Welcome() {
           en="Speak Along! Learn Afrikaans"
         />
         <BilingualText
-          af="Speletjies, punte en kentekens om jou te help met Graad 4 Afrikaans."
-          en="Games, points and badges to help you with Grade 4 Afrikaans."
+          af="Speletjies, punte en plakkers om jou te help met Graad 4 Afrikaans."
+          en="Games, points and stickers to help you with Grade 4 Afrikaans."
         />
         <div className={styles.ctaRow}>
           <Link to="/registreer">
@@ -35,7 +35,7 @@ function Welcome() {
         </Card>
         <Card className={styles.featureCard}>
           <Award size={32} aria-hidden="true" />
-          <BilingualText as="h3" af="Kentekens" en="Badges" />
+          <BilingualText as="h3" af="Plakkers" en="Stickers" />
         </Card>
         <Card className={styles.featureCard}>
           <PartyPopper size={32} aria-hidden="true" />
