@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
-import { getLevelForPoints } from "../data/levels";
 import { topics } from "../data/topics";
 import { badges } from "../data/badges";
 import Card from "../components/Card";
@@ -17,7 +16,6 @@ import styles from "./Profile.module.css";
 function Profile() {
   const { user, updateProfile } = useAuth();
   const { progress } = useProgress();
-  const level = getLevelForPoints(progress.points);
 
   const [isEditing, setIsEditing] = useState(false);
   const [firstName, setFirstName] = useState(user.firstName || "");
@@ -116,8 +114,8 @@ function Profile() {
           <BilingualText af="Punte" en="Points" />
         </Card>
         <Card className={styles.statCard}>
-          <span className={styles.statValue}>{level.level}</span>
-          <BilingualText af={level.title} en={level.englishTitle} />
+          <span className={styles.statValue}>{progress.badges.length}</span>
+          <BilingualText af="Kentekens Ontsluit" en="Badges Unlocked" />
         </Card>
         <Card className={styles.statCard}>
           <StreakFlame count={progress.streak.count} size={48} />
