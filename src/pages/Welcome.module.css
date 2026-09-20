@@ -1,0 +1,44 @@
+.hero {
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.ctaRow {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  max-width: 960px;
+  margin: 0 auto var(--space-xl);
+  padding: 0 var(--space-lg);
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.featureCard svg {
+  color: var(--color-secondary-dark);
+}
+
+@media (max-width: 720px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
+}

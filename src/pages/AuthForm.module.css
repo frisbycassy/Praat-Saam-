@@ -1,0 +1,60 @@
+.page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-sm);
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.field input {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border);
+  font-size: 1rem;
+  font-family: inherit;
+  min-height: 48px;
+}
+
+.field input:focus-visible {
+  border-color: var(--color-primary);
+}
+
+.roleRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.roleRow > * {
+  flex: 1;
+}
+
+.switchLine {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
