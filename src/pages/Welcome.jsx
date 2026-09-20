@@ -3,12 +3,14 @@ import { Award, Rocket, PartyPopper } from "lucide-react";
 import Button from "../components/Button";
 import BilingualText from "../components/BilingualText";
 import Card from "../components/Card";
+import OwlMascot from "../components/OwlMascot";
 import styles from "./Welcome.module.css";
 
 function Welcome() {
   return (
     <>
       <section className={styles.hero}>
+        <OwlMascot size={130} />
         <BilingualText
           as="h1"
           af="Praat Saam! Leer Afrikaans"

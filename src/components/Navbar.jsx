@@ -5,6 +5,7 @@ import { useProgress } from "../context/ProgressContext";
 import { getDisplayName } from "../utils/user";
 import Avatar from "./Avatar";
 import StreakFlame from "./StreakFlame";
+import Logo from "./Logo";
 import styles from "./Navbar.module.css";
 
 function Navbar() {
@@ -22,6 +23,7 @@ function Navbar() {
   return (
     <header className={styles.bar}>
       <Link to={user ? "/tuisblad" : "/"} className={styles.logo}>
+        <Logo size={32} />
         Praat Saam!
       </Link>
 
