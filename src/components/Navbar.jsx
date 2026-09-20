@@ -29,7 +29,7 @@ function Navbar() {
         <div className={styles.right}>
           <Link to="/tuisblad" className={styles.pill}>
             <Home size={16} aria-hidden="true" />
-            <span className="label">Tuisblad</span>
+            <span className="label">Huis</span>
           </Link>
           <Link to="/onderwerpe" className={styles.pill}>
             <LayoutGrid size={16} aria-hidden="true" />
