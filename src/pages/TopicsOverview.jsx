@@ -26,7 +26,7 @@ function TopicsOverview() {
 
           return (
             <Card key={topic.id} className={styles.topicCard} onClick={() => navigate(`/onderwerp/${topic.id}`)}>
-              <div className={styles.iconCircle} style={{ backgroundColor: topic.color }}>
+              <div className={styles.iconCircle} style={{ backgroundColor: topic.colors[4] }}>
                 <Icon size={26} aria-hidden="true" />
               </div>
               <div className={styles.topicInfo}>
