@@ -2,10 +2,10 @@
 // minPoints ascending.
 export const levels = [
   { level: 1, title: "Nuweling", englishTitle: "Newbie", minPoints: 0 },
-  { level: 2, title: "Ontdekker", englishTitle: "Explorer", minPoints: 50 },
-  { level: 3, title: "Avonturier", englishTitle: "Adventurer", minPoints: 120 },
-  { level: 4, title: "Kampioen", englishTitle: "Champion", minPoints: 220 },
-  { level: 5, title: "Meester", englishTitle: "Master", minPoints: 350 },
+  { level: 2, title: "Ontdekker", englishTitle: "Explorer", minPoints: 10 },
+  { level: 3, title: "Avonturier", englishTitle: "Adventurer", minPoints: 25 },
+  { level: 4, title: "Kampioen", englishTitle: "Champion", minPoints: 50 },
+  { level: 5, title: "Meester", englishTitle: "Master", minPoints: 100 },
 ];
 
 export function getLevelForPoints(points) {
