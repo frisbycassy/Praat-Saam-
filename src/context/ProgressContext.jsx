@@ -57,8 +57,7 @@ export function ProgressProvider({ children }) {
   function completeLesson(topicId, lessonIndex, correctCount) {
     const lessonKey = `${topicId}:${lessonIndex}`;
     const isFirstTimeCompleting = !progress.completedLessons.includes(lessonKey);
-    const completionBonus = 20;
-    const pointsEarned = correctCount * 10 + (isFirstTimeCompleting ? completionBonus : 0);
+    const pointsEarned = correctCount; // 1 point per correct question
 
     const nextCompletedLessons = isFirstTimeCompleting
       ? [...progress.completedLessons, lessonKey]
