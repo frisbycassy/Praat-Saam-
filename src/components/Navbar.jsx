@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { GraduationCap, LayoutGrid, LogOut, Settings } from "lucide-react";
+import { GraduationCap, Home, LayoutGrid, LogOut, Settings } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
-import { getLevelForPoints } from "../data/levels";
 import { getDisplayName } from "../utils/user";
 import Avatar from "./Avatar";
 import StreakFlame from "./StreakFlame";
@@ -18,7 +17,6 @@ function Navbar() {
     navigate("/");
   }
 
-  const level = getLevelForPoints(progress.points);
   const isTeacher = user?.role === "teacher";
 
   return (
@@ -29,6 +27,10 @@ function Navbar() {
 
       {user && (
         <div className={styles.right}>
+          <Link to="/tuisblad" className={styles.pill}>
+            <Home size={16} aria-hidden="true" />
+            <span className="label">Tuisblad</span>
+          </Link>
           <Link to="/onderwerpe" className={styles.pill}>
             <LayoutGrid size={16} aria-hidden="true" />
             <span className="label">Onderwerpe</span>
@@ -39,14 +41,7 @@ function Navbar() {
               <span className="label">Onderwyser (Teacher)</span>
             </span>
           ) : (
-            <>
-              <Link to="/profiel" className={styles.pill}>
-                <span className="label">
-                  Vlak {level.level} - {level.title}
-                </span>
-              </Link>
-              <StreakFlame count={progress.streak.count} size={30} />
-            </>
+            <StreakFlame count={progress.streak.count} size={30} />
           )}
           <Link
             to="/instellings"
