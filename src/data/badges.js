@@ -1,8 +1,8 @@
-// Every topic has 5 badges, one per lesson slot, using
-// src/assets/badge-sprite.png (8 rows - one per topic - by 5 columns:
-// V, IV, III, II, then a star for the 5th/final lesson). Finishing a
-// topic's lesson N unlocks that topic's badge N. Simple, direct, no
-// points thresholds involved.
+// Every topic has 5 badges, one per lesson slot, rendered as an
+// original SVG shield (see BadgeIcon) using that topic's icon and its
+// level color (muted for lesson 1, vivid for lesson 5). Finishing a
+// topic's lesson N unlocks that topic's badge N - simple and direct,
+// no points thresholds involved.
 import { topics } from "./topics";
 
 export const badges = topics.flatMap((topic) =>
@@ -10,8 +10,8 @@ export const badges = topics.flatMap((topic) =>
     id: `${topic.id}:${lessonIndex}`,
     topicId: topic.id,
     lessonIndex,
-    spriteRow: topic.spriteRow,
-    spriteCol: lessonIndex,
+    icon: topic.icon,
+    color: topic.colors[lessonIndex],
     title: `${topic.title} - Les ${lessonIndex + 1}`,
     englishTitle: `${topic.englishTitle} - Lesson ${lessonIndex + 1}`,
   })),
