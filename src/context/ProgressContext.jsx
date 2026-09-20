@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { PASS_THRESHOLD } from "../utils/lessonAccess";
 
 // TEMPORARY: progress is saved to local storage on this one device/browser
 // for now, the same way AuthContext works. Once Supabase is connected,
@@ -10,6 +11,7 @@ const defaultProgress = {
   points: 0, // overall total, drives the general Vlak/Level system
   completedLessons: [], // "topicId:lessonIndex" strings
   badges: [], // "topicId:lessonIndex" strings, one per earned badge
+  lessonScores: {}, // "topicId:lessonIndex" -> best correctCount achieved
   streak: { count: 0, lastActiveDate: null },
 };
 
@@ -63,8 +65,11 @@ export function ProgressProvider({ children }) {
       ? [...progress.completedLessons, lessonKey]
       : progress.completedLessons;
 
-    const newlyUnlockedBadge =
-      isFirstTimeCompleting && !progress.badges.includes(lessonKey) ? lessonKey : null;
+    const bestScore = Math.max(progress.lessonScores[lessonKey] || 0, correctCount);
+    const lessonScores = { ...progress.lessonScores, [lessonKey]: bestScore };
+
+    const hasPassed = correctCount >= PASS_THRESHOLD;
+    const newlyUnlockedBadge = hasPassed && !progress.badges.includes(lessonKey) ? lessonKey : null;
     const badges = newlyUnlockedBadge ? [...progress.badges, newlyUnlockedBadge] : progress.badges;
 
     setProgress({
@@ -72,6 +77,7 @@ export function ProgressProvider({ children }) {
       points: progress.points + pointsEarned,
       completedLessons: nextCompletedLessons,
       badges,
+      lessonScores,
     });
 
     return { pointsEarned, newlyUnlockedBadge };

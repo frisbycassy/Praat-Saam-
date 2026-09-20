@@ -5,6 +5,7 @@ import { findLesson } from "../data/lessons";
 import { badgesForTopic } from "../data/badges";
 import { useProgress } from "../context/ProgressContext";
 import { useAuth } from "../context/AuthContext";
+import { canAccessLesson, isLessonPassed, PASS_THRESHOLD } from "../utils/lessonAccess";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import BadgeIcon from "../components/BadgeIcon";
@@ -38,13 +39,28 @@ function TopicDetail() {
       </Button>
 
       <BilingualText as="h1" af={topic.title} en={topic.englishTitle} />
+      <BilingualText
+        af={`Kry ten minste ${PASS_THRESHOLD}/10 reg om die volgende les te ontsluit.`}
+        en={`Score at least ${PASS_THRESHOLD}/10 to unlock the next lesson.`}
+      />
 
       <div className={styles.list}>
         {badges.map((badge, index) => {
           const lesson = findLesson(topic.id, index);
           const hasContent = Boolean(lesson);
-          const isUnlocked = hasContent || isTeacher;
+          const isUnlocked = canAccessLesson(progress, topic.id, index, isTeacher);
           const isCompleted = progress.completedLessons.includes(badge.id);
+          const passed = isLessonPassed(progress, topic.id, index);
+          const score = progress.lessonScores[badge.id];
+
+          let statusLabel = null;
+          if (!hasContent) {
+            statusLabel = isTeacher ? "Voorskou (Preview)" : "Kom binnekort (Coming soon)";
+          } else if (!isUnlocked) {
+            statusLabel = `Slaag Les ${index} eers (Pass Lesson ${index} first)`;
+          } else if (isCompleted) {
+            statusLabel = `${score}/10 ${passed ? "" : "- probeer weer (try again)"}`;
+          }
 
           return (
             <Card
@@ -53,7 +69,7 @@ function TopicDetail() {
               locked={!isUnlocked}
               onClick={isUnlocked ? () => navigate(`/onderwerp/${topic.id}/${index}`) : undefined}
             >
-              <BadgeIcon badge={badge} unlocked={isCompleted} size={48} label="" />
+              <BadgeIcon badge={badge} unlocked={passed} size={48} label="" />
               <div className={styles.lessonInfo}>
                 <BilingualText
                   as="h3"
@@ -61,15 +77,10 @@ function TopicDetail() {
                   en={hasContent ? lesson.englishTitle : `Lesson ${index + 1}`}
                 />
               </div>
-              {hasContent ? (
-                isCompleted && (
-                  <CheckCircle2 className={styles.status} size={22} aria-label="Voltooi (Completed)" />
-                )
-              ) : (
-                <span className={styles.comingSoon}>
-                  {isTeacher ? "Voorskou (Preview)" : "Kom binnekort (Coming soon)"}
-                </span>
+              {passed && (
+                <CheckCircle2 className={styles.status} size={22} aria-label="Voltooi (Completed)" />
               )}
+              {statusLabel && <span className={styles.comingSoon}>{statusLabel}</span>}
             </Card>
           );
         })}

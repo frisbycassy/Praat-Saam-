@@ -62,3 +62,8 @@
   display: flex;
   gap: var(--space-md);
 }
+
+.resultActions {
+  display: flex;
+  gap: var(--space-sm);
+}
