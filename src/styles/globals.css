@@ -1,0 +1,140 @@
+:root {
+  /* Colors */
+  --color-primary: #7c4dff;
+  --color-primary-dark: #5e35c7;
+  --color-primary-light: #f1ebfe;
+  --color-secondary: #ffb238;
+  --color-secondary-dark: #e0961a;
+  --color-accent: #ff6fa8;
+  --color-bg: #faf8ff;
+  --color-surface: #ffffff;
+  --color-text: #2a2140;
+  --color-text-muted: #6f6483;
+  --color-border: #e4dff3;
+  --color-success: #2fae66;
+  --color-danger: #e2544b;
+  --color-locked: #c9c2d9;
+
+  /* Typography */
+  --font-heading: "Baloo 2", "Nunito", sans-serif;
+  --font-body: "Nunito", sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3.5rem;
+
+  /* Shape */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --shadow-sm: 0 2px 8px rgba(35, 48, 58, 0.08);
+  --shadow-md: 0 8px 24px rgba(35, 48, 58, 0.12);
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-medium: 300ms ease;
+}
+
+/* Dark theme, toggled by ThemeContext setting data-theme on <html> */
+:root[data-theme="dark"] {
+  --color-primary: #9d7bff;
+  --color-primary-dark: #7c4dff;
+  --color-primary-light: #332b57;
+  --color-secondary: #ffc857;
+  --color-secondary-dark: #ffb238;
+  --color-accent: #ff8fbb;
+  --color-bg: #1b1730;
+  --color-surface: #26213f;
+  --color-text: #efeafb;
+  --color-text-muted: #b3a9cb;
+  --color-border: #3a3358;
+  --color-locked: #4a4368;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition-medium), color var(--transition-medium);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-primary-dark);
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Visible keyboard focus for every interactive element */
+:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
