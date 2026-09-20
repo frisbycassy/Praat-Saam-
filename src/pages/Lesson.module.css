@@ -58,7 +58,7 @@
   align-items: flex-start;
 }
 
-.badgeUnlockRow {
+.stickerUnlockRow {
   display: flex;
   gap: var(--space-md);
 }

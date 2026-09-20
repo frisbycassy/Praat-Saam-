@@ -1,11 +1,24 @@
-import term1Inligtingstekste from "./term1-inligtingstekste";
+import naamwoorde from "./naamwoorde";
+import werkwoorde from "./werkwoorde";
+import byvoeglikeNaamwoorde from "./byvoeglike-naamwoorde";
+import bywoorde from "./bywoorde";
+import voornaamwoorde from "./voornaamwoorde";
+import voorsetsels from "./voorsetsels";
+import voegwoorde from "./voegwoorde";
+import tydsvorme from "./tydsvorme";
 
-// Maps a theme id (from curriculum.js) to its lesson content. As more
-// lessons are written, import them and add a line here.
+// Maps a topic id (from topics.js) to its lesson content.
 const lessons = {
-  [term1Inligtingstekste.themeId]: term1Inligtingstekste,
+  [naamwoorde.topicId]: naamwoorde,
+  [werkwoorde.topicId]: werkwoorde,
+  [byvoeglikeNaamwoorde.topicId]: byvoeglikeNaamwoorde,
+  [bywoorde.topicId]: bywoorde,
+  [voornaamwoorde.topicId]: voornaamwoorde,
+  [voorsetsels.topicId]: voorsetsels,
+  [voegwoorde.topicId]: voegwoorde,
+  [tydsvorme.topicId]: tydsvorme,
 };
 
-export function findLesson(themeId) {
-  return lessons[themeId] || null;
+export function findLesson(topicId) {
+  return lessons[topicId] || null;
 }

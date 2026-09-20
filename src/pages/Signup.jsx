@@ -4,19 +4,24 @@ import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
+import PhotoPicker from "../components/PhotoPicker";
 import styles from "./AuthForm.module.css";
 
 function Signup() {
   const { signup } = useAuth();
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("learner");
+  const [photoUrl, setPhotoUrl] = useState(null);
 
   function handleSubmit(event) {
     event.preventDefault();
-    signup(name, email, role);
+    signup({ firstName, lastName, nickname, email, role, username, photoUrl });
     navigate("/tuisblad");
   }
 
@@ -25,14 +30,54 @@ function Signup() {
       <Card className={styles.card}>
         <BilingualText as="h2" af="Registreer" en="Sign up" />
         <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.nameRow}>
+            <div className={styles.field}>
+              <label htmlFor="firstName">Naam (Name)</label>
+              <input
+                id="firstName"
+                type="text"
+                required
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
+              />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="lastName">Van (Surname)</label>
+              <input
+                id="lastName"
+                type="text"
+                required
+                value={lastName}
+                onChange={(event) => setLastName(event.target.value)}
+              />
+            </div>
+          </div>
           <div className={styles.field}>
-            <label htmlFor="name">Naam (Name)</label>
+            <label htmlFor="nickname">Bynaam (Nickname) - opsioneel (optional)</label>
             <input
-              id="name"
+              id="nickname"
+              type="text"
+              placeholder="bv. Miss. Frisby"
+              value={nickname}
+              onChange={(event) => setNickname(event.target.value)}
+            />
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="username">Gebruikersnaam (Username)</label>
+            <input
+              id="username"
               type="text"
               required
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
+          <div className={styles.field}>
+            <span>Profielfoto (optioneel) - Profile picture (optional)</span>
+            <PhotoPicker
+              name={[firstName, lastName].filter(Boolean).join(" ") || nickname || "?"}
+              photoUrl={photoUrl}
+              onChange={setPhotoUrl}
             />
           </div>
           <div className={styles.field}>

@@ -20,27 +20,49 @@ export function AuthProvider({ children }) {
   });
 
   useEffect(() => {
-    if (user) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-    } else {
+    if (!user) {
       localStorage.removeItem(STORAGE_KEY);
+      return;
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+    } catch {
+      // A profile picture can be too large for local storage's ~5MB
+      // limit. Keep the account working in this session, just without
+      // the picture surviving a page refresh.
+      console.warn("Could not save profile picture to local storage (too large).");
     }
   }, [user]);
 
-  function signup(name, email, role = "learner") {
-    setUser({ name, email, role });
+  function signup({ firstName, lastName, nickname, email, role = "learner", username, photoUrl }) {
+    setUser({ firstName, lastName, nickname, email, role, username, photoUrl: photoUrl || null });
   }
 
   function login(email) {
-    setUser((current) => current || { name: email.split("@")[0], email, role: "learner" });
+    setUser(
+      (current) =>
+        current || {
+          firstName: email.split("@")[0],
+          lastName: "",
+          nickname: "",
+          email,
+          role: "learner",
+          username: email.split("@")[0],
+          photoUrl: null,
+        },
+    );
   }
 
   function logout() {
     setUser(null);
   }
 
+  function updateProfile(updates) {
+    setUser((current) => (current ? { ...current, ...updates } : current));
+  }
+
   return (
-    <AuthContext.Provider value={{ user, signup, login, logout }}>
+    <AuthContext.Provider value={{ user, signup, login, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

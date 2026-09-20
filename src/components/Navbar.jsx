@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Flame, GraduationCap, LogOut, Settings, Sparkles } from "lucide-react";
+import { GraduationCap, LogOut, Settings, Sparkles } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getLevelForPoints } from "../data/levels";
+import { getDisplayName } from "../utils/user";
 import Avatar from "./Avatar";
+import StreakFlame from "./StreakFlame";
 import styles from "./Navbar.module.css";
 
 function Navbar() {
@@ -40,10 +42,7 @@ function Navbar() {
                   Vlak {level.level} - {level.title}
                 </span>
               </Link>
-              <span className={styles.pill}>
-                <Flame size={16} aria-hidden="true" />
-                <span className="label">{progress.streak.count}</span>
-              </span>
+              <StreakFlame count={progress.streak.count} size={30} />
             </>
           )}
           <Link
@@ -54,7 +53,7 @@ function Navbar() {
             <Settings size={20} />
           </Link>
           <Link to="/profiel" aria-label="Profiel (Profile)">
-            <Avatar name={user.name} />
+            <Avatar name={getDisplayName(user)} photoUrl={user.photoUrl} />
           </Link>
           <button
             type="button"
