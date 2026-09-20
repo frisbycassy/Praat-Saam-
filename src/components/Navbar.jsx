@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { GraduationCap, LogOut, Settings, Sparkles } from "lucide-react";
+import { GraduationCap, LayoutGrid, LogOut, Settings } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getLevelForPoints } from "../data/levels";
@@ -29,6 +29,10 @@ function Navbar() {
 
       {user && (
         <div className={styles.right}>
+          <Link to="/onderwerpe" className={styles.pill}>
+            <LayoutGrid size={16} aria-hidden="true" />
+            <span className="label">Onderwerpe</span>
+          </Link>
           {isTeacher ? (
             <span className={styles.pill}>
               <GraduationCap size={16} aria-hidden="true" />
@@ -37,7 +41,6 @@ function Navbar() {
           ) : (
             <>
               <Link to="/profiel" className={styles.pill}>
-                <Sparkles size={16} aria-hidden="true" />
                 <span className="label">
                   Vlak {level.level} - {level.title}
                 </span>
