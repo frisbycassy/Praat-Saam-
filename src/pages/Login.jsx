@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
+import OwlMascot from "../components/OwlMascot";
 import styles from "./AuthForm.module.css";
 
 function Login() {
@@ -21,6 +22,7 @@ function Login() {
   return (
     <div className={styles.page}>
       <Card className={styles.card}>
+        <OwlMascot size={110} />
         <BilingualText as="h2" af="Meld aan" en="Log in" />
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>

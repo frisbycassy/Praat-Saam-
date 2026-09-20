@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import PhotoPicker from "../components/PhotoPicker";
+import OwlMascot from "../components/OwlMascot";
 import styles from "./AuthForm.module.css";
 
 function Signup() {
@@ -28,6 +29,7 @@ function Signup() {
   return (
     <div className={styles.page}>
       <Card className={styles.card}>
+        <OwlMascot size={90} />
         <BilingualText as="h2" af="Registreer" en="Sign up" />
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.nameRow}>
