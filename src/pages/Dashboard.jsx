@@ -3,14 +3,23 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getLevelForPoints, getNextLevel } from "../data/levels";
-import { findSticker, getCurrentLevelForTopic } from "../data/stickers";
+import { badgesForTopic } from "../data/badges";
 import { topics } from "../data/topics";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import ProgressBar from "../components/ProgressBar";
-import StickerIcon from "../components/StickerIcon";
+import BadgeIcon from "../components/BadgeIcon";
 import Button from "../components/Button";
 import styles from "./Dashboard.module.css";
+
+function highestEarnedBadge(topicId, earnedBadgeIds) {
+  const badges = badgesForTopic(topicId);
+  let latest = null;
+  for (const badge of badges) {
+    if (earnedBadgeIds.includes(badge.id)) latest = badge;
+  }
+  return latest || badges[0];
+}
 
 function Dashboard() {
   const { user } = useAuth();
@@ -50,24 +59,23 @@ function Dashboard() {
       </Card>
 
       <Card className={styles.summaryCard}>
-        <BilingualText as="h3" af="My Plakkers" en="My Stickers" />
+        <BilingualText as="h3" af="My Kentekens" en="My Badges" />
         <div className={styles.stickerRow}>
           {topics.map((topic) => {
-            const currentLevel = getCurrentLevelForTopic(topic.id, progress.stickers);
-            const isUnlocked = currentLevel > 0;
-            const sticker = findSticker(`${topic.id}-${Math.max(currentLevel, 1)}`);
+            const badge = highestEarnedBadge(topic.id, progress.badges);
+            const isUnlocked = progress.badges.includes(badge.id);
             return (
-              <StickerIcon
+              <BadgeIcon
                 key={topic.id}
-                sticker={sticker}
+                badge={badge}
                 unlocked={isUnlocked}
-                label={isUnlocked ? `${topic.title} Vlak ${currentLevel}` : topic.title}
+                label={topic.title}
               />
             );
           })}
         </div>
         <Link to="/profiel" className={styles.stickerLink}>
-          Sien al my plakkers (See all my stickers) &rarr;
+          Sien al my kentekens (See all my badges) &rarr;
         </Link>
       </Card>
 
