@@ -3,11 +3,10 @@ import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getLevelForPoints } from "../data/levels";
 import { topics } from "../data/topics";
-import { lessonBadges } from "../data/lessonBadges";
+import { badges } from "../data/badges";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
-import StickerCategoryRow from "../components/StickerCategoryRow";
-import LessonBadgeIcon from "../components/LessonBadgeIcon";
+import TopicBadgeRow from "../components/TopicBadgeRow";
 import StreakFlame from "../components/StreakFlame";
 import Avatar from "../components/Avatar";
 import PhotoPicker from "../components/PhotoPicker";
@@ -127,23 +126,14 @@ function Profile() {
       </div>
 
       <Card className={styles.stickerCard}>
-        <BilingualText as="h3" af="Al My Plakkers" en="All My Stickers" />
-        {topics.map((topic) => (
-          <StickerCategoryRow key={topic.id} topic={topic} unlockedStickerIds={progress.stickers} />
-        ))}
-      </Card>
-
-      <Card className={styles.stickerCard}>
         <BilingualText
           as="h3"
-          af={`Les-kentekens (${progress.lessonBadges.length}/${lessonBadges.length})`}
-          en="Lesson Badges"
+          af={`Al My Kentekens (${progress.badges.length}/${badges.length})`}
+          en="All My Badges"
         />
-        <div className={styles.badgeGrid}>
-          {lessonBadges.map((badge) => (
-            <LessonBadgeIcon key={badge.id} badge={badge} unlocked={progress.lessonBadges.includes(badge.id)} />
-          ))}
-        </div>
+        {topics.map((topic) => (
+          <TopicBadgeRow key={topic.id} topic={topic} unlockedBadgeIds={progress.badges} />
+        ))}
       </Card>
     </div>
   );

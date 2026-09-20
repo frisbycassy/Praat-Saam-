@@ -2,19 +2,18 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { findTopic } from "../data/topics";
 import { findLesson } from "../data/lessons";
-import { findSticker } from "../data/stickers";
-import { findLessonBadge } from "../data/lessonBadges";
+import { findBadge } from "../data/badges";
 import { useProgress } from "../context/ProgressContext";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import BilingualText from "../components/BilingualText";
 import Quiz from "../components/Quiz";
-import StickerIcon from "../components/StickerIcon";
-import LessonBadgeIcon from "../components/LessonBadgeIcon";
+import BadgeIcon from "../components/BadgeIcon";
 import styles from "./Lesson.module.css";
 
 function Lesson() {
-  const { topicId } = useParams();
+  const { topicId, lessonIndex } = useParams();
+  const index = Number(lessonIndex);
   const navigate = useNavigate();
   const { completeLesson } = useProgress();
 
@@ -22,7 +21,7 @@ function Lesson() {
   const [result, setResult] = useState(null);
 
   const topic = findTopic(topicId);
-  const lesson = findLesson(topicId);
+  const lesson = findLesson(topicId, index);
 
   if (!topic || !lesson) {
     return (
@@ -32,21 +31,23 @@ function Lesson() {
           af="Hierdie les is nog nie gereed nie"
           en="This lesson isn't ready yet"
         />
-        <Button onClick={() => navigate("/onderwerpe")}>Terug na Onderwerpe (Back to Topics)</Button>
+        <Button onClick={() => navigate(`/onderwerp/${topicId}`)}>
+          Terug na {topic ? topic.title : "Onderwerpe"} (Back)
+        </Button>
       </div>
     );
   }
 
   function handleQuizComplete(correctCount) {
-    const summary = completeLesson(topicId, correctCount);
+    const summary = completeLesson(topicId, index, correctCount);
     setResult({ correctCount, ...summary });
     setStage("result");
   }
 
   return (
     <div className={styles.page}>
-      <Button variant="ghost" className={styles.back} onClick={() => navigate("/onderwerpe")}>
-        &larr; Terug na Onderwerpe (Back to Topics)
+      <Button variant="ghost" className={styles.back} onClick={() => navigate(`/onderwerp/${topicId}`)}>
+        &larr; Terug na {topic.title} (Back)
       </Button>
 
       <BilingualText as="h1" af={lesson.title} en={lesson.englishTitle} />
@@ -89,28 +90,17 @@ function Lesson() {
             <strong>+{result.pointsEarned} punte (points)</strong>
           </p>
 
-          {result.newlyUnlockedLessonBadge && (
+          {result.newlyUnlockedBadge && (
             <>
-              <BilingualText af="Nuwe Les-kenteken!" en="New Lesson Badge!" />
+              <BilingualText af="Nuwe Kenteken!" en="New Badge!" />
               <div className={styles.stickerUnlockRow}>
-                <LessonBadgeIcon badge={findLessonBadge(result.newlyUnlockedLessonBadge)} unlocked />
+                <BadgeIcon badge={findBadge(result.newlyUnlockedBadge)} unlocked />
               </div>
             </>
           )}
 
-          {result.newlyUnlockedStickers.length > 0 && (
-            <>
-              <BilingualText af="Nuwe Plakker!" en="New Sticker!" />
-              <div className={styles.stickerUnlockRow}>
-                {result.newlyUnlockedStickers.map((stickerId) => (
-                  <StickerIcon key={stickerId} sticker={findSticker(stickerId)} unlocked />
-                ))}
-              </div>
-            </>
-          )}
-
-          <Button onClick={() => navigate("/onderwerpe")}>
-            Terug na Onderwerpe (Back to Topics)
+          <Button onClick={() => navigate(`/onderwerp/${topicId}`)}>
+            Terug na {topic.title} (Back)
           </Button>
         </Card>
       )}

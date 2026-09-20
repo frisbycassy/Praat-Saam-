@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import TopicsOverview from "./pages/TopicsOverview";
+import TopicDetail from "./pages/TopicDetail";
 import Lesson from "./pages/Lesson";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
@@ -37,6 +38,14 @@ function App() {
         />
         <Route
           path="/onderwerp/:topicId"
+          element={
+            <ProtectedRoute>
+              <TopicDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/onderwerp/:topicId/:lessonIndex"
           element={
             <ProtectedRoute>
               <Lesson />

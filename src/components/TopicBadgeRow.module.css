@@ -4,13 +4,13 @@
   gap: var(--space-sm);
 }
 
-.levels {
+.badges {
   display: flex;
   gap: var(--space-md);
   overflow-x: auto;
   padding-bottom: 0.25rem;
 }
 
-.levels > * {
+.badges > * {
   flex-shrink: 0;
 }
