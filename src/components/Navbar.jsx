@@ -43,7 +43,7 @@ function Navbar() {
                 <Users size={16} aria-hidden="true" />
                 <span className="label">Leerders (Learners)</span>
               </Link>
-              <span className={styles.pill}>
+              <span className={styles.roleLabel}>
                 <GraduationCap size={16} aria-hidden="true" />
                 <span className="label">Onderwyser (Teacher)</span>
               </span>
@@ -54,7 +54,7 @@ function Navbar() {
                 <GraduationCap size={16} aria-hidden="true" />
                 <span className="label">My Onderwyser (My Teacher)</span>
               </Link>
-              <span className={styles.pill}>
+              <span className={styles.roleLabel}>
                 <User size={16} aria-hidden="true" />
                 <span className="label">Leerder (Learner)</span>
               </span>
