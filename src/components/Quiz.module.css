@@ -10,6 +10,12 @@
   font-size: 0.9rem;
 }
 
+.questionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .options {
   display: flex;
   flex-direction: column;
