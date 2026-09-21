@@ -23,13 +23,13 @@ function highestEarnedBadge(topicId, earnedBadgeIds) {
 
 function Dashboard() {
   const { user } = useAuth();
-  const { progress, markVisitToday } = useProgress();
+  const { progress, isReady, markVisitToday } = useProgress();
 
   useEffect(() => {
-    markVisitToday();
-    // Only needs to run once when the dashboard is first shown.
+    if (isReady) markVisitToday();
+    // Only needs to run once progress has loaded from Supabase.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isReady]);
 
   const level = getLevelForPoints(progress.points);
   const nextLevel = getNextLevel(progress.points);

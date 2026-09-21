@@ -1,19 +1,40 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { PASS_THRESHOLD } from "../utils/lessonAccess";
+import { useAuth } from "./AuthContext";
+import { supabase } from "../lib/supabaseClient";
 
-// TEMPORARY: progress is saved to local storage on this one device/browser
-// for now, the same way AuthContext works. Once Supabase is connected,
-// these functions will read/write to the database instead, so every page
-// using useProgress() can stay the same.
-const STORAGE_KEY = "praatsaam-progress";
-
+// Progress now lives in Supabase, keyed to the signed-in user, so it
+// follows a learner to any device instead of staying on one browser.
 const defaultProgress = {
-  points: 0, // overall total, drives the general Vlak/Level system
+  points: 0,
   completedLessons: [], // "topicId:lessonIndex" strings
   badges: [], // "topicId:lessonIndex" strings, one per earned badge
   lessonScores: {}, // "topicId:lessonIndex" -> best correctCount achieved
   streak: { count: 0, lastActiveDate: null },
 };
+
+function toAppProgress(row) {
+  if (!row) return defaultProgress;
+  return {
+    points: row.points ?? 0,
+    completedLessons: row.completed_lessons ?? [],
+    badges: row.badges ?? [],
+    lessonScores: row.lesson_scores ?? {},
+    streak: { count: row.streak_count ?? 0, lastActiveDate: row.streak_last_date ?? null },
+  };
+}
+
+function toDbProgress(userId, progress) {
+  return {
+    user_id: userId,
+    points: progress.points,
+    completed_lessons: progress.completedLessons,
+    badges: progress.badges,
+    lesson_scores: progress.lessonScores,
+    streak_count: progress.streak.count,
+    streak_last_date: progress.streak.lastActiveDate,
+  };
+}
 
 function todayString() {
   return new Date().toISOString().slice(0, 10);
@@ -27,36 +48,68 @@ function daysBetween(a, b) {
 const ProgressContext = createContext(null);
 
 export function ProgressProvider({ children }) {
-  const [progress, setProgress] = useState(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? { ...defaultProgress, ...JSON.parse(stored) } : defaultProgress;
-    } catch {
-      return defaultProgress;
-    }
-  });
+  const { user } = useAuth();
+  const [progress, setProgress] = useState(defaultProgress);
+  // Guards markVisitToday/completeLesson from running against the default
+  // (empty) progress before the real row has been fetched from Supabase -
+  // without this, an early write could overwrite a returning user's saved
+  // points/badges with zeros.
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  }, [progress]);
+    if (!user) {
+      setProgress(defaultProgress);
+      setIsReady(false);
+      return;
+    }
+
+    let active = true;
+    setIsReady(false);
+    async function loadProgress() {
+      const { data, error } = await supabase
+        .from("progress")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+      if (!active) return;
+      setProgress(error ? defaultProgress : toAppProgress(data));
+      setIsReady(true);
+    }
+    loadProgress();
+
+    return () => {
+      active = false;
+    };
+  }, [user]);
+
+  async function persist(nextProgress) {
+    if (!user) return;
+    const { error } = await supabase
+      .from("progress")
+      .update(toDbProgress(user.id, nextProgress))
+      .eq("user_id", user.id);
+    if (error) console.warn("Could not save progress to Supabase.", error);
+  }
 
   function markVisitToday() {
-    setProgress((current) => {
-      const today = todayString();
-      const { lastActiveDate, count } = current.streak;
-      if (lastActiveDate === today) return current;
+    if (!isReady) return;
+    const today = todayString();
+    const { lastActiveDate, count } = progress.streak;
+    if (lastActiveDate === today) return;
 
-      const gap = lastActiveDate ? daysBetween(lastActiveDate, today) : null;
-      const nextCount = gap === 1 ? count + 1 : 1;
+    const gap = lastActiveDate ? daysBetween(lastActiveDate, today) : null;
+    const nextCount = gap === 1 ? count + 1 : 1;
 
-      return { ...current, streak: { count: nextCount, lastActiveDate: today } };
-    });
+    const next = { ...progress, streak: { count: nextCount, lastActiveDate: today } };
+    setProgress(next);
+    persist(next);
   }
 
   // Runs once when a learner finishes a specific lesson within a topic.
   // Returns a summary (points earned, whether a new badge was unlocked)
   // so the results screen can celebrate it, while saving the update.
   function completeLesson(topicId, lessonIndex, correctCount) {
+    if (!isReady) return { pointsEarned: 0, newlyUnlockedBadge: null };
     const lessonKey = `${topicId}:${lessonIndex}`;
     const isFirstTimeCompleting = !progress.completedLessons.includes(lessonKey);
     const pointsEarned = correctCount; // 1 point per correct question
@@ -72,19 +125,21 @@ export function ProgressProvider({ children }) {
     const newlyUnlockedBadge = hasPassed && !progress.badges.includes(lessonKey) ? lessonKey : null;
     const badges = newlyUnlockedBadge ? [...progress.badges, newlyUnlockedBadge] : progress.badges;
 
-    setProgress({
+    const next = {
       ...progress,
       points: progress.points + pointsEarned,
       completedLessons: nextCompletedLessons,
       badges,
       lessonScores,
-    });
+    };
+    setProgress(next);
+    persist(next);
 
     return { pointsEarned, newlyUnlockedBadge };
   }
 
   return (
-    <ProgressContext.Provider value={{ progress, markVisitToday, completeLesson }}>
+    <ProgressContext.Provider value={{ progress, isReady, markVisitToday, completeLesson }}>
       {children}
     </ProgressContext.Provider>
   );
