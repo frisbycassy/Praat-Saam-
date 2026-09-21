@@ -11,11 +11,13 @@ import Avatar from "../components/Avatar";
 import PhotoPicker from "../components/PhotoPicker";
 import Button from "../components/Button";
 import { getFullName, getDisplayName } from "../utils/user";
+import { TITLES } from "../data/titles";
 import styles from "./Profile.module.css";
 
 function Profile() {
   const { user, updateProfile } = useAuth();
   const { progress } = useProgress();
+  const isTeacher = user.role === "teacher";
 
   const [isEditing, setIsEditing] = useState(false);
   const [firstName, setFirstName] = useState(user.firstName || "");
@@ -50,16 +52,37 @@ function Profile() {
           <form className={styles.editForm} onSubmit={handleSave}>
             <BilingualText as="h3" af="Wysig Profiel" en="Edit Profile" />
             <div className={styles.nameRow}>
-              <div className={styles.field}>
-                <label htmlFor="edit-firstName">Naam (Name)</label>
-                <input
-                  id="edit-firstName"
-                  type="text"
-                  required
-                  value={firstName}
-                  onChange={(event) => setFirstName(event.target.value)}
-                />
-              </div>
+              {isTeacher ? (
+                <div className={styles.field}>
+                  <label htmlFor="edit-title">Titel (Title)</label>
+                  <select
+                    id="edit-title"
+                    required
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
+                  >
+                    {firstName && !TITLES.some((title) => title.value === firstName) && (
+                      <option value={firstName}>{firstName}</option>
+                    )}
+                    {TITLES.map((title) => (
+                      <option key={title.value} value={title.value}>
+                        {title.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <div className={styles.field}>
+                  <label htmlFor="edit-firstName">Naam (Name)</label>
+                  <input
+                    id="edit-firstName"
+                    type="text"
+                    required
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
+                  />
+                </div>
+              )}
               <div className={styles.field}>
                 <label htmlFor="edit-lastName">Van (Surname)</label>
                 <input

@@ -6,15 +6,8 @@ import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import PhotoPicker from "../components/PhotoPicker";
 import Logo from "../components/Logo";
+import { TITLES } from "../data/titles";
 import styles from "./AuthForm.module.css";
-
-const TITLES = [
-  { value: "Juffrou", label: "Juffrou (Miss)" },
-  { value: "Mev.", label: "Mev. (Mrs)" },
-  { value: "Mnr.", label: "Mnr. (Mr)" },
-  { value: "Me.", label: "Me. (Ms)" },
-  { value: "Dr.", label: "Dr. (Dr)" },
-];
 
 const HEADINGS = {
   teacher: { af: "Registreer as Onderwyser", en: "Sign up as Teacher" },
