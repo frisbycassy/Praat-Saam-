@@ -24,7 +24,10 @@ function Navbar() {
     <header className={styles.bar}>
       <Link to={user ? "/tuisblad" : "/"} className={styles.logo}>
         <Logo size={32} />
-        Praat Saam!
+        <span>
+          <span className={styles.brandPurple}>Praat</span>{" "}
+          <span className={styles.brandOrange}>Saam!</span>
+        </span>
       </Link>
 
       {user && (

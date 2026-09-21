@@ -23,6 +23,14 @@
   white-space: nowrap;
 }
 
+.brandPurple {
+  color: var(--color-brand-purple);
+}
+
+.brandOrange {
+  color: var(--color-brand-orange);
+}
+
 .right {
   display: flex;
   align-items: center;
