@@ -14,19 +14,6 @@
   gap: var(--space-md);
 }
 
-.username {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-weight: 600;
-}
-
-.nickname {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-style: italic;
-  font-size: 0.9rem;
-}
-
 .nameRow {
   display: flex;
   gap: 0.5rem;

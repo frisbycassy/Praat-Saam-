@@ -37,7 +37,6 @@ function Teacher() {
           id: p.id,
           firstName: p.first_name || "",
           lastName: p.last_name || "",
-          nickname: p.nickname || "",
           username: p.username || "",
           email: p.email,
           photoUrl: p.photo_url || null,
@@ -75,11 +74,7 @@ function Teacher() {
           <Card key={teacher.id} className={styles.teacherCard}>
             <Avatar name={getDisplayName(teacher)} photoUrl={teacher.photoUrl} size={72} />
             <div className={styles.info}>
-              <BilingualText as="h2" af={teacher.nickname || getFullName(teacher)} en={teacher.email} />
-              {teacher.nickname && getFullName(teacher) && (
-                <p className={styles.fullName}>{getFullName(teacher)}</p>
-              )}
-              {teacher.username && <p className={styles.username}>@{teacher.username}</p>}
+              <BilingualText as="h2" af={getFullName(teacher) || teacher.username} en={teacher.email} />
             </div>
           </Card>
         ))}

@@ -20,8 +20,6 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [firstName, setFirstName] = useState(user.firstName || "");
   const [lastName, setLastName] = useState(user.lastName || "");
-  const [nickname, setNickname] = useState(user.nickname || "");
-  const [username, setUsername] = useState(user.username || "");
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl || null);
   const [saveError, setSaveError] = useState("");
 
@@ -29,7 +27,7 @@ function Profile() {
     event.preventDefault();
     setSaveError("");
     try {
-      await updateProfile({ firstName, lastName, nickname, username, photoUrl });
+      await updateProfile({ firstName, lastName, photoUrl });
       setIsEditing(false);
     } catch {
       setSaveError("Kon nie stoor nie. Probeer weer. (Could not save. Please try again.)");
@@ -43,9 +41,7 @@ function Profile() {
       <div className={styles.header}>
         <Avatar name={getDisplayName(user)} photoUrl={user.photoUrl} size={64} />
         <div>
-          <BilingualText as="h1" af={user.username || fullName} en={user.email} />
-          {fullName && <p className={styles.username}>{fullName}</p>}
-          {user.nickname && <p className={styles.nickname}>&ldquo;{user.nickname}&rdquo;</p>}
+          <BilingualText as="h1" af={fullName || user.username} en={user.email} />
         </div>
       </div>
 
@@ -75,28 +71,8 @@ function Profile() {
                 />
               </div>
             </div>
-            <div className={styles.field}>
-              <label htmlFor="edit-nickname">Bynaam (Nickname) - opsioneel (optional)</label>
-              <input
-                id="edit-nickname"
-                type="text"
-                placeholder="bv. Miss. Frisby"
-                value={nickname}
-                onChange={(event) => setNickname(event.target.value)}
-              />
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="edit-username">Gebruikersnaam (Username)</label>
-              <input
-                id="edit-username"
-                type="text"
-                required
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-              />
-            </div>
             <PhotoPicker
-              name={[firstName, lastName].filter(Boolean).join(" ") || nickname}
+              name={[firstName, lastName].filter(Boolean).join(" ") || "?"}
               photoUrl={photoUrl}
               onChange={setPhotoUrl}
             />

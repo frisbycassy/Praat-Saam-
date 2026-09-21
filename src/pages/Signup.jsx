@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import Card from "../components/Card";
@@ -8,16 +8,31 @@ import PhotoPicker from "../components/PhotoPicker";
 import Logo from "../components/Logo";
 import styles from "./AuthForm.module.css";
 
+const TITLES = [
+  { value: "Juffrou", label: "Juffrou (Miss)" },
+  { value: "Mev.", label: "Mev. (Mrs)" },
+  { value: "Mnr.", label: "Mnr. (Mr)" },
+  { value: "Me.", label: "Me. (Ms)" },
+  { value: "Dr.", label: "Dr. (Dr)" },
+];
+
+const HEADINGS = {
+  teacher: { af: "Registreer as Onderwyser", en: "Sign up as Teacher" },
+  learner: { af: "Registreer as Leerder", en: "Sign up as Student" },
+};
+
 function Signup() {
   const { signup } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const role = searchParams.get("role") === "teacher" ? "teacher" : "learner";
+  const isTeacher = role === "teacher";
+  const heading = HEADINGS[role];
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("learner");
   const [photoUrl, setPhotoUrl] = useState(null);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,7 +42,7 @@ function Signup() {
     setError("");
     setIsSubmitting(true);
     try {
-      await signup({ firstName, lastName, nickname, email, role, username, photoUrl, password });
+      await signup({ firstName, lastName, email, role, photoUrl, password });
       navigate("/tuisblad");
     } catch (err) {
       setError(
@@ -44,19 +59,40 @@ function Signup() {
     <div className={styles.page}>
       <Card className={styles.card}>
         <Logo size={90} />
-        <BilingualText as="h2" af="Registreer" en="Sign up" />
+        <BilingualText as="h2" af={heading.af} en={heading.en} />
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.nameRow}>
-            <div className={styles.field}>
-              <label htmlFor="firstName">Naam (Name)</label>
-              <input
-                id="firstName"
-                type="text"
-                required
-                value={firstName}
-                onChange={(event) => setFirstName(event.target.value)}
-              />
-            </div>
+            {isTeacher ? (
+              <div className={styles.field}>
+                <label htmlFor="title">Titel (Title)</label>
+                <select
+                  id="title"
+                  required
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                >
+                  <option value="" disabled>
+                    Kies... (Choose...)
+                  </option>
+                  {TITLES.map((title) => (
+                    <option key={title.value} value={title.value}>
+                      {title.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <div className={styles.field}>
+                <label htmlFor="firstName">Naam (Name)</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                />
+              </div>
+            )}
             <div className={styles.field}>
               <label htmlFor="lastName">Van (Surname)</label>
               <input
@@ -69,29 +105,9 @@ function Signup() {
             </div>
           </div>
           <div className={styles.field}>
-            <label htmlFor="nickname">Bynaam (Nickname) - opsioneel (optional)</label>
-            <input
-              id="nickname"
-              type="text"
-              placeholder="bv. Miss. Frisby"
-              value={nickname}
-              onChange={(event) => setNickname(event.target.value)}
-            />
-          </div>
-          <div className={styles.field}>
-            <label htmlFor="username">Gebruikersnaam (Username)</label>
-            <input
-              id="username"
-              type="text"
-              required
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-            />
-          </div>
-          <div className={styles.field}>
             <span>Profielfoto (optioneel) - Profile picture (optional)</span>
             <PhotoPicker
-              name={[firstName, lastName].filter(Boolean).join(" ") || nickname || "?"}
+              name={[firstName, lastName].filter(Boolean).join(" ") || "?"}
               photoUrl={photoUrl}
               onChange={setPhotoUrl}
             />
@@ -117,25 +133,6 @@ function Signup() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          <div className={styles.field}>
-            <span id="role-label">Ek is 'n... (I am a...)</span>
-            <div className={styles.roleRow} role="radiogroup" aria-labelledby="role-label">
-              <Button
-                type="button"
-                variant={role === "learner" ? "primary" : "secondary"}
-                onClick={() => setRole("learner")}
-              >
-                Leerder (Learner)
-              </Button>
-              <Button
-                type="button"
-                variant={role === "teacher" ? "primary" : "secondary"}
-                onClick={() => setRole("teacher")}
-              >
-                Onderwyser (Teacher)
-              </Button>
-            </div>
-          </div>
           {error && <p className={styles.error}>{error}</p>}
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Registreer..." : "Registreer (Sign up)"}
@@ -143,7 +140,7 @@ function Signup() {
         </form>
         <p className={styles.switchLine}>
           Het jy klaar 'n rekening? (Already have an account?){" "}
-          <Link to="/aanmeld">Meld aan (Log in)</Link>
+          <Link to={`/aanmeld?role=${role}`}>Meld aan (Log in)</Link>
         </p>
       </Card>
     </div>

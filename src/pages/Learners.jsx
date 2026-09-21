@@ -39,7 +39,6 @@ function Learners() {
           id: profile.id,
           firstName: profile.first_name || "",
           lastName: profile.last_name || "",
-          nickname: profile.nickname || "",
           username: profile.username || "",
           email: profile.email,
           photoUrl: profile.photo_url || null,
@@ -80,9 +79,7 @@ function Learners() {
           <Card key={learner.id} className={styles.learnerCard}>
             <Avatar name={getDisplayName(learner)} photoUrl={learner.photoUrl} size={56} />
             <div className={styles.info}>
-              <BilingualText as="h3" af={learner.username || getFullName(learner)} en={learner.email} />
-              {getFullName(learner) && <p className={styles.fullName}>{getFullName(learner)}</p>}
-              {learner.nickname && <p className={styles.nickname}>&ldquo;{learner.nickname}&rdquo;</p>}
+              <BilingualText as="h3" af={getFullName(learner) || learner.username} en={learner.email} />
               <div className={styles.stats}>
                 <span>{learner.points} punte (points)</span>
                 <span>

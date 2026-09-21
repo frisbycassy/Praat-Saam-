@@ -41,7 +41,7 @@ function Dashboard() {
     <div className={styles.page}>
       <BilingualText
         as="h1"
-        af={`Hallo, ${user.nickname || user.firstName || user.username}!`}
+        af={`Hallo, ${user.firstName || user.username}!`}
         en="Hello!"
       />
 
