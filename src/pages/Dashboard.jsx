@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
-import { badgesForTopic } from "../data/badges";
-import { topics } from "../data/topics";
+import { findBadge } from "../data/badges";
 import { totalPossiblePoints } from "../data/lessons";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
@@ -12,14 +11,9 @@ import BadgeIcon from "../components/BadgeIcon";
 import Button from "../components/Button";
 import styles from "./Dashboard.module.css";
 
-function highestEarnedBadge(topicId, earnedBadgeIds) {
-  const badges = badgesForTopic(topicId);
-  let latest = null;
-  for (const badge of badges) {
-    if (earnedBadgeIds.includes(badge.id)) latest = badge;
-  }
-  return latest || badges[0];
-}
+// Enough to fill the card's row without spilling into a wall of icons -
+// the profile page is where every badge can be seen.
+const MAX_DASHBOARD_BADGES = 8;
 
 function Dashboard() {
   const { user } = useAuth();
@@ -34,9 +28,9 @@ function Dashboard() {
   const maxPoints = totalPossiblePoints();
   const percent = (progress.points / maxPoints) * 100;
 
-  const unlockedTopics = topics.filter((topic) =>
-    badgesForTopic(topic.id).some((badge) => progress.badges.includes(badge.id)),
-  );
+  // Most recently earned first (badges are appended as they're unlocked).
+  const unlockedBadges = [...progress.badges].reverse().map(findBadge).filter(Boolean);
+  const shownBadges = unlockedBadges.slice(0, MAX_DASHBOARD_BADGES);
 
   return (
     <div className={styles.page}>
@@ -53,19 +47,16 @@ function Dashboard() {
 
       <Card className={styles.summaryCard}>
         <BilingualText as="h3" af="Ontsluite Kentekens" en="Unlocked Badges" />
-        {unlockedTopics.length === 0 ? (
+        {shownBadges.length === 0 ? (
           <BilingualText
             af="Nog geen kentekens ontsluit nie. Voltooi 'n les om jou eerste kenteken te wen!"
             en="No badges unlocked yet. Finish a lesson to earn your first badge!"
           />
         ) : (
           <div className={styles.stickerRow}>
-            {unlockedTopics.map((topic) => {
-              const badge = highestEarnedBadge(topic.id, progress.badges);
-              return (
-                <BadgeIcon key={topic.id} badge={badge} unlocked label={topic.title} />
-              );
-            })}
+            {shownBadges.map((badge) => (
+              <BadgeIcon key={badge.id} badge={badge} unlocked />
+            ))}
           </div>
         )}
         <Link to="/profiel" className={styles.stickerLink}>
