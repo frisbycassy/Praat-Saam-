@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
-import { getLevelForPoints, getNextLevel } from "../data/levels";
+import { getLevelForPoints } from "../data/levels";
 import { badgesForTopic } from "../data/badges";
 import { topics } from "../data/topics";
+import { totalPossiblePoints } from "../data/lessons";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import ProgressBar from "../components/ProgressBar";
@@ -32,10 +33,12 @@ function Dashboard() {
   }, [isReady]);
 
   const level = getLevelForPoints(progress.points);
-  const nextLevel = getNextLevel(progress.points);
-  const pointsIntoLevel = progress.points - level.minPoints;
-  const pointsForNextLevel = nextLevel ? nextLevel.minPoints - level.minPoints : null;
-  const percent = nextLevel ? (pointsIntoLevel / pointsForNextLevel) * 100 : 100;
+  const maxPoints = totalPossiblePoints();
+  const percent = (progress.points / maxPoints) * 100;
+
+  const unlockedTopics = topics.filter((topic) =>
+    badgesForTopic(topic.id).some((badge) => progress.badges.includes(badge.id)),
+  );
 
   return (
     <div className={styles.page}>
@@ -53,27 +56,27 @@ function Dashboard() {
         />
         <ProgressBar
           percent={percent}
-          leftLabel={`${progress.points} punte (points)`}
-          rightLabel={nextLevel ? `${nextLevel.minPoints} vir Vlak ${nextLevel.level}` : "Top vlak!"}
+          leftLabel={`${progress.points} / ${maxPoints} punte (points)`}
         />
       </Card>
 
       <Card className={styles.summaryCard}>
-        <BilingualText as="h3" af="My Kentekens" en="My Badges" />
-        <div className={styles.stickerRow}>
-          {topics.map((topic) => {
-            const badge = highestEarnedBadge(topic.id, progress.badges);
-            const isUnlocked = progress.badges.includes(badge.id);
-            return (
-              <BadgeIcon
-                key={topic.id}
-                badge={badge}
-                unlocked={isUnlocked}
-                label={topic.title}
-              />
-            );
-          })}
-        </div>
+        <BilingualText as="h3" af="Ontsluite Kentekens" en="Unlocked Badges" />
+        {unlockedTopics.length === 0 ? (
+          <BilingualText
+            af="Nog geen kentekens ontsluit nie. Voltooi 'n les om jou eerste kenteken te wen!"
+            en="No badges unlocked yet. Finish a lesson to earn your first badge!"
+          />
+        ) : (
+          <div className={styles.stickerRow}>
+            {unlockedTopics.map((topic) => {
+              const badge = highestEarnedBadge(topic.id, progress.badges);
+              return (
+                <BadgeIcon key={topic.id} badge={badge} unlocked label={topic.title} />
+              );
+            })}
+          </div>
+        )}
         <Link to="/profiel" className={styles.stickerLink}>
           Sien al my kentekens (See all my badges) &rarr;
         </Link>
