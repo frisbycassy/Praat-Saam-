@@ -50,6 +50,10 @@ function Navbar() {
             </>
           ) : (
             <>
+              <Link to="/onderwyser" className={styles.pill}>
+                <GraduationCap size={16} aria-hidden="true" />
+                <span className="label">My Onderwyser (My Teacher)</span>
+              </Link>
               <span className={styles.pill}>
                 <User size={16} aria-hidden="true" />
                 <span className="label">Leerder (Learner)</span>
