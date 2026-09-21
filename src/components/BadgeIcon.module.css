@@ -25,6 +25,13 @@
   filter: grayscale(60%) opacity(0.6);
 }
 
+/* The final (5th) lesson in a topic is the harder completion badge -
+   give it an orange glow so it stands out from the regular tiers. */
+.finalLesson .shieldWrap {
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18)) drop-shadow(0 0 6px var(--color-brand-orange))
+    drop-shadow(0 0 14px rgba(242, 129, 29, 0.65));
+}
+
 .shieldSvg {
   position: absolute;
   inset: 0;

@@ -14,9 +14,12 @@ function BadgeIcon({ badge, unlocked, label, size = 64 }) {
   const Icon = TOPIC_ICONS[badge.icon] || TOPIC_ICONS.Medal;
   const isFinalLesson = badge.lessonIndex === 4;
   const fill = unlocked ? badge.color : "var(--color-locked)";
+  const classes = [styles.badge, unlocked ? "" : styles.locked, isFinalLesson && unlocked ? styles.finalLesson : ""]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div className={`${styles.badge} ${unlocked ? "" : styles.locked}`}>
+    <div className={classes}>
       <div className={styles.shieldWrap} style={{ width: size, height: size * 1.02 }}>
         <svg viewBox="0 0 100 100" className={styles.shieldSvg}>
           <path d={SHIELD_PATH} fill={fill} stroke="rgba(0,0,0,0.15)" strokeWidth="2" />
