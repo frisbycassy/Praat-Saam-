@@ -30,3 +30,12 @@ export function lessonCountForTopic(topicId) {
   const lessons = lessonsByTopic[topicId] || [];
   return lessons.filter(Boolean).length;
 }
+
+// Sum of every question across every written lesson - the maximum
+// number of points anyone could possibly earn right now.
+export function totalPossiblePoints() {
+  return Object.values(lessonsByTopic)
+    .flat()
+    .filter(Boolean)
+    .reduce((sum, lesson) => sum + lesson.questions.length, 0);
+}

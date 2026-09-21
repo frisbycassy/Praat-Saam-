@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { topics } from "../data/topics";
 import { badges } from "../data/badges";
+import { totalPossiblePoints } from "../data/lessons";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import TopicBadgeRow from "../components/TopicBadgeRow";
@@ -116,17 +117,23 @@ function Profile() {
 
       <div className={styles.statsRow}>
         <Card className={styles.statCard}>
-          <span className={styles.statValue}>{progress.points}</span>
+          <span className={styles.statValue}>
+            {isTeacher ? `${progress.points}/${totalPossiblePoints()}` : progress.points}
+          </span>
           <BilingualText af="Punte" en="Points" />
         </Card>
         <Card className={styles.statCard}>
-          <span className={styles.statValue}>{progress.badges.length}</span>
+          <span className={styles.statValue}>
+            {isTeacher ? `${progress.badges.length}/${badges.length}` : progress.badges.length}
+          </span>
           <BilingualText af="Kentekens Ontsluit" en="Badges Unlocked" />
         </Card>
-        <Card className={styles.statCard}>
-          <StreakFlame count={progress.streak.count} size={48} />
-          <BilingualText af="Dae Vlam" en="Day Streak" />
-        </Card>
+        {!isTeacher && (
+          <Card className={styles.statCard}>
+            <StreakFlame count={progress.streak.count} size={48} />
+            <BilingualText af="Dae Vlam" en="Day Streak" />
+          </Card>
+        )}
       </div>
 
       <Card className={styles.stickerCard}>
