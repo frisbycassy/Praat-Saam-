@@ -118,13 +118,13 @@ function Profile() {
       <div className={styles.statsRow}>
         <Card className={styles.statCard}>
           <span className={styles.statValue}>
-            {isTeacher ? `${progress.points}/${totalPossiblePoints()}` : progress.points}
+            {progress.points}/{totalPossiblePoints()}
           </span>
           <BilingualText af="Punte" en="Points" />
         </Card>
         <Card className={styles.statCard}>
           <span className={styles.statValue}>
-            {isTeacher ? `${progress.badges.length}/${badges.length}` : progress.badges.length}
+            {progress.badges.length}/{badges.length}
           </span>
           <BilingualText af="Kentekens Ontsluit" en="Badges Unlocked" />
         </Card>
