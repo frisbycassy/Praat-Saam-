@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { GraduationCap, Home, LayoutGrid, LogOut } from "lucide-react";
+import { GraduationCap, Home, LayoutGrid, LogOut, User } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getDisplayName } from "../utils/user";
@@ -43,7 +43,13 @@ function Navbar() {
               <span className="label">Onderwyser (Teacher)</span>
             </span>
           ) : (
-            <StreakFlame count={progress.streak.count} size={30} />
+            <>
+              <span className={styles.pill}>
+                <User size={16} aria-hidden="true" />
+                <span className="label">Leerder (Learner)</span>
+              </span>
+              <StreakFlame count={progress.streak.count} size={30} />
+            </>
           )}
           <Link to="/profiel" aria-label="Profiel (Profile)">
             <Avatar name={getDisplayName(user)} photoUrl={user.photoUrl} />
