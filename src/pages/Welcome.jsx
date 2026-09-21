@@ -21,8 +21,15 @@ function Welcome() {
           en="Games, points and stickers to help you with Grade 4 Afrikaans."
         />
         <div className={styles.ctaRow}>
-          <Link to="/registreer">
-            <Button variant="primary">Registreer (Sign up)</Button>
+          <Link to="/registreer?role=learner">
+            <Button variant="primary">
+              <User size={18} /> Leerder Registreer (Student Sign Up)
+            </Button>
+          </Link>
+          <Link to="/registreer?role=teacher">
+            <Button variant="primary">
+              <GraduationCap size={18} /> Onderwyser Registreer (Teacher Sign Up)
+            </Button>
           </Link>
         </div>
 

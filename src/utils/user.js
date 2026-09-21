@@ -1,8 +1,9 @@
-// A user's real name (firstName + lastName), a casual nickname (e.g. how
-// a teacher likes to be addressed, like "Miss. Frisby"), and their
-// username (the account handle) are three separate, optional pieces of
-// identity. These helpers pick a sensible one to show depending on
-// context, instead of every page repeating the same fallback logic.
+// A user's name is firstName + lastName (for a teacher, firstName holds
+// their chosen title, e.g. "Juffrou", so this still reads naturally as
+// "Juffrou Hart"). These helpers pick a sensible display string,
+// instead of every page repeating the same fallback logic. `username`
+// is kept only as a fallback for older accounts created before the
+// name-only signup flow.
 
 export function getFullName(user) {
   return [user.firstName, user.lastName].filter(Boolean).join(" ");
@@ -10,5 +11,5 @@ export function getFullName(user) {
 
 // Best string to compute avatar initials from, or to greet someone with.
 export function getDisplayName(user) {
-  return getFullName(user) || user.nickname || user.username || "";
+  return getFullName(user) || user.username || "";
 }
