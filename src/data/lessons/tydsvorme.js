@@ -1,4 +1,4 @@
-// Tydsvorme (Tenses) - lesson 1 written; lessons 2-5 still to come.
+// Tydsvorme (Tenses) - 5 lessons, low to higher level.
 const lessons = [
   {
     title: "Tydsvorme",
@@ -78,10 +78,309 @@ const lessons = [
       },
     ],
   },
-  null,
-  null,
-  null,
-  null,
+  {
+    title: "Verlede Tyd",
+    englishTitle: "Past Tense",
+    vocabulary: [
+      { af: "het gespeel", en: "played" },
+      { af: "het geëet", en: "ate" },
+      { af: "het gelees", en: "read (past)" },
+      { af: "het geloop", en: "walked" },
+    ],
+    passage: {
+      af: "Gister het ek met my vriende gespeel. Ons het pizza geëet en 'n storie gelees. Daarna het ons huis toe geloop.",
+      en: "Yesterday I played with my friends. We ate pizza and read a story. Afterwards we walked home.",
+    },
+    questions: [
+      {
+        af: "Watter woordgroep wys die verlede tyd?",
+        en: "Which word group shows the past tense?",
+        options: ["speel", "het gespeel", "sal speel"],
+        correctIndex: 1,
+      },
+      {
+        af: "Met wie het ek gister gespeel?",
+        en: "Who did I play with yesterday?",
+        options: ["my familie", "my vriende", "my onderwyser"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat het ons geëet?",
+        en: "What did we eat?",
+        options: ["pizza", "koek", "brood"],
+        correctIndex: 0,
+      },
+      {
+        af: "In Afrikaans se verlede tyd gebruik ons dikwels 'het' plus 'n woord wat begin met...",
+        en: "In Afrikaans's past tense we often use 'het' plus a word that starts with...",
+        options: ["ge-", "te-", "be-"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat het ons gelees?",
+        en: "What did we read?",
+        options: ["'n koerant", "'n storie", "'n brief"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat is die verlede tyd van 'eet'?",
+        en: "What is the past tense of 'eet'?",
+        options: ["het geëet", "eet", "sal eet"],
+        correctIndex: 0,
+      },
+      {
+        af: "Hoe het ons huis toe gegaan?",
+        en: "How did we go home?",
+        options: ["het gery", "het geloop", "het gevlieg"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat is die verlede tyd van 'speel'?",
+        en: "What is the past tense of 'speel'?",
+        options: ["speel", "sal speel", "het gespeel"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wanneer het dit alles gebeur?",
+        en: "When did all of this happen?",
+        options: ["vandag", "gister", "môre"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord wys NIE die verlede tyd nie?",
+        en: "Which word does NOT show the past tense?",
+        options: ["het gelees", "sal speel", "het geëet"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Teenwoordige Tyd",
+    englishTitle: "Present Tense",
+    vocabulary: [
+      { af: "speel", en: "plays" },
+      { af: "eet", en: "eats" },
+      { af: "lees", en: "reads" },
+      { af: "loop", en: "walks" },
+    ],
+    passage: {
+      af: "Vandag speel ek met my vriende. Ons eet vrugte en lees 'n boek saam. Ons loop dan na die park.",
+      en: "Today I play with my friends. We eat fruit and read a book together. We then walk to the park.",
+    },
+    questions: [
+      {
+        af: "Watter tydsvorm wys iets wat NOU gebeur?",
+        en: "Which tense shows something that is happening NOW?",
+        options: ["verlede tyd", "teenwoordige tyd", "toekomende tyd"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat doen ek vandag?",
+        en: "What am I doing today?",
+        options: ["speel met my vriende", "slaap", "lees alleen"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat eet ons?",
+        en: "What do we eat?",
+        options: ["pizza", "vrugte", "brood"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waarheen loop ons?",
+        en: "Where do we walk to?",
+        options: ["die skool", "die park", "die see"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is in die teenwoordige tyd?",
+        en: "Which word is in the present tense?",
+        options: ["het gespeel", "speel", "sal speel"],
+        correctIndex: 1,
+      },
+      {
+        af: "Lees ons alleen of saam?",
+        en: "Do we read alone or together?",
+        options: ["alleen", "saam", "nooit"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord wys die teenwoordige tyd van 'eet'?",
+        en: "Which word shows the present tense of 'eet'?",
+        options: ["het geëet", "eet", "sal eet"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wanneer gebeur hierdie storie?",
+        en: "When does this story happen?",
+        options: ["gister", "vandag", "môre"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord wys NIE die teenwoordige tyd nie?",
+        en: "Which word does NOT show the present tense?",
+        options: ["speel", "het gelees", "loop"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'loop' in Engels?",
+        en: "What does 'loop' mean in English?",
+        options: ["run", "walk", "jump"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Toekomende Tyd",
+    englishTitle: "Future Tense",
+    vocabulary: [
+      { af: "sal speel", en: "will play" },
+      { af: "sal eet", en: "will eat" },
+      { af: "sal lees", en: "will read" },
+      { af: "sal gaan", en: "will go" },
+    ],
+    passage: {
+      af: "Môre sal ek met my vriende speel. Ons sal pizza eet en 'n nuwe boek lees. Ons sal ook see toe gaan.",
+      en: "Tomorrow I will play with my friends. We will eat pizza and read a new book. We will also go to the sea.",
+    },
+    questions: [
+      {
+        af: "Watter woord wys die toekomende tyd?",
+        en: "Which word shows the future tense?",
+        options: ["speel", "het gespeel", "sal speel"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat gaan ek môre doen?",
+        en: "What am I going to do tomorrow?",
+        options: ["speel met my vriende", "slaap heeldag", "huiswerk doen"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat sal ons eet?",
+        en: "What will we eat?",
+        options: ["koek", "pizza", "vis"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waarheen sal ons gaan?",
+        en: "Where will we go?",
+        options: ["die berg", "die see", "die woestyn"],
+        correctIndex: 1,
+      },
+      {
+        af: "In Afrikaans se toekomende tyd gebruik ons die woord...",
+        en: "In Afrikaans's future tense we use the word...",
+        options: ["het", "sal", "was"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat is die toekomende tyd van 'lees'?",
+        en: "What is the future tense of 'lees'?",
+        options: ["het gelees", "lees", "sal lees"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wanneer gaan hierdie dinge gebeur?",
+        en: "When are these things going to happen?",
+        options: ["gister", "vandag", "môre"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat is die toekomende tyd van 'eet'?",
+        en: "What is the future tense of 'eet'?",
+        options: ["sal eet", "het geëet", "eet"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord wys NIE die toekomende tyd nie?",
+        en: "Which word does NOT show the future tense?",
+        options: ["sal gaan", "het gegaan", "sal speel"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'sal' in Engels?",
+        en: "What does 'sal' mean in English?",
+        options: ["did", "will", "is"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Tydsvorme Hersiening",
+    englishTitle: "Tenses Review",
+    vocabulary: [
+      { af: "verlede", en: "past" },
+      { af: "hede", en: "present" },
+      { af: "toekoms", en: "future" },
+    ],
+    passage: {
+      af: "Daar is drie tydsvorme: verlede, hede en toekoms. 'Ek het gespeel' is verlede. 'Ek speel' is hede. 'Ek sal speel' is toekoms.",
+      en: "There are three tenses: past, present and future. 'I played' is past. 'I play' is present. 'I will play' is future.",
+    },
+    questions: [
+      {
+        af: "Hoeveel tydsvorme is daar?",
+        en: "How many tenses are there?",
+        options: ["twee", "drie", "vier"],
+        correctIndex: 1,
+      },
+      {
+        af: "'Ek het gespeel' is watter tydsvorm?",
+        en: "'Ek het gespeel' is which tense?",
+        options: ["verlede", "hede", "toekoms"],
+        correctIndex: 0,
+      },
+      {
+        af: "'Ek speel' is watter tydsvorm?",
+        en: "'Ek speel' is which tense?",
+        options: ["verlede", "hede", "toekoms"],
+        correctIndex: 1,
+      },
+      {
+        af: "'Ek sal speel' is watter tydsvorm?",
+        en: "'Ek sal speel' is which tense?",
+        options: ["verlede", "hede", "toekoms"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat beteken 'verlede' in Engels?",
+        en: "What does 'verlede' mean in English?",
+        options: ["future", "present", "past"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat beteken 'toekoms' in Engels?",
+        en: "What does 'toekoms' mean in English?",
+        options: ["past", "future", "present"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord wys verlede tyd?",
+        en: "Which word shows past tense?",
+        options: ["het geëet", "eet", "sal eet"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord wys toekomende tyd?",
+        en: "Which word shows future tense?",
+        options: ["het gelees", "lees", "sal lees"],
+        correctIndex: 2,
+      },
+      {
+        af: "Watter woord wys teenwoordige tyd?",
+        en: "Which word shows present tense?",
+        options: ["speel", "het gespeel", "sal speel"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'hede' in Engels?",
+        en: "What does 'hede' mean in English?",
+        options: ["past", "present", "future"],
+        correctIndex: 1,
+      },
+    ],
+  },
 ];
 
 export default lessons;

@@ -1,4 +1,4 @@
-// Byvoeglike Naamwoorde (Adjectives) - lesson 1 written; lessons 2-5 still to come.
+// Byvoeglike Naamwoorde (Adjectives) - 5 lessons, low to higher level.
 const lessons = [
   {
     title: "Byvoeglike Naamwoorde",
@@ -78,10 +78,315 @@ const lessons = [
       },
     ],
   },
-  null,
-  null,
-  null,
-  null,
+  {
+    title: "Grootte en Vorm",
+    englishTitle: "Size and Shape",
+    vocabulary: [
+      { af: "lank", en: "tall / long" },
+      { af: "kort", en: "short" },
+      { af: "rond", en: "round" },
+      { af: "vierkantig", en: "square" },
+      { af: "swaar", en: "heavy" },
+      { af: "lig", en: "light (not heavy)" },
+    ],
+    passage: {
+      af: "Die reus is baie lank. Die kabouter is kort. Die bal is rond, maar die boks is vierkantig. Die klip is swaar, maar die veer is lig.",
+      en: "The giant is very tall. The dwarf is short. The ball is round, but the box is square. The rock is heavy, but the feather is light.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n byvoeglike naamwoord?",
+        en: "Which word is an adjective?",
+        options: ["reus", "lank", "spring"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe lank is die reus?",
+        en: "How tall is the giant?",
+        options: ["kort", "baie lank", "gemiddeld"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter vorm is die bal?",
+        en: "What shape is the ball?",
+        options: ["vierkantig", "rond", "plat"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'swaar' in Engels?",
+        en: "What does 'swaar' mean in English?",
+        options: ["light", "heavy", "soft"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'lig' in Engels (in hierdie sin)?",
+        en: "What does 'lig' mean in English (in this sentence)?",
+        options: ["light (not heavy)", "lamp", "colour"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter vorm is die boks?",
+        en: "What shape is the box?",
+        options: ["rond", "vierkantig", "lank"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'kort' in Engels?",
+        en: "What does 'kort' mean in English?",
+        options: ["tall", "short", "round"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe is die kabouter?",
+        en: "How is the dwarf?",
+        options: ["lank", "kort", "swaar"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n byvoeglike naamwoord nie?",
+        en: "Which word is NOT an adjective?",
+        options: ["swaar", "klip", "rond"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'lank' in Engels?",
+        en: "What does 'lank' mean in English?",
+        options: ["short", "tall / long", "round"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Trappe van Vergelyking",
+    englishTitle: "Degrees of Comparison",
+    vocabulary: [
+      { af: "groter", en: "bigger" },
+      { af: "grootste", en: "biggest" },
+      { af: "kleiner", en: "smaller" },
+      { af: "kleinste", en: "smallest" },
+      { af: "mooier", en: "prettier" },
+    ],
+    passage: {
+      af: "My hond is groot. Jou hond is groter. Maar Sarel se hond is die grootste van almal! My kat is klein, maar jou kat is kleiner.",
+      en: "My dog is big. Your dog is bigger. But Sarel's dog is the biggest of all! My cat is small, but your cat is smaller.",
+    },
+    questions: [
+      {
+        af: "Watter hond is die grootste?",
+        en: "Which dog is the biggest?",
+        options: ["my hond", "jou hond", "Sarel se hond"],
+        correctIndex: 2,
+      },
+      {
+        af: "'Groter' beteken meer... as iets anders.",
+        en: "'Groter' means more... than something else.",
+        options: ["groot", "klein", "mooi"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter kat is kleiner?",
+        en: "Which cat is smaller?",
+        options: ["my kat", "jou kat", "Sarel se kat"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'grootste' in Engels?",
+        en: "What does 'grootste' mean in English?",
+        options: ["bigger", "biggest", "big"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'kleinste' in Engels?",
+        en: "What does 'kleinste' mean in English?",
+        options: ["smaller", "small", "smallest"],
+        correctIndex: 2,
+      },
+      {
+        af: "Om 'groot' groter te maak, voeg ons '-er' by: groot →...",
+        en: "To make 'groot' bigger, we add '-er': groot →...",
+        options: ["grootste", "groter", "grootstse"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'mooier' in Engels?",
+        en: "What does 'mooier' mean in English?",
+        options: ["prettiest", "pretty", "prettier"],
+        correctIndex: 2,
+      },
+      {
+        af: "Is my hond groter of kleiner as jou hond?",
+        en: "Is my dog bigger or smaller than your dog?",
+        options: ["groter", "kleiner", "dieselfde"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord wys die MEESTE (superlatief)?",
+        en: "Which word shows the MOST (superlative)?",
+        options: ["groot", "groter", "grootste"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat beteken 'groter' in Engels?",
+        en: "What does 'groter' mean in English?",
+        options: ["big", "bigger", "biggest"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Byvoeglike Naamwoorde in Sinne",
+    englishTitle: "Adjectives in Sentences",
+    vocabulary: [
+      { af: "skoon", en: "clean" },
+      { af: "vuil", en: "dirty" },
+      { af: "vars", en: "fresh" },
+      { af: "oud", en: "old" },
+      { af: "nuut", en: "new" },
+    ],
+    passage: {
+      af: "Ons het 'n nuwe fiets gekoop. My ou fiets was vuil, maar dié een is skoon en blink. Ons eet vars vrugte elke dag.",
+      en: "We bought a new bicycle. My old bicycle was dirty, but this one is clean and shiny. We eat fresh fruit every day.",
+    },
+    questions: [
+      {
+        af: "Watter woord beskryf die nuwe fiets?",
+        en: "Which word describes the new bicycle?",
+        options: ["vuil", "skoon", "oud"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter byvoeglike naamwoord is in: 'Ons eet vars vrugte.'?",
+        en: "Which adjective is in: 'We eat fresh fruit.'?",
+        options: ["eet", "vars", "vrugte"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe was die ou fiets?",
+        en: "How was the old bicycle?",
+        options: ["skoon", "vuil", "nuut"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'vars' in Engels?",
+        en: "What does 'vars' mean in English?",
+        options: ["fresh", "old", "dirty"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'skoon' in Engels?",
+        en: "What does 'skoon' mean in English?",
+        options: ["dirty", "clean", "new"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'oud' in Engels?",
+        en: "What does 'oud' mean in English?",
+        options: ["old", "new", "fresh"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat het ons gekoop?",
+        en: "What did we buy?",
+        options: ["'n nuwe fiets", "'n ou fiets", "vrugte"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wanneer eet ons vars vrugte?",
+        en: "When do we eat fresh fruit?",
+        options: ["net Maandae", "elke dag", "nooit"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'nuut' in Engels?",
+        en: "What does 'nuut' mean in English?",
+        options: ["old", "new", "clean"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n byvoeglike naamwoord nie?",
+        en: "Which word is NOT an adjective?",
+        options: ["fiets", "skoon", "vars"],
+        correctIndex: 0,
+      },
+    ],
+  },
+  {
+    title: "Byvoeglike Naamwoorde Hersiening",
+    englishTitle: "Adjectives Review",
+    vocabulary: [
+      { af: "beskryf", en: "describe" },
+      { af: "hoedanigheid", en: "quality" },
+      { af: "warm", en: "warm" },
+      { af: "koud", en: "cold" },
+      { af: "sag", en: "soft" },
+    ],
+    passage: {
+      af: "Byvoeglike naamwoorde beskryf naamwoorde. Hulle wys hoe iets lyk, voel of is. Vandag is dit warm, maar gister was dit koud.",
+      en: "Adjectives describe nouns. They show how something looks, feels or is. Today it is warm, but yesterday it was cold.",
+    },
+    questions: [
+      {
+        af: "Wat beskryf byvoeglike naamwoorde?",
+        en: "What do adjectives describe?",
+        options: ["werkwoorde", "naamwoorde", "voorsetsels"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe is die weer vandag?",
+        en: "How is the weather today?",
+        options: ["koud", "warm", "nat"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe was die weer gister?",
+        en: "How was the weather yesterday?",
+        options: ["warm", "koud", "droog"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'sag' in Engels?",
+        en: "What does 'sag' mean in English?",
+        options: ["hard", "soft", "rough"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter EEN van hierdie is NIE 'n byvoeglike naamwoord nie?",
+        en: "Which ONE of these is NOT an adjective?",
+        options: ["mooi", "hardloop", "groot"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord wys die MEESTE van 'groot'?",
+        en: "Which word shows the MOST of 'groot'?",
+        options: ["groter", "grootste", "groot"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'koud' in Engels?",
+        en: "What does 'koud' mean in English?",
+        options: ["warm", "cold", "wet"],
+        correctIndex: 1,
+      },
+      {
+        af: "Byvoeglike naamwoorde wys hoe iets lyk, voel of...",
+        en: "Adjectives show how something looks, feels or...",
+        options: ["is", "hardloop", "spring"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord beskryf 'n bal wat rond IS?",
+        en: "Which word describes a ball that IS round?",
+        options: ["rond", "bal", "is"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'warm' in Engels?",
+        en: "What does 'warm' mean in English?",
+        options: ["cold", "warm", "wet"],
+        correctIndex: 1,
+      },
+    ],
+  },
 ];
 
 export default lessons;

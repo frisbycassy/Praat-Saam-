@@ -1,4 +1,4 @@
-// Voorsetsels (Prepositions) - lesson 1 written; lessons 2-5 still to come.
+// Voorsetsels (Prepositions) - 5 lessons, low to higher level.
 const lessons = [
   {
     title: "Voorsetsels",
@@ -78,10 +78,312 @@ const lessons = [
       },
     ],
   },
-  null,
-  null,
-  null,
-  null,
+  {
+    title: "Meer Voorsetsels",
+    englishTitle: "More Prepositions",
+    vocabulary: [
+      { af: "voor", en: "in front of" },
+      { af: "bo", en: "above" },
+      { af: "tussen", en: "between" },
+      { af: "deur", en: "through" },
+      { af: "oor", en: "over" },
+    ],
+    passage: {
+      af: "Die boom staan voor die huis. 'n Voël vlieg bo die dak. Die kat sit tussen die stoele. Die hond hardloop deur die tuinhekkie. 'n Brug gaan oor die rivier.",
+      en: "The tree stands in front of the house. A bird flies above the roof. The cat sits between the chairs. The dog runs through the garden gate. A bridge goes over the river.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n voorsetsel?",
+        en: "Which word is a preposition?",
+        options: ["boom", "voor", "huis"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waar staan die boom?",
+        en: "Where does the tree stand?",
+        options: ["agter die huis", "voor die huis", "op die huis"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waar vlieg die voël?",
+        en: "Where does the bird fly?",
+        options: ["onder die dak", "bo die dak", "langs die dak"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'tussen' in Engels?",
+        en: "What does 'tussen' mean in English?",
+        options: ["between", "behind", "above"],
+        correctIndex: 0,
+      },
+      {
+        af: "Waar sit die kat?",
+        en: "Where does the cat sit?",
+        options: ["tussen die stoele", "onder die stoele", "op die stoele"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'deur' in Engels (in hierdie sin)?",
+        en: "What does 'deur' mean in English (in this sentence)?",
+        options: ["door", "through", "over"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat gaan oor die rivier?",
+        en: "What goes over the river?",
+        options: ["'n pad", "'n brug", "'n boom"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'oor' in Engels (in hierdie sin)?",
+        en: "What does 'oor' mean in English (in this sentence)?",
+        options: ["under", "over", "about"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n voorsetsel nie?",
+        en: "Which word is NOT a preposition?",
+        options: ["voor", "rivier", "bo"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'bo' in Engels?",
+        en: "What does 'bo' mean in English?",
+        options: ["below", "above", "next to"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Voorsetsels van Beweging",
+    englishTitle: "Prepositions of Movement",
+    vocabulary: [
+      { af: "na", en: "to" },
+      { af: "van", en: "from" },
+      { af: "uit", en: "out of" },
+      { af: "in...in", en: "into" },
+      { af: "om", en: "around" },
+    ],
+    passage: {
+      af: "Ons ry na die see. Ons kom van die huis af. Die kat spring uit die boom. Die water loop in die emmer in. Ons stap om die skool.",
+      en: "We drive to the sea. We come from the house. The cat jumps out of the tree. The water runs into the bucket. We walk around the school.",
+    },
+    questions: [
+      {
+        af: "Watter woord wys beweging na 'n plek toe?",
+        en: "Which word shows movement towards a place?",
+        options: ["na", "stap", "skool"],
+        correctIndex: 0,
+      },
+      {
+        af: "Waarheen ry ons?",
+        en: "Where do we drive to?",
+        options: ["die see", "die huis", "die skool"],
+        correctIndex: 0,
+      },
+      {
+        af: "Waaruit spring die kat?",
+        en: "What does the cat jump out of?",
+        options: ["die emmer", "die boom", "die huis"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'van' in Engels?",
+        en: "What does 'van' mean in English?",
+        options: ["to", "from", "around"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'uit' in Engels?",
+        en: "What does 'uit' mean in English?",
+        options: ["into", "out of", "around"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waarin loop die water?",
+        en: "What does the water run into?",
+        options: ["die emmer", "die boom", "die see"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'om' in Engels (in hierdie sin)?",
+        en: "What does 'om' mean in English (in this sentence)?",
+        options: ["through", "around", "over"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waar stap ons om?",
+        en: "What do we walk around?",
+        options: ["die see", "die skool", "die huis"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n voorsetsel nie?",
+        en: "Which word is NOT a preposition?",
+        options: ["na", "emmer", "van"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'na' in Engels?",
+        en: "What does 'na' mean in English?",
+        options: ["from", "to", "around"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Voorsetsels in Sinne",
+    englishTitle: "Prepositions in Sentences",
+    vocabulary: [
+      { af: "kas", en: "cupboard" },
+      { af: "venster", en: "window" },
+      { af: "muur", en: "wall" },
+      { af: "vloer", en: "floor" },
+      { af: "teen", en: "against" },
+    ],
+    passage: {
+      af: "Die bal lê onder die kas. Die prent hang teen die muur. Die kat spring op die vloer. Buite die venster sing 'n voël.",
+      en: "The ball lies under the cupboard. The picture hangs against the wall. The cat jumps onto the floor. Outside the window a bird sings.",
+    },
+    questions: [
+      {
+        af: "Waar lê die bal?",
+        en: "Where does the ball lie?",
+        options: ["op die kas", "onder die kas", "langs die kas"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waarteen hang die prent?",
+        en: "What does the picture hang against?",
+        options: ["die muur", "die venster", "die vloer"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'teen' in Engels?",
+        en: "What does 'teen' mean in English?",
+        options: ["against", "under", "between"],
+        correctIndex: 0,
+      },
+      {
+        af: "Waarop spring die kat?",
+        en: "What does the cat jump onto?",
+        options: ["die kas", "die vloer", "die muur"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waar sing die voël?",
+        en: "Where does the bird sing?",
+        options: ["binne die venster", "buite die venster", "onder die venster"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'vloer' in Engels?",
+        en: "What does 'vloer' mean in English?",
+        options: ["wall", "floor", "window"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voorsetsel pas: 'Die kat spring ___ die vloer.'?",
+        en: "Which preposition fits: 'The cat jumps ___ the floor.'?",
+        options: ["op", "in", "van"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'muur' in Engels?",
+        en: "What does 'muur' mean in English?",
+        options: ["floor", "wall", "window"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voorsetsel pas: 'Die prent hang ___ die muur.'?",
+        en: "Which preposition fits: 'The picture hangs ___ the wall.'?",
+        options: ["teen", "onder", "van"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'kas' in Engels?",
+        en: "What does 'kas' mean in English?",
+        options: ["basket", "cupboard", "window"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Voorsetsels Hersiening",
+    englishTitle: "Prepositions Review",
+    vocabulary: [
+      { af: "plek", en: "place" },
+      { af: "rigting", en: "direction" },
+      { af: "posisie", en: "position" },
+    ],
+    passage: {
+      af: "Voorsetsels wys waar iets is of hoe iets beweeg. Die kat is op die mat, onder die tafel of langs die deur. Ons stap na die skool of van die skool af.",
+      en: "Prepositions show where something is or how something moves. The cat is on the mat, under the table or next to the door. We walk to school or from school.",
+    },
+    questions: [
+      {
+        af: "Wat wys voorsetsels?",
+        en: "What do prepositions show?",
+        options: ["waar iets is of hoe dit beweeg", "wie iemand is", "watter kleur iets is"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter EEN van hierdie is NIE 'n voorsetsel nie?",
+        en: "Which ONE of these is NOT a preposition?",
+        options: ["onder", "kat", "langs"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'na' in Engels?",
+        en: "What does 'na' mean in English?",
+        options: ["from", "to", "under"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'van' in Engels?",
+        en: "What does 'van' mean in English?",
+        options: ["to", "from", "between"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voorsetsel wys 'n plek ONDER iets?",
+        en: "Which preposition shows a place UNDER something?",
+        options: ["op", "onder", "bo"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voorsetsel wys 'n plek BO iets?",
+        en: "Which preposition shows a place ABOVE something?",
+        options: ["onder", "bo", "langs"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waar is die kat in die storie?",
+        en: "Where is the cat in the story?",
+        options: ["op die mat", "in die kas", "agter die deur"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'tussen' in Engels?",
+        en: "What does 'tussen' mean in English?",
+        options: ["between", "behind", "above"],
+        correctIndex: 0,
+      },
+      {
+        af: "Waarheen stap ons?",
+        en: "Where do we walk to?",
+        options: ["die huis", "die skool", "die see"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voorsetsel pas: 'Die boek lê ___ die tafel.' (op die bopunt)?",
+        en: "Which preposition fits: 'The book lies ___ the table.' (on top)?",
+        options: ["op", "onder", "van"],
+        correctIndex: 0,
+      },
+    ],
+  },
 ];
 
 export default lessons;
