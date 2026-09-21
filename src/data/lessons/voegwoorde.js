@@ -1,4 +1,4 @@
-// Voegwoorde (Conjunctions) - lesson 1 written; lessons 2-5 still to come.
+// Voegwoorde (Conjunctions) - 5 lessons, low to higher level.
 const lessons = [
   {
     title: "Voegwoorde",
@@ -78,10 +78,309 @@ const lessons = [
       },
     ],
   },
-  null,
-  null,
-  null,
-  null,
+  {
+    title: "Meer Voegwoorde",
+    englishTitle: "More Conjunctions",
+    vocabulary: [
+      { af: "daarom", en: "therefore" },
+      { af: "sodat", en: "so that" },
+      { af: "terwyl", en: "while" },
+      { af: "nadat", en: "after" },
+      { af: "voordat", en: "before" },
+    ],
+    passage: {
+      af: "Ek het vroeg opgestaan, daarom is ek nie laat nie. Ek leer hard sodat ek goed kan doen. Terwyl ek eet, luister ek musiek. Nadat ek geëet het, was ek my hande.",
+      en: "I woke up early, therefore I am not late. I study hard so that I can do well. While I eat, I listen to music. After I have eaten, I wash my hands.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n voegwoord?",
+        en: "Which word is a conjunction?",
+        options: ["vroeg", "daarom", "opgestaan"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoekom is ek nie laat nie?",
+        en: "Why am I not late?",
+        options: ["ek het vroeg opgestaan", "ek het vinnig geëet", "ek het geslaap"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'sodat' in Engels?",
+        en: "What does 'sodat' mean in English?",
+        options: ["so that", "because", "while"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat doen ek terwyl ek eet?",
+        en: "What do I do while I eat?",
+        options: ["lees", "luister musiek", "slaap"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'terwyl' in Engels?",
+        en: "What does 'terwyl' mean in English?",
+        options: ["after", "before", "while"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat doen ek nadat ek geëet het?",
+        en: "What do I do after I have eaten?",
+        options: ["was my hande", "gaan slaap", "speel buite"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'nadat' in Engels?",
+        en: "What does 'nadat' mean in English?",
+        options: ["before", "after", "while"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'daarom' in Engels?",
+        en: "What does 'daarom' mean in English?",
+        options: ["therefore", "because", "or"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord is NIE 'n voegwoord nie?",
+        en: "Which word is NOT a conjunction?",
+        options: ["sodat", "hande", "terwyl"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'voordat' in Engels?",
+        en: "What does 'voordat' mean in English?",
+        options: ["after", "before", "while"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Voegwoorde in Sinne",
+    englishTitle: "Conjunctions in Sentences",
+    vocabulary: [
+      { af: "alhoewel", en: "although" },
+      { af: "tog", en: "still / yet" },
+      { af: "dus", en: "so / thus" },
+    ],
+    passage: {
+      af: "Alhoewel dit reën, gaan ons steeds buite speel. Ons het nat geword, maar ons het tog pret gehad. Ons was moeg, dus het ons vroeg gaan slaap.",
+      en: "Although it is raining, we are still going to play outside. We got wet, but we still had fun. We were tired, so we went to bed early.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n voegwoord?",
+        en: "Which word is a conjunction?",
+        options: ["reën", "alhoewel", "buite"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'alhoewel' in Engels?",
+        en: "What does 'alhoewel' mean in English?",
+        options: ["although", "because", "and"],
+        correctIndex: 0,
+      },
+      {
+        af: "Het hulle pret gehad, al het hulle nat geword?",
+        en: "Did they have fun, even though they got wet?",
+        options: ["ja", "nee", "onseker"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'dus' in Engels?",
+        en: "What does 'dus' mean in English?",
+        options: ["so / thus", "but", "or"],
+        correctIndex: 0,
+      },
+      {
+        af: "Hoekom het hulle vroeg gaan slaap?",
+        en: "Why did they go to bed early?",
+        options: ["hulle was honger", "hulle was moeg", "dit was laat"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'tog' in Engels?",
+        en: "What does 'tog' mean in English?",
+        options: ["never", "still / yet", "always"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat gaan hulle doen alhoewel dit reën?",
+        en: "What are they going to do although it is raining?",
+        options: ["binne bly", "buite speel", "slaap"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n voegwoord nie?",
+        en: "Which word is NOT a conjunction?",
+        options: ["dus", "reën", "maar"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voegwoord verbind twee teenoorgestelde idees?",
+        en: "Which conjunction joins two opposite ideas?",
+        options: ["en", "maar", "dus"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voegwoord wys 'n gevolg?",
+        en: "Which conjunction shows a result?",
+        options: ["dus", "alhoewel", "tog"],
+        correctIndex: 0,
+      },
+    ],
+  },
+  {
+    title: "Voegwoorde: Keuse Maak",
+    englishTitle: "Conjunctions: Making a Choice",
+    vocabulary: [
+      { af: "kies", en: "choose" },
+      { af: "reg", en: "right / correct" },
+      { af: "verkeerd", en: "wrong" },
+      { af: "duidelik", en: "clear" },
+    ],
+    passage: {
+      af: "Ons moet die regte voegwoord kies. Die woorde 'en', 'maar', 'want' en 'of' beteken elkeen iets anders. Die regte woord maak die sin duidelik.",
+      en: "We must choose the right conjunction. The words 'and', 'but', 'because' and 'or' each mean something different. The right word makes the sentence clear.",
+    },
+    questions: [
+      {
+        af: "Watter voegwoord pas: 'Ek is honger, ___ ek gaan eet.'?",
+        en: "Which conjunction fits: 'I am hungry, ___ I am going to eat.'?",
+        options: ["maar", "toe", "of"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voegwoord pas: 'Ek wil speel, ___ ek moet huiswerk doen.'?",
+        en: "Which conjunction fits: 'I want to play, ___ I must do homework.'?",
+        options: ["maar", "en", "of"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter voegwoord pas: 'Wil jy tee ___ koffie hê?'?",
+        en: "Which conjunction fits: 'Do you want tea ___ coffee?'?",
+        options: ["en", "of", "maar"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voegwoord pas: 'Sy huil, ___ sy is hartseer.'?",
+        en: "Which conjunction fits: 'She cries, ___ she is sad.'?",
+        options: ["want", "of", "maar"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat maak die regte voegwoord vir 'n sin?",
+        en: "What does the right conjunction do for a sentence?",
+        options: ["maak dit duidelik", "maak dit korter", "maak dit kleurvol"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter voegwoord pas: 'Ek eet appels ___ piesangs.'?",
+        en: "Which conjunction fits: 'I eat apples ___ bananas.'?",
+        options: ["en", "maar", "want"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'kies' in Engels?",
+        en: "What does 'kies' mean in English?",
+        options: ["choose", "find", "write"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter voegwoord wys 'n rede?",
+        en: "Which conjunction shows a reason?",
+        options: ["en", "want", "of"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voegwoord wys 'n keuse?",
+        en: "Which conjunction shows a choice?",
+        options: ["of", "en", "maar"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter voegwoord verbind twee soortgelyke idees?",
+        en: "Which conjunction joins two similar ideas?",
+        options: ["en", "maar", "of"],
+        correctIndex: 0,
+      },
+    ],
+  },
+  {
+    title: "Voegwoorde Hersiening",
+    englishTitle: "Conjunctions Review",
+    vocabulary: [
+      { af: "idee", en: "idea" },
+      { af: "rede", en: "reason" },
+      { af: "gevolg", en: "result" },
+    ],
+    passage: {
+      af: "Voegwoorde verbind woorde of sinne. 'En' voeg idees by. 'Maar' wys 'n verskil. 'Want' gee 'n rede. 'Of' wys 'n keuse.",
+      en: "Conjunctions join words or sentences. 'En' adds ideas. 'Maar' shows a difference. 'Want' gives a reason. 'Of' shows a choice.",
+    },
+    questions: [
+      {
+        af: "Wat doen voegwoorde?",
+        en: "What do conjunctions do?",
+        options: ["verbind woorde of sinne", "beskryf naamwoorde", "wys waar iets is"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter voegwoord voeg idees by?",
+        en: "Which conjunction adds ideas?",
+        options: ["en", "maar", "of"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter voegwoord wys 'n verskil?",
+        en: "Which conjunction shows a difference?",
+        options: ["en", "maar", "want"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voegwoord gee 'n rede?",
+        en: "Which conjunction gives a reason?",
+        options: ["of", "want", "en"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter voegwoord wys 'n keuse?",
+        en: "Which conjunction shows a choice?",
+        options: ["of", "en", "want"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter EEN van hierdie is NIE 'n voegwoord nie?",
+        en: "Which ONE of these is NOT a conjunction?",
+        options: ["maar", "hond", "want"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'want' in Engels?",
+        en: "What does 'want' mean in English?",
+        options: ["because", "or", "and"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'of' in Engels?",
+        en: "What does 'of' mean in English?",
+        options: ["and", "or", "but"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'maar' in Engels?",
+        en: "What does 'maar' mean in English?",
+        options: ["and", "but", "because"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'en' in Engels?",
+        en: "What does 'en' mean in English?",
+        options: ["or", "and", "but"],
+        correctIndex: 1,
+      },
+    ],
+  },
 ];
 
 export default lessons;

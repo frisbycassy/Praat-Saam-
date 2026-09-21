@@ -1,4 +1,4 @@
-// Voornaamwoorde (Pronouns) - lesson 1 written; lessons 2-5 still to come.
+// Voornaamwoorde (Pronouns) - 5 lessons, low to higher level.
 const lessons = [
   {
     title: "Voornaamwoorde",
@@ -78,10 +78,311 @@ const lessons = [
       },
     ],
   },
-  null,
-  null,
-  null,
-  null,
+  {
+    title: "Ons en Julle",
+    englishTitle: "We and You (plural)",
+    vocabulary: [
+      { af: "ons", en: "we" },
+      { af: "julle", en: "you (plural)" },
+      { af: "dit", en: "it" },
+      { af: "almal", en: "everyone" },
+      { af: "niemand", en: "no one" },
+    ],
+    passage: {
+      af: "Ons gaan môre see toe. Julle is almal genooi! Dit gaan pret wees. Niemand hoef alleen te bly nie.",
+      en: "We are going to the sea tomorrow. You are all invited! It is going to be fun. No one needs to stay alone.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n voornaamwoord?",
+        en: "Which word is a pronoun?",
+        options: ["see", "ons", "môre"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wie gaan see toe?",
+        en: "Who is going to the sea?",
+        options: ["ons", "hulle", "hy"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'julle' in Engels?",
+        en: "What does 'julle' mean in English?",
+        options: ["we", "you (plural)", "they"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'dit' in Engels?",
+        en: "What does 'dit' mean in English?",
+        options: ["it", "this person", "that place"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'ons' in Engels?",
+        en: "What does 'ons' mean in English?",
+        options: ["I", "we", "you"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wie is genooi?",
+        en: "Who is invited?",
+        options: ["net een persoon", "almal", "niemand"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'niemand' in Engels?",
+        en: "What does 'niemand' mean in English?",
+        options: ["everyone", "someone", "no one"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wanneer gaan hulle see toe?",
+        en: "When are they going to the sea?",
+        options: ["vandag", "môre", "gister"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n voornaamwoord nie?",
+        en: "Which word is NOT a pronoun?",
+        options: ["see", "ons", "dit"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'almal' in Engels?",
+        en: "What does 'almal' mean in English?",
+        options: ["no one", "everyone", "someone"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Besitlike Voornaamwoorde",
+    englishTitle: "Possessive Pronouns",
+    vocabulary: [
+      { af: "my", en: "my" },
+      { af: "jou", en: "your" },
+      { af: "haar", en: "her" },
+      { af: "sy", en: "his" },
+      { af: "hulle se", en: "their" },
+    ],
+    passage: {
+      af: "Dit is my boek. Waar is jou pen? Haar rok is pers. Sy skoene is groot. Dit is hulle se hond.",
+      en: "This is my book. Where is your pen? Her dress is purple. His shoes are big. That is their dog.",
+    },
+    questions: [
+      {
+        af: "Watter woord wys besit (wie s'n dit is)?",
+        en: "Which word shows possession (whose it is)?",
+        options: ["boek", "my", "is"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wie se boek is dit?",
+        en: "Whose book is it?",
+        options: ["myne", "joune", "hare"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter kleur is haar rok?",
+        en: "What colour is her dress?",
+        options: ["pers", "rooi", "blou"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'jou' in Engels?",
+        en: "What does 'jou' mean in English?",
+        options: ["my", "your", "her"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'haar' in Engels?",
+        en: "What does 'haar' mean in English?",
+        options: ["his", "her", "their"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wie se hond is dit?",
+        en: "Whose dog is it?",
+        options: ["myne", "hulle s'n", "hare"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'sy' in Engels (in hierdie sin oor skoene)?",
+        en: "What does 'sy' mean in English (in this sentence about shoes)?",
+        options: ["her", "his", "their"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe is sy skoene?",
+        en: "How are his shoes?",
+        options: ["klein", "groot", "nuut"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n besitlike voornaamwoord nie?",
+        en: "Which word is NOT a possessive pronoun?",
+        options: ["my", "boek", "jou"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'hulle se' in Engels?",
+        en: "What does 'hulle se' mean in English?",
+        options: ["our", "their", "your"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Voornaamwoorde in Sinne",
+    englishTitle: "Pronouns in Sentences",
+    vocabulary: [
+      { af: "vervang", en: "replace" },
+      { af: "mekaar", en: "each other" },
+      { af: "iemand", en: "someone" },
+      { af: "iets", en: "something" },
+    ],
+    passage: {
+      af: "Anna het 'n hond. Sy noem hom Rex. Anna en Rex speel saam. Hulle geniet mekaar se geselskap.",
+      en: "Anna has a dog. She calls him Rex. Anna and Rex play together. They enjoy each other's company.",
+    },
+    questions: [
+      {
+        af: "Watter woord vervang 'Anna' in die tweede sin?",
+        en: "Which word replaces 'Anna' in the second sentence?",
+        options: ["Sy", "hom", "hulle"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord vervang 'die hond' / 'Rex'?",
+        en: "Which word replaces 'the dog' / 'Rex'?",
+        options: ["Sy", "hom", "Anna"],
+        correctIndex: 1,
+      },
+      {
+        af: "'n Voornaamwoord neem die plek in van 'n...",
+        en: "A pronoun takes the place of a...",
+        options: ["naamwoord", "kleur", "syfer"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'mekaar' in Engels?",
+        en: "What does 'mekaar' mean in English?",
+        options: ["each other", "alone", "someone"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat is die hond se naam?",
+        en: "What is the dog's name?",
+        options: ["Anna", "Rex", "Sy"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat doen Anna en Rex saam?",
+        en: "What do Anna and Rex do together?",
+        options: ["eet", "speel", "slaap"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord vervang 'Anna en Rex' in die laaste sin?",
+        en: "Which word replaces 'Anna and Rex' in the last sentence?",
+        options: ["Hulle", "Sy", "Hom"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'iemand' in Engels?",
+        en: "What does 'iemand' mean in English?",
+        options: ["something", "someone", "nothing"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n voornaamwoord nie?",
+        en: "Which word is NOT a pronoun?",
+        options: ["Sy", "Rex", "hom"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'iets' in Engels?",
+        en: "What does 'iets' mean in English?",
+        options: ["someone", "nothing", "something"],
+        correctIndex: 2,
+      },
+    ],
+  },
+  {
+    title: "Voornaamwoorde Hersiening",
+    englishTitle: "Pronouns Review",
+    vocabulary: [
+      { af: "naam", en: "name" },
+      { af: "besit", en: "possession" },
+      { af: "vorm", en: "form" },
+    ],
+    passage: {
+      af: "Voornaamwoorde staan in die plek van name. Ek, jy, hy, sy, ons, julle en hulle is voornaamwoorde. My, jou en haar wys besit.",
+      en: "Pronouns stand in the place of names. Ek, jy, hy, sy, ons, julle and hulle are pronouns. My, jou and haar show possession.",
+    },
+    questions: [
+      {
+        af: "Waarvoor staan voornaamwoorde in die plek?",
+        en: "What do pronouns stand in the place of?",
+        options: ["name", "kleure", "syfers"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord wys besit?",
+        en: "Which word shows possession?",
+        options: ["hy", "my", "ons"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'ek' in Engels?",
+        en: "What does 'ek' mean in English?",
+        options: ["you", "I", "he"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'jou' in Engels?",
+        en: "What does 'jou' mean in English?",
+        options: ["your", "you", "my"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'hulle' in Engels?",
+        en: "What does 'hulle' mean in English?",
+        options: ["we", "they", "you all"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter EEN van hierdie is NIE 'n voornaamwoord nie?",
+        en: "Which ONE of these is NOT a pronoun?",
+        options: ["sy", "hond", "ons"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord vervang 'die seun' in: 'Die seun speel. Hy is vinnig.'?",
+        en: "Which word replaces 'the boy' in: 'The boy plays. He is fast.'?",
+        options: ["Hy", "speel", "vinnig"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord wys besit in: 'Dit is my bal.'?",
+        en: "Which word shows possession in: 'This is my ball.'?",
+        options: ["Dit", "my", "bal"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'jy' in Engels?",
+        en: "What does 'jy' mean in English?",
+        options: ["you", "he", "they"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woorde is voorbeelde van voornaamwoorde?",
+        en: "Which words are examples of pronouns?",
+        options: ["hond, kat, bal", "ek, jy, hulle", "groot, klein, mooi"],
+        correctIndex: 1,
+      },
+    ],
+  },
 ];
 
 export default lessons;

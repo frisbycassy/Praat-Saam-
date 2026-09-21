@@ -1,4 +1,4 @@
-// Bywoorde (Adverbs) - lesson 1 written; lessons 2-5 still to come.
+// Bywoorde (Adverbs) - 5 lessons, low to higher level.
 const lessons = [
   {
     title: "Bywoorde",
@@ -78,10 +78,314 @@ const lessons = [
       },
     ],
   },
-  null,
-  null,
-  null,
-  null,
+  {
+    title: "Bywoorde van Tyd",
+    englishTitle: "Adverbs of Time",
+    vocabulary: [
+      { af: "nou", en: "now" },
+      { af: "later", en: "later" },
+      { af: "altyd", en: "always" },
+      { af: "nooit", en: "never" },
+      { af: "dikwels", en: "often" },
+    ],
+    passage: {
+      af: "Ek doen nou my huiswerk. Later gaan ek fiets ry. Ek is altyd op tyd vir skool, en ek is nooit laat nie. Ons eet dikwels pizza op Vrydae.",
+      en: "I am doing my homework now. Later I am going to ride my bicycle. I am always on time for school, and I am never late. We often eat pizza on Fridays.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n bywoord van tyd?",
+        en: "Which word is an adverb of time?",
+        options: ["huiswerk", "later", "fiets"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat doen ek nou?",
+        en: "What am I doing now?",
+        options: ["fiets ry", "my huiswerk", "eet pizza"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wanneer eet ons pizza?",
+        en: "When do we eat pizza?",
+        options: ["Maandae", "Vrydae", "Sondae"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'nooit' in Engels?",
+        en: "What does 'nooit' mean in English?",
+        options: ["always", "sometimes", "never"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat beteken 'altyd' in Engels?",
+        en: "What does 'altyd' mean in English?",
+        options: ["always", "never", "often"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'dikwels' in Engels?",
+        en: "What does 'dikwels' mean in English?",
+        options: ["never", "often", "later"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat gaan ek later doen?",
+        en: "What am I going to do later?",
+        options: ["huiswerk doen", "fiets ry", "slaap"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'later' in Engels?",
+        en: "What does 'later' mean in English?",
+        options: ["now", "later", "never"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n bywoord van tyd nie?",
+        en: "Which word is NOT an adverb of time?",
+        options: ["nou", "fiets", "altyd"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'nou' in Engels?",
+        en: "What does 'nou' mean in English?",
+        options: ["later", "now", "never"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Bywoorde van Plek",
+    englishTitle: "Adverbs of Place",
+    vocabulary: [
+      { af: "hier", en: "here" },
+      { af: "daar", en: "there" },
+      { af: "buite", en: "outside" },
+      { af: "binne", en: "inside" },
+      { af: "oral", en: "everywhere" },
+    ],
+    passage: {
+      af: "Kom sit hier langs my. Die kat lê daar op die mat. Ons speel buite, maar ons eet binne. Daar is speelgoed oral in die kamer.",
+      en: "Come sit here next to me. The cat lies there on the mat. We play outside, but we eat inside. There are toys everywhere in the room.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n bywoord van plek?",
+        en: "Which word is an adverb of place?",
+        options: ["kat", "hier", "mat"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waar lê die kat?",
+        en: "Where does the cat lie?",
+        options: ["hier", "daar op die mat", "binne"],
+        correctIndex: 1,
+      },
+      {
+        af: "Waar speel die kinders?",
+        en: "Where do the children play?",
+        options: ["binne", "buite", "daar"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'binne' in Engels?",
+        en: "What does 'binne' mean in English?",
+        options: ["outside", "inside", "everywhere"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'oral' in Engels?",
+        en: "What does 'oral' mean in English?",
+        options: ["nowhere", "somewhere", "everywhere"],
+        correctIndex: 2,
+      },
+      {
+        af: "Waar eet die kinders?",
+        en: "Where do the children eat?",
+        options: ["buite", "binne", "daar"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'daar' in Engels?",
+        en: "What does 'daar' mean in English?",
+        options: ["here", "there", "everywhere"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'hier' in Engels?",
+        en: "What does 'hier' mean in English?",
+        options: ["here", "there", "outside"],
+        correctIndex: 0,
+      },
+      {
+        af: "Waar is die speelgoed?",
+        en: "Where are the toys?",
+        options: ["net op die bed", "oral in die kamer", "in die kas"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n bywoord van plek nie?",
+        en: "Which word is NOT an adverb of place?",
+        options: ["kamer", "hier", "buite"],
+        correctIndex: 0,
+      },
+    ],
+  },
+  {
+    title: "Bywoorde van Wyse",
+    englishTitle: "Adverbs of Manner",
+    vocabulary: [
+      { af: "saggies", en: "softly" },
+      { af: "netjies", en: "neatly" },
+      { af: "maklik", en: "easily" },
+      { af: "moeilik", en: "with difficulty" },
+      { af: "ordentlik", en: "properly" },
+    ],
+    passage: {
+      af: "Die baba slaap, so ons praat saggies. Ek pak my kamer netjies op. Sommige somme is maklik, ander is moeilik. Ons moet altyd ordentlik eet.",
+      en: "The baby is sleeping, so we talk softly. I pack my room neatly. Some sums are easy, others are difficult. We must always eat properly.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n bywoord van wyse?",
+        en: "Which word is an adverb of manner?",
+        options: ["baba", "saggies", "slaap"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoekom praat ons saggies?",
+        en: "Why do we talk softly?",
+        options: ["die baba slaap", "ons is kwaad", "dit is stil"],
+        correctIndex: 0,
+      },
+      {
+        af: "Hoe pak ek my kamer op?",
+        en: "How do I pack up my room?",
+        options: ["vinnig", "netjies", "stadig"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'maklik' in Engels?",
+        en: "What does 'maklik' mean in English?",
+        options: ["difficult", "easily", "slowly"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'moeilik' in Engels?",
+        en: "What does 'moeilik' mean in English?",
+        options: ["easily", "difficult", "neatly"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe moet ons altyd eet?",
+        en: "How must we always eat?",
+        options: ["vinnig", "hard", "ordentlik"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat beteken 'saggies' in Engels?",
+        en: "What does 'saggies' mean in English?",
+        options: ["loudly", "softly", "quickly"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'netjies' in Engels?",
+        en: "What does 'netjies' mean in English?",
+        options: ["messily", "neatly", "slowly"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter somme is moeilik?",
+        en: "Which sums are difficult?",
+        options: ["almal", "sommige", "geeneen"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is NIE 'n bywoord van wyse nie?",
+        en: "Which word is NOT an adverb of manner?",
+        options: ["kamer", "saggies", "netjies"],
+        correctIndex: 0,
+      },
+    ],
+  },
+  {
+    title: "Bywoorde Hersiening",
+    englishTitle: "Adverbs Review",
+    vocabulary: [
+      { af: "tyd", en: "time" },
+      { af: "plek", en: "place" },
+      { af: "wyse", en: "manner" },
+      { af: "vraag", en: "question" },
+      { af: "antwoord", en: "answer" },
+    ],
+    passage: {
+      af: "Bywoorde vertel ons wanneer, waar of hoe iets gebeur. 'Gister' is 'n bywoord van tyd. 'Hier' is 'n bywoord van plek. 'Vinnig' is 'n bywoord van wyse.",
+      en: "Adverbs tell us when, where or how something happens. 'Gister' is an adverb of time. 'Hier' is an adverb of place. 'Vinnig' is an adverb of manner.",
+    },
+    questions: [
+      {
+        af: "Wat vertel bywoorde vir ons?",
+        en: "What do adverbs tell us?",
+        options: ["wanneer, waar of hoe", "wie iemand is", "watter kleur iets is"],
+        correctIndex: 0,
+      },
+      {
+        af: "'Gister' is 'n bywoord van...",
+        en: "'Gister' is an adverb of...",
+        options: ["tyd", "plek", "wyse"],
+        correctIndex: 0,
+      },
+      {
+        af: "'Hier' is 'n bywoord van...",
+        en: "'Hier' is an adverb of...",
+        options: ["tyd", "plek", "wyse"],
+        correctIndex: 1,
+      },
+      {
+        af: "'Vinnig' is 'n bywoord van...",
+        en: "'Vinnig' is an adverb of...",
+        options: ["tyd", "plek", "wyse"],
+        correctIndex: 2,
+      },
+      {
+        af: "Watter woord is 'n bywoord van tyd?",
+        en: "Which word is an adverb of time?",
+        options: ["altyd", "hier", "stadig"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord is 'n bywoord van plek?",
+        en: "Which word is an adverb of place?",
+        options: ["gister", "buite", "saggies"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is 'n bywoord van wyse?",
+        en: "Which word is an adverb of manner?",
+        options: ["môre", "daar", "netjies"],
+        correctIndex: 2,
+      },
+      {
+        af: "Wat beteken 'altyd' in Engels?",
+        en: "What does 'altyd' mean in English?",
+        options: ["always", "never", "sometimes"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter EEN van hierdie is NIE 'n bywoord nie?",
+        en: "Which ONE of these is NOT an adverb?",
+        options: ["vinnig", "hond", "hier"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'oral' in Engels?",
+        en: "What does 'oral' mean in English?",
+        options: ["nowhere", "everywhere", "somewhere"],
+        correctIndex: 1,
+      },
+    ],
+  },
 ];
 
 export default lessons;

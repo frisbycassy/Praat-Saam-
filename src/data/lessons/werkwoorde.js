@@ -1,4 +1,4 @@
-// Werkwoorde (Verbs) - lesson 1 written; lessons 2-5 still to come.
+// Werkwoorde (Verbs) - 5 lessons, low to higher level.
 const lessons = [
   {
     title: "Werkwoorde",
@@ -78,10 +78,315 @@ const lessons = [
       },
     ],
   },
-  null,
-  null,
-  null,
-  null,
+  {
+    title: "Aksiewerkwoorde",
+    englishTitle: "Action Verbs",
+    vocabulary: [
+      { af: "skop", en: "kick" },
+      { af: "gooi", en: "throw" },
+      { af: "sing", en: "sing" },
+      { af: "dans", en: "dance" },
+      { af: "swem", en: "swim" },
+      { af: "klim", en: "climb" },
+    ],
+    passage: {
+      af: "Op die speelgrond skop die seuns 'n bal. Die meisies sing en dans. Later swem almal in die swembad en klim op die glyplank.",
+      en: "On the playground the boys kick a ball. The girls sing and dance. Later everyone swims in the pool and climbs on the slide.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n aksiewerkwoord?",
+        en: "Which word is an action verb?",
+        options: ["bal", "skop", "speelgrond"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wie skop die bal op die speelgrond?",
+        en: "Who kicks the ball on the playground?",
+        options: ["die seuns", "die meisies", "die onderwyser"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat doen die meisies?",
+        en: "What do the girls do?",
+        options: ["swem en klim", "sing en dans", "skop en gooi"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'swem' in Engels?",
+        en: "What does 'swem' mean in English?",
+        options: ["climb", "swim", "throw"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'klim' in Engels?",
+        en: "What does 'klim' mean in English?",
+        options: ["climb", "kick", "dance"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'gooi' in Engels?",
+        en: "What does 'gooi' mean in English?",
+        options: ["throw", "sing", "swim"],
+        correctIndex: 0,
+      },
+      {
+        af: "Waar swem almal?",
+        en: "Where does everyone swim?",
+        options: ["in die see", "in die swembad", "in die rivier"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'skop' in Engels?",
+        en: "What does 'skop' mean in English?",
+        options: ["kick", "throw", "climb"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord is NIE 'n aksiewerkwoord nie?",
+        en: "Which word is NOT an action verb?",
+        options: ["dans", "speelgrond", "klim"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'sing' in Engels?",
+        en: "What does 'sing' mean in English?",
+        options: ["dance", "sing", "swim"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Toestandswerkwoorde",
+    englishTitle: "State Verbs",
+    vocabulary: [
+      { af: "is", en: "is" },
+      { af: "het", en: "has" },
+      { af: "voel", en: "feel" },
+      { af: "lyk", en: "look / seem" },
+      { af: "word", en: "become" },
+    ],
+    passage: {
+      af: "Ek voel gelukkig vandag. Die lug lyk blou en mooi. My hond het 'n nuwe bal. Die weer word al warmer.",
+      en: "I feel happy today. The sky looks blue and pretty. My dog has a new ball. The weather is becoming warmer.",
+    },
+    questions: [
+      {
+        af: "Watter woord is 'n toestandswerkwoord?",
+        en: "Which word is a state verb?",
+        options: ["bal", "voel", "warm"],
+        correctIndex: 1,
+      },
+      {
+        af: "'n Toestandswerkwoord wys hoe iets is of...",
+        en: "A state verb shows how something is or...",
+        options: ["voel", "spring", "hardloop"],
+        correctIndex: 0,
+      },
+      {
+        af: "Hoe voel ek vandag?",
+        en: "How do I feel today?",
+        options: ["hartseer", "gelukkig", "moeg"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'lyk' in Engels?",
+        en: "What does 'lyk' mean in English?",
+        options: ["look / seem", "feel", "become"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat het my hond?",
+        en: "What does my dog have?",
+        options: ["'n nuwe bal", "'n nuwe huis", "'n nuwe kombers"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'word' in Engels (in hierdie sin)?",
+        en: "What does 'word' mean in English (in this sentence)?",
+        options: ["become", "word", "was"],
+        correctIndex: 0,
+      },
+      {
+        af: "Hoe lyk die lug?",
+        en: "How does the sky look?",
+        options: ["grys en donker", "blou en mooi", "swart"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'voel' in Engels?",
+        en: "What does 'voel' mean in English?",
+        options: ["feel", "see", "hear"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord is NIE 'n toestandswerkwoord nie?",
+        en: "Which word is NOT a state verb?",
+        options: ["is", "bal", "word"],
+        correctIndex: 1,
+      },
+      {
+        af: "Hoe word die weer?",
+        en: "How is the weather becoming?",
+        options: ["kouer", "warmer", "natter"],
+        correctIndex: 1,
+      },
+    ],
+  },
+  {
+    title: "Werkwoorde in Sinne",
+    englishTitle: "Verbs in Sentences",
+    vocabulary: [
+      { af: "onderwerp", en: "subject" },
+      { af: "sin", en: "sentence" },
+      { af: "skryf", en: "write" },
+      { af: "teken", en: "draw" },
+      { af: "luister", en: "listen" },
+    ],
+    passage: {
+      af: "In die klas skryf die kinders 'n storie. Hulle teken ook prente. Die onderwyser luister mooi na almal.",
+      en: "In class the children write a story. They also draw pictures. The teacher listens nicely to everyone.",
+    },
+    questions: [
+      {
+        af: "Watter woord is die werkwoord in: 'Die kinders skryf 'n storie.'?",
+        en: "Which word is the verb in: 'The children write a story.'?",
+        options: ["kinders", "skryf", "storie"],
+        correctIndex: 1,
+      },
+      {
+        af: "'n Sin het altyd 'n onderwerp en 'n...",
+        en: "A sentence always has a subject and a...",
+        options: ["werkwoord", "kleur", "syfer"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat doen die kinders in die klas?",
+        en: "What do the children do in class?",
+        options: ["skryf 'n storie", "lees 'n boek", "speel buite"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'teken' in Engels?",
+        en: "What does 'teken' mean in English?",
+        options: ["write", "draw", "listen"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'luister' in Engels?",
+        en: "What does 'luister' mean in English?",
+        options: ["listen", "look", "speak"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wie luister mooi na almal?",
+        en: "Who listens nicely to everyone?",
+        options: ["die kinders", "die onderwyser", "die ouers"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'skryf' in Engels?",
+        en: "What does 'skryf' mean in English?",
+        options: ["write", "read", "draw"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord is die werkwoord in: 'Hulle teken prente.'?",
+        en: "Which word is the verb in: 'They draw pictures.'?",
+        options: ["Hulle", "teken", "prente"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'onderwerp' in Engels?",
+        en: "What does 'onderwerp' mean in English?",
+        options: ["subject", "sentence", "teacher"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat teken die kinders ook?",
+        en: "What do the children also draw?",
+        options: ["prente", "syfers", "letters"],
+        correctIndex: 0,
+      },
+    ],
+  },
+  {
+    title: "Werkwoorde Hersiening",
+    englishTitle: "Verbs Review",
+    vocabulary: [
+      { af: "gebeur", en: "happen" },
+      { af: "altyd", en: "always" },
+      { af: "soms", en: "sometimes" },
+      { af: "saam", en: "together" },
+      { af: "elke", en: "every" },
+    ],
+    passage: {
+      af: "Werkwoorde vertel ons wat gebeur. Ons hardloop, ons eet, ons speel, ons is, ons voel. Elke sin het 'n werkwoord nodig.",
+      en: "Verbs tell us what happens. We run, we eat, we play, we are, we feel. Every sentence needs a verb.",
+    },
+    questions: [
+      {
+        af: "Wat vertel werkwoorde vir ons?",
+        en: "What do verbs tell us?",
+        options: ["wat gebeur", "waar iets is", "wie iemand is"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter EEN van hierdie is NIE 'n werkwoord nie?",
+        en: "Which ONE of these is NOT a verb?",
+        options: ["hardloop", "boom", "voel"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat het elke sin nodig?",
+        en: "What does every sentence need?",
+        options: ["'n kleur", "'n werkwoord", "'n syfer"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord is 'n aksiewerkwoord?",
+        en: "Which word is an action verb?",
+        options: ["hardloop", "mooi", "stad"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord is 'n toestandswerkwoord?",
+        en: "Which word is a state verb?",
+        options: ["is", "spring", "eet"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'eet' in Engels?",
+        en: "What does 'eet' mean in English?",
+        options: ["eat", "sleep", "run"],
+        correctIndex: 0,
+      },
+      {
+        af: "Wat beteken 'voel' in Engels?",
+        en: "What does 'voel' mean in English?",
+        options: ["feel", "see", "run"],
+        correctIndex: 0,
+      },
+      {
+        af: "Watter woord IS die werkwoord in: 'Sy speel buite.'?",
+        en: "Which word IS the verb in: 'She plays outside.'?",
+        options: ["Sy", "speel", "buite"],
+        correctIndex: 1,
+      },
+      {
+        af: "Watter woord IS die werkwoord in: 'Die hond hardloop vinnig.'?",
+        en: "Which word IS the verb in: 'The dog runs fast.'?",
+        options: ["hond", "hardloop", "vinnig"],
+        correctIndex: 1,
+      },
+      {
+        af: "Wat beteken 'saam' in Engels?",
+        en: "What does 'saam' mean in English?",
+        options: ["alone", "together", "never"],
+        correctIndex: 1,
+      },
+    ],
+  },
 ];
 
 export default lessons;
