@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
-import { getLevelForPoints } from "../data/levels";
 import { badgesForTopic } from "../data/badges";
 import { topics } from "../data/topics";
 import { totalPossiblePoints } from "../data/lessons";
@@ -32,7 +31,6 @@ function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady]);
 
-  const level = getLevelForPoints(progress.points);
   const maxPoints = totalPossiblePoints();
   const percent = (progress.points / maxPoints) * 100;
 
@@ -49,15 +47,8 @@ function Dashboard() {
       />
 
       <Card className={styles.summaryCard}>
-        <BilingualText
-          as="h3"
-          af={`Vlak ${level.level}: ${level.title}`}
-          en={level.englishTitle}
-        />
-        <ProgressBar
-          percent={percent}
-          leftLabel={`${progress.points} / ${maxPoints} punte (points)`}
-        />
+        <BilingualText as="h3" af="Punte" en="Points" />
+        <ProgressBar percent={percent} leftLabel={`${progress.points} / ${maxPoints}`} />
       </Card>
 
       <Card className={styles.summaryCard}>

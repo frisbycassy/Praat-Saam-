@@ -112,13 +112,17 @@ export function ProgressProvider({ children }) {
     if (!isReady) return { pointsEarned: 0, newlyUnlockedBadge: null };
     const lessonKey = `${topicId}:${lessonIndex}`;
     const isFirstTimeCompleting = !progress.completedLessons.includes(lessonKey);
-    const pointsEarned = correctCount; // 1 point per correct question
 
     const nextCompletedLessons = isFirstTimeCompleting
       ? [...progress.completedLessons, lessonKey]
       : progress.completedLessons;
 
-    const bestScore = Math.max(progress.lessonScores[lessonKey] || 0, correctCount);
+    // Points count each lesson's BEST score once, not every attempt - so
+    // redoing a lesson only adds points if it actually improves on the
+    // previous best (retrying with a lower score adds nothing).
+    const previousBest = progress.lessonScores[lessonKey] || 0;
+    const bestScore = Math.max(previousBest, correctCount);
+    const pointsEarned = bestScore - previousBest;
     const lessonScores = { ...progress.lessonScores, [lessonKey]: bestScore };
 
     const hasPassed = correctCount >= PASS_THRESHOLD;
