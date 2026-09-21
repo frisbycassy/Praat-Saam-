@@ -10,6 +10,7 @@ import TopicDetail from "./pages/TopicDetail";
 import Lesson from "./pages/Lesson";
 import Profile from "./pages/Profile";
 import Learners from "./pages/Learners";
+import Teacher from "./pages/Teacher";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -65,6 +66,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Learners />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/onderwyser"
+          element={
+            <ProtectedRoute>
+              <Teacher />
             </ProtectedRoute>
           }
         />
