@@ -43,6 +43,18 @@
   border-radius: 999px;
 }
 
+/* A plain role label (e.g. "Onderwyser"/"Leerder") - not a button, so it
+   skips the pill's background/border to avoid looking clickable. */
+.roleLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.25rem;
+}
+
 .iconButton {
   background: none;
   border: none;
@@ -64,7 +76,8 @@
     padding: var(--space-sm);
   }
 
-  .pill span.label {
+  .pill span.label,
+  .roleLabel span.label {
     display: none;
   }
 }
