@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="af">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Praat Saam! - Leer Afrikaans</title>
+    <script>
+      // GitHub Pages has no server-side routing, so a direct visit or a
+      // page refresh on any route other than / lands here (a real 404).
+      // Encode the intended path into a query string and redirect to the
+      // real index.html, which decodes it back on load (see index.html).
+      var base = "/Praat-Saam-/";
+      var fullPath = location.pathname + location.search + location.hash;
+      location.replace(base + "?redirect=" + encodeURIComponent(fullPath));
+    </script>
+  </head>
+  <body></body>
+</html>

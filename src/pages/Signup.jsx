@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import PhotoPicker from "../components/PhotoPicker";
-import OwlMascot from "../components/OwlMascot";
+import Logo from "../components/Logo";
 import styles from "./AuthForm.module.css";
 
 function Signup() {
@@ -19,17 +19,31 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("learner");
   const [photoUrl, setPhotoUrl] = useState(null);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    signup({ firstName, lastName, nickname, email, role, username, photoUrl });
-    navigate("/tuisblad");
+    setError("");
+    setIsSubmitting(true);
+    try {
+      await signup({ firstName, lastName, nickname, email, role, username, photoUrl, password });
+      navigate("/tuisblad");
+    } catch (err) {
+      setError(
+        err?.message?.includes("already registered") || err?.code === "user_already_exists"
+          ? "Hierdie e-pos is klaar geregistreer. (This email is already registered.)"
+          : "Kon nie registreer nie. Probeer weer. (Could not sign up. Please try again.)",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <div className={styles.page}>
       <Card className={styles.card}>
-        <OwlMascot size={90} />
+        <Logo size={90} />
         <BilingualText as="h2" af="Registreer" en="Sign up" />
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.nameRow}>
@@ -98,6 +112,7 @@ function Signup() {
               id="password"
               type="password"
               required
+              minLength={6}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
@@ -121,7 +136,10 @@ function Signup() {
               </Button>
             </div>
           </div>
-          <Button type="submit">Registreer (Sign up)</Button>
+          {error && <p className={styles.error}>{error}</p>}
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Registreer..." : "Registreer (Sign up)"}
+          </Button>
         </form>
         <p className={styles.switchLine}>
           Het jy klaar 'n rekening? (Already have an account?){" "}

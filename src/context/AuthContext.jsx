@@ -1,111 +1,121 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 
-// TEMPORARY: accounts and the current session both live in the browser's
-// local storage instead of a real account system. It lets us build and
-// test every page of the site right now. Once we connect Supabase, only
-// the inside of these functions needs to change - every page that uses
-// useAuth() can stay exactly the same.
-//
-// ACCOUNTS_KEY holds every profile ever signed up, keyed by email, so
-// logging back in (even after logging out) restores the same name,
-// username, nickname and profile picture instead of starting blank.
-const SESSION_KEY = "praatsaam-user";
-const ACCOUNTS_KEY = "praatsaam-accounts";
-
-function normalizeEmail(email) {
-  return email.trim().toLowerCase();
-}
-
-function readAccounts() {
-  try {
-    return JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) || {};
-  } catch {
-    return {};
-  }
-}
-
-function saveAccount(profile) {
-  try {
-    const accounts = readAccounts();
-    accounts[normalizeEmail(profile.email)] = profile;
-    localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
-  } catch {
-    // A profile picture can be too large for local storage's ~5MB
-    // limit. Keep the account working in this session, just without
-    // the picture surviving a page refresh.
-    console.warn("Could not save account details to local storage (too large).");
-  }
-}
-
+// Accounts and progress now live in Supabase, so the same login works from
+// any device/browser - not just the one you signed up on.
 const AuthContext = createContext(null);
 
+function toAppProfile(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    email: row.email,
+    firstName: row.first_name || "",
+    lastName: row.last_name || "",
+    nickname: row.nickname || "",
+    username: row.username || "",
+    role: row.role || "learner",
+    photoUrl: row.photo_url || null,
+  };
+}
+
+function toDbProfile(userId, email, updates) {
+  const db = { id: userId, email };
+  if (updates.firstName !== undefined) db.first_name = updates.firstName;
+  if (updates.lastName !== undefined) db.last_name = updates.lastName;
+  if (updates.nickname !== undefined) db.nickname = updates.nickname;
+  if (updates.username !== undefined) db.username = updates.username;
+  if (updates.role !== undefined) db.role = updates.role;
+  if (updates.photoUrl !== undefined) db.photo_url = updates.photoUrl;
+  return db;
+}
+
+async function fetchProfile(userId) {
+  const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single();
+  if (error) throw error;
+  return toAppProfile(data);
+}
+
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    try {
-      const stored = localStorage.getItem(SESSION_KEY);
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      localStorage.removeItem(SESSION_KEY);
-      return;
-    }
-    try {
-      localStorage.setItem(SESSION_KEY, JSON.stringify(user));
-    } catch {
-      console.warn("Could not save the current session to local storage (too large).");
-    }
-  }, [user]);
+    let active = true;
 
-  function signup({ firstName, lastName, nickname, email, role = "learner", username, photoUrl }) {
-    const profile = { firstName, lastName, nickname, email, role, username, photoUrl: photoUrl || null };
-    saveAccount(profile);
-    setUser(profile);
-  }
-
-  // Restores the saved profile for this email if one exists (name,
-  // username, nickname, photo and all), instead of starting fresh every
-  // time someone logs back in.
-  function login(email) {
-    const accounts = readAccounts();
-    const saved = accounts[normalizeEmail(email)];
-    if (saved) {
-      setUser(saved);
-      return;
+    async function loadSession() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!active) return;
+      if (session?.user) {
+        try {
+          setUser(await fetchProfile(session.user.id));
+        } catch {
+          setUser(null);
+        }
+      }
+      setLoading(false);
     }
+    loadSession();
 
-    const fallback = {
-      firstName: email.split("@")[0],
-      lastName: "",
-      nickname: "",
-      email,
-      role: "learner",
-      username: email.split("@")[0],
-      photoUrl: null,
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!active) return;
+      if (!session?.user) {
+        setUser(null);
+        return;
+      }
+      try {
+        setUser(await fetchProfile(session.user.id));
+      } catch {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      active = false;
+      subscription.unsubscribe();
     };
-    saveAccount(fallback);
-    setUser(fallback);
+  }, []);
+
+  async function signup({ firstName, lastName, nickname, email, role = "learner", username, photoUrl, password }) {
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) throw error;
+
+    const userId = data.user.id;
+    const profileRow = toDbProfile(userId, email, { firstName, lastName, nickname, username, role, photoUrl });
+    const { error: profileError } = await supabase.from("profiles").upsert(profileRow);
+    if (profileError) throw profileError;
+
+    const { error: progressError } = await supabase.from("progress").upsert({ user_id: userId });
+    if (progressError) throw progressError;
+
+    setUser(toAppProfile(profileRow));
   }
 
-  function logout() {
+  async function login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    setUser(await fetchProfile(data.user.id));
+  }
+
+  async function logout() {
+    await supabase.auth.signOut();
     setUser(null);
   }
 
-  function updateProfile(updates) {
-    setUser((current) => {
-      if (!current) return current;
-      const next = { ...current, ...updates };
-      saveAccount(next);
-      return next;
-    });
+  async function updateProfile(updates) {
+    if (!user) return;
+    const profileRow = toDbProfile(user.id, user.email, updates);
+    const { error } = await supabase.from("profiles").update(profileRow).eq("id", user.id);
+    if (error) throw error;
+    setUser((current) => ({ ...current, ...updates }));
   }
 
   return (
-    <AuthContext.Provider value={{ user, signup, login, logout, updateProfile }}>
+    <AuthContext.Provider value={{ user, loading, signup, login, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );
