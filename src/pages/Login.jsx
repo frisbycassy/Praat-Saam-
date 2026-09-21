@@ -1,29 +1,48 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
-import OwlMascot from "../components/OwlMascot";
+import Logo from "../components/Logo";
 import styles from "./AuthForm.module.css";
+
+const HEADINGS = {
+  teacher: { af: "Onderwyser Meld Aan", en: "Teacher Login" },
+  learner: { af: "Leerder Meld Aan", en: "Student Login" },
+};
 
 function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(event) {
+  const roleHint = searchParams.get("role");
+  const heading = HEADINGS[roleHint] || { af: "Meld aan", en: "Log in" };
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    login(email);
-    navigate("/tuisblad");
+    setError("");
+    setIsSubmitting(true);
+    try {
+      await login(email, password);
+      navigate("/tuisblad");
+    } catch {
+      setError("Verkeerde e-pos of wagwoord. (Incorrect email or password.)");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <div className={styles.page}>
       <Card className={styles.card}>
-        <OwlMascot size={110} />
-        <BilingualText as="h2" af="Meld aan" en="Log in" />
+        <Logo size={90} />
+        <BilingualText as="h2" af={heading.af} en={heading.en} />
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>
             <label htmlFor="email">E-pos (Email)</label>
@@ -45,7 +64,10 @@ function Login() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          <Button type="submit">Meld aan (Log in)</Button>
+          {error && <p className={styles.error}>{error}</p>}
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Meld aan..." : "Meld aan (Log in)"}
+          </Button>
         </form>
         <p className={styles.switchLine}>
           Het jy nie 'n rekening nie? (No account yet?){" "}

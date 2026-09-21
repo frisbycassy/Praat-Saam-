@@ -23,11 +23,17 @@ function Profile() {
   const [nickname, setNickname] = useState(user.nickname || "");
   const [username, setUsername] = useState(user.username || "");
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl || null);
+  const [saveError, setSaveError] = useState("");
 
-  function handleSave(event) {
+  async function handleSave(event) {
     event.preventDefault();
-    updateProfile({ firstName, lastName, nickname, username, photoUrl });
-    setIsEditing(false);
+    setSaveError("");
+    try {
+      await updateProfile({ firstName, lastName, nickname, username, photoUrl });
+      setIsEditing(false);
+    } catch {
+      setSaveError("Kon nie stoor nie. Probeer weer. (Could not save. Please try again.)");
+    }
   }
 
   const fullName = getFullName(user);
@@ -94,6 +100,7 @@ function Profile() {
               photoUrl={photoUrl}
               onChange={setPhotoUrl}
             />
+            {saveError && <p className={styles.error}>{saveError}</p>}
             <div className={styles.editActions}>
               <Button type="submit">Stoor (Save)</Button>
               <Button type="button" variant="ghost" onClick={() => setIsEditing(false)}>
