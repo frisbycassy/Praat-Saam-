@@ -13,8 +13,8 @@ function Navbar() {
   const { progress } = useProgress();
   const navigate = useNavigate();
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    await logout();
     navigate("/");
   }
 
