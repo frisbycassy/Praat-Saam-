@@ -3,9 +3,11 @@ import { TOPIC_ICONS } from "../utils/topicIcons";
 import styles from "./BadgeIcon.module.css";
 
 // An original shield shape (not traced from any reference art) used for
-// every badge. Drawn once as a path and reused at any size.
+// every badge. Drawn once as a path and reused at any size. Shorter and
+// more compact than a heraldic shield so it reads as a badge, not a
+// tall crest.
 const SHIELD_PATH =
-  "M50 3 C62 3 72 8 80 16 L80 52 C80 74 68 88 50 98 C32 88 20 74 20 52 L20 16 C28 8 38 3 50 3 Z";
+  "M50 3 C62 3 72 7 80 13 L80 40 C80 56 68 67 50 74 C32 67 20 56 20 40 L20 13 C28 7 38 3 50 3 Z";
 
 // Renders one badge: a colored shield with the topic's icon, plus a
 // small tier marker (the lesson number, or a star for the final lesson
@@ -20,8 +22,8 @@ function BadgeIcon({ badge, unlocked, label, size = 64 }) {
 
   return (
     <div className={classes}>
-      <div className={styles.shieldWrap} style={{ width: size, height: size * 1.02 }}>
-        <svg viewBox="0 0 100 100" className={styles.shieldSvg}>
+      <div className={styles.shieldWrap} style={{ width: size, height: size * 0.78 }}>
+        <svg viewBox="0 0 100 78" className={styles.shieldSvg}>
           <path d={SHIELD_PATH} fill={fill} stroke="rgba(0,0,0,0.15)" strokeWidth="2" />
         </svg>
         <Icon className={styles.icon} size={size * 0.42} color="white" aria-hidden="true" />
