@@ -12,6 +12,20 @@
       rel="stylesheet"
     />
     <title>Praat Saam! - Leer Afrikaans</title>
+    <script>
+      // Restores the real route after the 404.html redirect trick above
+      // (needed because GitHub Pages can't rewrite unknown paths to
+      // index.html itself, unlike a normal server).
+      (function () {
+        var params = new URLSearchParams(location.search);
+        var redirect = params.get("redirect");
+        if (redirect) {
+          params.delete("redirect");
+          var rest = params.toString();
+          history.replaceState(null, "", redirect + (rest ? "?" + rest : ""));
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
