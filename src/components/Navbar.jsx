@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { GraduationCap, Home, LayoutGrid, LogOut, User } from "lucide-react";
+import { GraduationCap, Home, LayoutGrid, LogOut, User, Users } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getDisplayName } from "../utils/user";
@@ -38,10 +38,16 @@ function Navbar() {
             <span className="label">Onderwerpe</span>
           </Link>
           {isTeacher ? (
-            <span className={styles.pill}>
-              <GraduationCap size={16} aria-hidden="true" />
-              <span className="label">Onderwyser (Teacher)</span>
-            </span>
+            <>
+              <Link to="/leerders" className={styles.pill}>
+                <Users size={16} aria-hidden="true" />
+                <span className="label">Leerders (Learners)</span>
+              </Link>
+              <span className={styles.pill}>
+                <GraduationCap size={16} aria-hidden="true" />
+                <span className="label">Onderwyser (Teacher)</span>
+              </span>
+            </>
           ) : (
             <>
               <span className={styles.pill}>
