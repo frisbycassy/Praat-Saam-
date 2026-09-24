@@ -231,19 +231,6 @@ function Koala() {
   );
 }
 
-function Turtle() {
-  return (
-    <>
-      <circle cx="50" cy="50" r="50" fill="#ffe9b8" />
-      <path d="M14 66 Q50 20 86 66 Q50 84 14 66 Z" fill="#3f9a5b" {...line} />
-      <path d="M50 30 L50 76 M30 44 Q40 56 30 70 M70 44 Q60 56 70 70" fill="none" {...line} strokeWidth="2" opacity="0.5" />
-      <circle cx="68" cy="52" r="16" fill="#8bd28f" {...line} />
-      <Eye x={72} y={48} />
-      <path d="M62 58 Q68 64 75 58" fill="none" {...line} />
-      <circle cx="60" cy="56" r="3.5" fill="#ffb3c8" opacity="0.7" />
-    </>
-  );
-}
 
 function Dragon() {
   return (
@@ -405,7 +392,6 @@ export const AVATAR_ICONS = [
   { id: "vark", label: "Vark (Pig)", Icon: Pig },
   { id: "pikkewyn", label: "Pikkewyn (Penguin)", Icon: Penguin },
   { id: "koala", label: "Koala", Icon: Koala },
-  { id: "skilpad", label: "Skilpad (Turtle)", Icon: Turtle },
   { id: "draak", label: "Draak (Dragon)", Icon: Dragon },
   { id: "eenhoring", label: "Eenhoring (Unicorn)", Icon: Unicorn },
   { id: "dinosourus", label: "Dinosourus (Dinosaur)", Icon: Dinosaur },
