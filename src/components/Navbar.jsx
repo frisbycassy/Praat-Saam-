@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   CalendarCheck,
   Check,
@@ -23,6 +23,14 @@ function Navbar() {
   const { user, logout } = useAuth();
   const { progress, isReady } = useProgress();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  // The tab for the page that's open is highlighted in orange. Topic and
+  // lesson pages (/onderwerp/...) count as part of Onderwerpe.
+  function pillClass(...paths) {
+    const isActive = paths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
+    return isActive ? `${styles.pill} ${styles.active}` : styles.pill;
+  }
 
   async function handleLogout() {
     await logout();
@@ -45,12 +53,12 @@ function Navbar() {
 
       {user && (
         <div className={styles.right}>
-          <Link to="/tuisblad" className={styles.pill}>
+          <Link to="/tuisblad" className={pillClass("/tuisblad")}>
             <Home size={16} aria-hidden="true" />
             <span className="label">Huis (Home)</span>
           </Link>
           {!isTeacher && (
-            <Link to="/verskuldig" className={styles.pill}>
+            <Link to="/verskuldig" className={pillClass("/verskuldig")}>
               <CalendarCheck size={16} aria-hidden="true" />
               <span className="label">Take (Tasks)</span>
               {isReady && progress.due.owed === 0 && (
@@ -63,13 +71,13 @@ function Navbar() {
               )}
             </Link>
           )}
-          <Link to="/onderwerpe" className={styles.pill}>
+          <Link to="/onderwerpe" className={pillClass("/onderwerpe", "/onderwerp")}>
             <LayoutGrid size={16} aria-hidden="true" />
             <span className="label">Onderwerpe (Topics)</span>
           </Link>
           {isTeacher ? (
             <>
-              <Link to="/leerders" className={styles.pill}>
+              <Link to="/leerders" className={pillClass("/leerders")}>
                 <Users size={16} aria-hidden="true" />
                 <span className="label">Leerders (Learners)</span>
               </Link>
@@ -80,7 +88,7 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/onderwyser" className={styles.pill}>
+              <Link to="/onderwyser" className={pillClass("/onderwyser")}>
                 <GraduationCap size={16} aria-hidden="true" />
                 <span className="label">My Onderwyser (My Teacher)</span>
               </Link>
