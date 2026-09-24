@@ -8,6 +8,22 @@
   width: 100%;
 }
 
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+}
+
+.slogan {
+  flex: 1 1 14rem;
+}
+
+.slogan > :first-child {
+  color: var(--color-brand-orange);
+  font-weight: 700;
+}
+
 .summary {
   display: flex;
   flex-direction: column;
