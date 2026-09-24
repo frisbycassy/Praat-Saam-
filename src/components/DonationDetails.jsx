@@ -14,7 +14,7 @@ const FIELDS = [
   { key: "account_number", af: "Rekeningnommer", en: "Account number", copy: true },
   { key: "branch_code", af: "Takkode", en: "Branch code", copy: true },
   { key: "account_type", af: "Rekeningtipe", en: "Account type" },
-  { key: "reference", af: "Verwysing", en: "Reference", copy: true },
+  { key: "reference", af: "Verwysing", en: "Reference" },
 ];
 
 const EMPTY_DETAILS = Object.fromEntries(FIELDS.map((field) => [field.key, ""]));
