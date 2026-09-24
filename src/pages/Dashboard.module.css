@@ -19,6 +19,7 @@
 .stickerRow {
   display: grid;
   grid-template-columns: repeat(auto-fill, 100px);
+  grid-template-rows: auto;
   grid-auto-rows: 0;
   gap: 0 var(--space-md);
   overflow: hidden;
