@@ -34,7 +34,7 @@ function TopicDetail() {
 
   return (
     <div className={styles.page}>
-      <Button variant="ghost" className={styles.back} onClick={() => navigate("/onderwerpe")}>
+      <Button variant="accent" className={styles.back} onClick={() => navigate("/onderwerpe")}>
         &larr; Terug na Onderwerpe (Back to Topics)
       </Button>
 
