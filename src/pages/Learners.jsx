@@ -96,34 +96,30 @@ function Learners() {
             <Avatar name={getDisplayName(learner)} photoUrl={learner.photoUrl} size={56} />
             <div className={styles.info}>
               <BilingualText as="h3" af={getFullName(learner) || learner.username} en={learner.email} />
-              <div className={styles.status}>
-                {learner.missedTasks === 0 ? (
-                  <span className={styles.upToDate}>
-                    <span className={styles.tick}>
-                      <Check size={12} strokeWidth={3.5} aria-hidden="true" />
-                    </span>
-                    Op datum
+            </div>
+            <div className={styles.details}>
+              {learner.missedTasks === 0 ? (
+                <span className={styles.upToDate}>
+                  <span className={styles.tick}>
+                    <Check size={12} strokeWidth={3.5} aria-hidden="true" />
                   </span>
-                ) : (
-                  <span className={styles.missed}>
-                    {learner.missedTasks} {learner.missedTasks === 1 ? "taak" : "take"} gemis
-                  </span>
-                )}
-                <span className={styles.streak}>
-                  <StreakFlame count={learner.streak} size={40} />
+                  Op datum
                 </span>
-                <span className={styles.lastActive}>
-                  {learner.lastActive
-                    ? `Laas aktief: ${formatDay(learner.lastActive)}`
-                    : "Nog nie aktief nie"}
+              ) : (
+                <span className={styles.missed}>
+                  {learner.missedTasks} {learner.missedTasks === 1 ? "taak" : "take"} gemis
                 </span>
-              </div>
-              <div className={styles.stats}>
-                <span>{learner.points} punte</span>
-                <span>
-                  {learner.badgeCount}/{badges.length} kentekens
-                </span>
-              </div>
+              )}
+              <StreakFlame count={learner.streak} size={36} />
+              <span className={styles.lastActive}>
+                {learner.lastActive
+                  ? `Laas aktief: ${formatDay(learner.lastActive)}`
+                  : "Nog nie aktief nie"}
+              </span>
+              <span className={styles.stat}>{learner.points} punte</span>
+              <span className={styles.stat}>
+                {learner.badgeCount}/{badges.length} kentekens
+              </span>
             </div>
           </Card>
         ))}
