@@ -44,3 +44,22 @@
   font-weight: 800;
   color: var(--color-primary-dark);
 }
+
+.donateHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: var(--space-md);
+}
+
+.heart {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--color-brand-orange);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

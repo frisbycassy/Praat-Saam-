@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { Heart } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
 import Card from "../components/Card";
 import Avatar from "../components/Avatar";
 import BilingualText from "../components/BilingualText";
+import DonationDetails from "../components/DonationDetails";
 import { getFullName, getDisplayName } from "../utils/user";
 import styles from "./Teacher.module.css";
 
@@ -84,6 +86,14 @@ function Teacher() {
             )}
           </Card>
         ))}
+
+      <div className={styles.donateHeader}>
+        <span className={styles.heart}>
+          <Heart size={20} aria-hidden="true" />
+        </span>
+        <BilingualText as="h2" af="Skenk aan jou Onderwyser" en="Donate to your Teacher" />
+      </div>
+      <DonationDetails />
     </div>
   );
 }
