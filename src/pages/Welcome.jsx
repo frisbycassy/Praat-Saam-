@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Award, Rocket, PartyPopper, GraduationCap, User } from "lucide-react";
+import { Award, Rocket, CalendarCheck, GraduationCap, User } from "lucide-react";
 import Button from "../components/Button";
 import BilingualText from "../components/BilingualText";
 import Card from "../components/Card";
@@ -57,11 +57,11 @@ function Welcome() {
         </Card>
         <Card className={styles.featureCard}>
           <Award size={32} aria-hidden="true" />
-          <BilingualText as="h3" af="Plakkers" en="Stickers" />
+          <BilingualText as="h3" af="Kentekens" en="Badges" />
         </Card>
         <Card className={styles.featureCard}>
-          <PartyPopper size={32} aria-hidden="true" />
-          <BilingualText as="h3" af="Pret Speletjies" en="Fun Games" />
+          <CalendarCheck size={32} aria-hidden="true" />
+          <BilingualText as="h3" af="Daaglikse Take" en="Daily Tasks" />
         </Card>
       </section>
     </>
