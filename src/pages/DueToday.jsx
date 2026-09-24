@@ -44,7 +44,14 @@ function DueToday() {
 
   return (
     <div className={styles.page}>
-      <BilingualText as="h1" af="Take" />
+      <div className={styles.header}>
+        <BilingualText as="h1" af="Take" />
+        <BilingualText
+          className={styles.slogan}
+          af="Een les per dag hou die Afrikaans-vrees weg!"
+          en="One lesson a day keeps the Afrikaans fear away!"
+        />
+      </div>
 
       <Card className={styles.summary}>
         {!schoolDay && owed > 0 ? (
