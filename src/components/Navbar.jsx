@@ -47,12 +47,12 @@ function Navbar() {
         <div className={styles.right}>
           <Link to="/tuisblad" className={styles.pill}>
             <Home size={16} aria-hidden="true" />
-            <span className="label">Huis</span>
+            <span className="label">Huis (Home)</span>
           </Link>
           {!isTeacher && (
             <Link to="/verskuldig" className={styles.pill}>
               <CalendarCheck size={16} aria-hidden="true" />
-              <span className="label">Take</span>
+              <span className="label">Take (Tasks)</span>
               {isReady && progress.due.owed === 0 && (
                 <span className={styles.dueDone} aria-label="Alles klaar (All done)">
                   <Check size={12} strokeWidth={3.5} aria-hidden="true" />
@@ -65,7 +65,7 @@ function Navbar() {
           )}
           <Link to="/onderwerpe" className={styles.pill}>
             <LayoutGrid size={16} aria-hidden="true" />
-            <span className="label">Onderwerpe</span>
+            <span className="label">Onderwerpe (Topics)</span>
           </Link>
           {isTeacher ? (
             <>
