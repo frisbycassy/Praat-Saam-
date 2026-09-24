@@ -3,12 +3,13 @@ import Button from "./Button";
 import BilingualText from "./BilingualText";
 import styles from "./Quiz.module.css";
 
-// A simple multiple-choice quiz. Calls onComplete(correctCount) once the
-// learner has answered the last question.
+// A simple multiple-choice quiz. Calls onComplete(answers) - the chosen
+// option index for every question - once the last question is answered.
+// The answers are marked again by the database, which is what counts.
 function Quiz({ questions, onComplete }) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState(null);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [answers, setAnswers] = useState([]);
 
   const question = questions[index];
   const isLast = index === questions.length - 1;
@@ -18,14 +19,12 @@ function Quiz({ questions, onComplete }) {
   function handleSelect(optionIndex) {
     if (hasAnswered) return;
     setSelected(optionIndex);
-    if (optionIndex === question.correctIndex) {
-      setCorrectCount((count) => count + 1);
-    }
+    setAnswers((current) => [...current, optionIndex]);
   }
 
   function handleNext() {
     if (isLast) {
-      onComplete(correctCount);
+      onComplete(answers);
       return;
     }
     setIndex((current) => current + 1);

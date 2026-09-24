@@ -23,6 +23,8 @@ function Lesson() {
 
   const [stage, setStage] = useState("intro");
   const [result, setResult] = useState(null);
+  const [saveError, setSaveError] = useState(false);
+  const [pendingAnswers, setPendingAnswers] = useState(null);
 
   const topic = findTopic(topicId);
   const lesson = findLesson(topicId, index);
@@ -43,10 +45,19 @@ function Lesson() {
     );
   }
 
-  function handleQuizComplete(correctCount) {
-    const summary = completeLesson(topicId, index, correctCount);
-    setResult({ correctCount, ...summary });
-    setStage("result");
+  // The database marks the answers and saves the points; the results screen
+  // shows once it has replied.
+  async function handleQuizComplete(answers) {
+    setPendingAnswers(answers);
+    setSaveError(false);
+    setStage("saving");
+    try {
+      setResult(await completeLesson(topicId, index, answers));
+      setStage("result");
+    } catch (error) {
+      console.warn("Could not save the lesson.", error);
+      setSaveError(true);
+    }
   }
 
   return (
@@ -111,6 +122,24 @@ function Lesson() {
       {stage === "quiz" && (
         <Card>
           <Quiz questions={lesson.questions} onComplete={handleQuizComplete} />
+        </Card>
+      )}
+
+      {stage === "saving" && (
+        <Card className={styles.resultCard}>
+          {saveError ? (
+            <>
+              <BilingualText
+                af="Kon nie jou antwoorde stoor nie. Kyk of jy aanlyn is en probeer weer."
+                en="Couldn't save your answers. Check that you're online and try again."
+              />
+              <Button onClick={() => handleQuizComplete(pendingAnswers)}>
+                Probeer Weer (Try Again)
+              </Button>
+            </>
+          ) : (
+            <BilingualText af="Merk jou antwoorde..." en="Marking your answers..." />
+          )}
         </Card>
       )}
 
