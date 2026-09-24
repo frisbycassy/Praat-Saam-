@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
@@ -18,14 +17,8 @@ const MAX_DASHBOARD_BADGES = 12;
 
 function Dashboard() {
   const { user } = useAuth();
-  const { progress, isReady, markVisitToday } = useProgress();
+  const { progress } = useProgress();
   const isTeacher = user.role === "teacher";
-
-  useEffect(() => {
-    if (isReady) markVisitToday();
-    // Only needs to run once progress has loaded from Supabase.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isReady]);
 
   const maxPoints = totalPossiblePoints();
   const percent = (progress.points / maxPoints) * 100;

@@ -100,9 +100,7 @@ export function AuthProvider({ children }) {
     const profileRow = toDbProfile(userId, email, { firstName, lastName, nickname, username, role, photoUrl });
     const { error: profileError } = await supabase.from("profiles").upsert(profileRow);
     if (profileError) throw profileError;
-
-    const { error: progressError } = await supabase.from("progress").upsert({ user_id: userId });
-    if (progressError) throw progressError;
+    // The database creates the learner's progress row itself.
 
     setUser(toAppProfile(profileRow));
   }
