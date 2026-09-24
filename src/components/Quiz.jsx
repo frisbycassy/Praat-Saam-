@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
 import BilingualText from "./BilingualText";
-import SpeakButton from "./SpeakButton";
 import styles from "./Quiz.module.css";
 
 // A simple multiple-choice quiz. Calls onComplete(correctCount) once the
@@ -39,10 +38,7 @@ function Quiz({ questions, onComplete }) {
         Vraag {index + 1} van {questions.length}
       </p>
 
-      <div className={styles.questionRow}>
-        <BilingualText as="h3" af={question.af} />
-        <SpeakButton text={question.af} />
-      </div>
+      <BilingualText as="h3" af={question.af} />
 
       <div className={styles.options} role="radiogroup" aria-label={question.af}>
         {question.options.map((option, optionIndex) => {
