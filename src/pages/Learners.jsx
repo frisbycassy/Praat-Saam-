@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Check, Flame } from "lucide-react";
+import { Check } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
 import { badges } from "../data/badges";
 import Card from "../components/Card";
 import Avatar from "../components/Avatar";
+import StreakFlame from "../components/StreakFlame";
 import BilingualText from "../components/BilingualText";
 import { getFullName, getDisplayName } from "../utils/user";
 import { liveStreak, rollDueForward } from "../utils/schoolDay";
 import styles from "./Learners.module.css";
 
 function formatDay(dateString) {
-  return new Date(`${dateString}T00:00:00`).toLocaleDateString("en-ZA", {
+  return new Date(`${dateString}T00:00:00`).toLocaleDateString("af-ZA", {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -37,7 +38,7 @@ function Learners() {
         ]);
       if (!active) return;
       if (profilesError || progressError) {
-        setError("Kon nie leerders laai nie. (Could not load learners.)");
+        setError("Kon nie leerders laai nie.");
         setLoading(false);
         return;
       }
@@ -78,17 +79,14 @@ function Learners() {
 
   return (
     <div className={styles.page}>
-      <BilingualText as="h1" af="Leerders" en="Learners" />
-      <BilingualText
-        af="Alle leerders wat toegang tot Praat Saam! het."
-        en="All learners who have access to Praat Saam!"
-      />
+      <BilingualText as="h1" af="Leerders" />
+      <BilingualText af="Alle leerders wat toegang tot Praat Saam! het." />
 
-      {loading && <p className={styles.note}>Laai... (Loading...)</p>}
+      {loading && <p className={styles.note}>Laai...</p>}
       {error && <p className={styles.note}>{error}</p>}
       {!loading && !error && learners.length === 0 && (
         <p className={styles.note}>
-          Nog geen leerders het geregistreer nie. (No learners have signed up yet.)
+          Nog geen leerders het geregistreer nie.
         </p>
       )}
 
@@ -104,28 +102,26 @@ function Learners() {
                     <span className={styles.tick}>
                       <Check size={12} strokeWidth={3.5} aria-hidden="true" />
                     </span>
-                    Op datum (Up to date)
+                    Op datum
                   </span>
                 ) : (
                   <span className={styles.missed}>
-                    {learner.missedTasks} {learner.missedTasks === 1 ? "taak" : "take"} gemis (
-                    {learner.missedTasks === 1 ? "task" : "tasks"} missed)
+                    {learner.missedTasks} {learner.missedTasks === 1 ? "taak" : "take"} gemis
                   </span>
                 )}
                 <span className={styles.streak}>
-                  <Flame size={14} aria-hidden="true" />
-                  {learner.streak} {learner.streak === 1 ? "dag" : "dae"} vlam (day streak)
+                  <StreakFlame count={learner.streak} size={40} />
                 </span>
                 <span className={styles.lastActive}>
                   {learner.lastActive
-                    ? `Laas aktief (Last active): ${formatDay(learner.lastActive)}`
-                    : "Nog nie aktief nie (Not active yet)"}
+                    ? `Laas aktief: ${formatDay(learner.lastActive)}`
+                    : "Nog nie aktief nie"}
                 </span>
               </div>
               <div className={styles.stats}>
-                <span>{learner.points} punte (points)</span>
+                <span>{learner.points} punte</span>
                 <span>
-                  {learner.badgeCount}/{badges.length} kentekens (badges)
+                  {learner.badgeCount}/{badges.length} kentekens
                 </span>
               </div>
             </div>
