@@ -7,7 +7,6 @@ import { findLesson } from "../data/lessons";
 import { canAccessLesson, isLessonPassed, PASS_THRESHOLD } from "../utils/lessonAccess";
 import { isSchoolDay, publicHolidayName } from "../utils/schoolDay";
 import Card from "../components/Card";
-import HolidayBanner from "../components/HolidayBanner";
 import BilingualText from "../components/BilingualText";
 import styles from "./DueToday.module.css";
 
@@ -46,8 +45,6 @@ function DueToday() {
   return (
     <div className={styles.page}>
       <BilingualText as="h1" af="Take" />
-
-      <HolidayBanner />
 
       <Card className={styles.summary}>
         {!schoolDay && owed > 0 ? (

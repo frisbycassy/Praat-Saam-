@@ -16,6 +16,7 @@ import { getDisplayName } from "../utils/user";
 import Avatar from "./Avatar";
 import StreakFlame from "./StreakFlame";
 import Logo from "./Logo";
+import HolidayBanner from "./HolidayBanner";
 import styles from "./Navbar.module.css";
 
 function Navbar() {
@@ -39,6 +40,8 @@ function Navbar() {
           <span className={styles.brandOrange}>Saam!</span>
         </span>
       </Link>
+
+      {user && <HolidayBanner />}
 
       {user && (
         <div className={styles.right}>
