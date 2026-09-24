@@ -5,8 +5,9 @@ import { useProgress } from "../context/ProgressContext";
 import { topics } from "../data/topics";
 import { findLesson } from "../data/lessons";
 import { canAccessLesson, isLessonPassed, PASS_THRESHOLD } from "../utils/lessonAccess";
-import { isSchoolDay } from "../utils/schoolDay";
+import { isSchoolDay, publicHolidayName } from "../utils/schoolDay";
 import Card from "../components/Card";
+import HolidayBanner from "../components/HolidayBanner";
 import BilingualText from "../components/BilingualText";
 import styles from "./DueToday.module.css";
 
@@ -39,19 +40,22 @@ function DueToday() {
   const today = new Date().getDay();
   const nextIsMonday = today === 5 || today === 6 || today === 0;
   const schoolDay = isSchoolDay();
+  const holiday = publicHolidayName();
   const dueNow = schoolDay && owed > 0;
 
   return (
     <div className={styles.page}>
       <BilingualText as="h1" af="Take" />
 
+      <HolidayBanner />
+
       <Card className={styles.summary}>
         {!schoolDay && owed > 0 ? (
           <>
             <CheckCircle2 size={44} className={styles.done} aria-hidden="true" />
             <BilingualText
-              af={`Geen take oor die naweek nie! Jou ${owed === 1 ? "les wag" : `${owed} lesse wag`} vir jou Maandag.`}
-              en={`No tasks over the weekend! ${owed === 1 ? "Your lesson is" : `Your ${owed} lessons are`} waiting for Monday.`}
+              af={`${holiday ? "Geen take op 'n vakansiedag nie!" : "Geen take oor die naweek nie!"} Jou ${owed === 1 ? "les wag" : `${owed} lesse wag`} vir die volgende skooldag.`}
+              en={`${holiday ? "No tasks on a public holiday!" : "No tasks over the weekend!"} ${owed === 1 ? "Your lesson is" : `Your ${owed} lessons are`} waiting for the next school day.`}
             />
           </>
         ) : dueNow ? (

@@ -9,6 +9,7 @@ import BilingualText from "../components/BilingualText";
 import ProgressBar from "../components/ProgressBar";
 import BadgeIcon from "../components/BadgeIcon";
 import Button from "../components/Button";
+import HolidayBanner from "../components/HolidayBanner";
 import styles from "./Dashboard.module.css";
 
 // Enough to fill the card's row without spilling into a wall of icons -
@@ -39,6 +40,8 @@ function Dashboard() {
         af={`Hallo, ${user.firstName || user.username}!`}
         en="Hello!"
       />
+
+      <HolidayBanner />
 
       <Card className={styles.summaryCard}>
         <BilingualText as="h3" af="Punte" en="Points" />
