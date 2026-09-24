@@ -11,9 +11,9 @@ import BadgeIcon from "../components/BadgeIcon";
 import Button from "../components/Button";
 import styles from "./Dashboard.module.css";
 
-// Enough to fill the card's row without spilling into a wall of icons -
-// the profile page is where every badge can be seen.
-const MAX_DASHBOARD_BADGES = 8;
+// The card shows a single row (the CSS hides any that wrap); the profile page
+// is where every badge can be seen.
+const MAX_DASHBOARD_BADGES = 12;
 
 function Dashboard() {
   const { user } = useAuth();
