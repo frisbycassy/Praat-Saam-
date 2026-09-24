@@ -75,6 +75,14 @@ export function ProgressProvider({ children }) {
         .single();
       if (!active) return;
       let loaded = error ? defaultProgress : toAppProgress(data);
+      // Show a streak that has lapsed as 0 right away, not only after the next visit.
+      loaded = {
+        ...loaded,
+        streak: {
+          ...loaded.streak,
+          count: liveStreak(loaded.streak.count, loaded.streak.lastActiveDate),
+        },
+      };
       if (!error && user.role === "learner") {
         const due = rollDueForward(loaded.due);
         if (due !== loaded.due) {
@@ -110,12 +118,14 @@ export function ProgressProvider({ children }) {
   function markVisitToday() {
     if (!isReady) return;
     const today = localDateString();
+    // Streaks only count school days (Monday to Friday): a weekend visit
+    // neither adds to a streak nor starts one, and never breaks one.
+    if (!isSchoolDay(new Date(`${today}T00:00:00`))) return;
     const { lastActiveDate, count } = progress.streak;
     if (lastActiveDate === today) return;
 
-    // Weekends don't break a streak - only skipping a whole school day does.
     const alive = liveStreak(count, lastActiveDate, today);
-    const nextCount = alive > 0 && isSchoolDay(new Date(`${today}T00:00:00`)) ? alive + 1 : alive > 0 ? alive : 1;
+    const nextCount = alive > 0 ? alive + 1 : 1;
 
     const next = { ...progress, streak: { count: nextCount, lastActiveDate: today } };
     setProgress(next);
