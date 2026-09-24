@@ -78,3 +78,10 @@
   font-weight: 700;
   color: var(--color-text-muted);
 }
+
+.dailyCount {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}

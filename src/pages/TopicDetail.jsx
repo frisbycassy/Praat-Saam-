@@ -5,7 +5,12 @@ import { findLesson } from "../data/lessons";
 import { badgesForTopic } from "../data/badges";
 import { useProgress } from "../context/ProgressContext";
 import { useAuth } from "../context/AuthContext";
-import { canAccessLesson, isLessonPassed, PASS_THRESHOLD } from "../utils/lessonAccess";
+import {
+  canAccessLesson,
+  isLessonPassed,
+  isWaitingForTomorrow,
+  PASS_THRESHOLD,
+} from "../utils/lessonAccess";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import BadgeIcon from "../components/BadgeIcon";
@@ -66,6 +71,8 @@ function TopicDetail() {
             statusLabel = isTeacher ? "Voorskou (Preview)" : "Kom binnekort (Coming soon)";
           } else if (isTeacher) {
             statusLabel = "Bekyk (View)";
+          } else if (isWaitingForTomorrow(progress, topic.id, index, isTeacher)) {
+            statusLabel = "Kom môre terug (Come back tomorrow)";
           } else if (!isUnlocked) {
             statusLabel = `Slaag Les ${index} eers (Pass Lesson ${index} first)`;
           } else if (isCompleted) {
