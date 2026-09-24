@@ -11,6 +11,9 @@ const defaultProgress = {
   badges: [], // "topicId:lessonIndex" strings, one per earned badge
   lessonScores: {}, // "topicId:lessonIndex" -> best correctCount achieved
   streak: { count: 0, lastActiveDate: null },
+  // Lessons a learner still owes: +1 for every day that passes, -1 for
+  // every lesson finished, never below 0. Missed days stack up.
+  due: { owed: 0, lastDate: null },
 };
 
 function toAppProgress(row) {
@@ -21,6 +24,7 @@ function toAppProgress(row) {
     badges: row.badges ?? [],
     lessonScores: row.lesson_scores ?? {},
     streak: { count: row.streak_count ?? 0, lastActiveDate: row.streak_last_date ?? null },
+    due: { owed: row.due_owed ?? 0, lastDate: row.due_last_date ?? null },
   };
 }
 
@@ -33,11 +37,31 @@ function toDbProgress(userId, progress) {
     lesson_scores: progress.lessonScores,
     streak_count: progress.streak.count,
     streak_last_date: progress.streak.lastActiveDate,
+    due_owed: progress.due.owed,
+    due_last_date: progress.due.lastDate,
   };
 }
 
 function todayString() {
   return new Date().toISOString().slice(0, 10);
+}
+
+// The learner's own calendar day (not UTC), so a new day starts at their
+// local midnight.
+function localDateString() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
+// Adds one owed lesson for each day since the last check (or one to
+// start, the first time).
+function rollDueForward(due) {
+  const today = localDateString();
+  if (due.lastDate === today) return due;
+  if (!due.lastDate) return { owed: due.owed + 1, lastDate: today };
+  return { owed: due.owed + daysBetween(due.lastDate, today), lastDate: today };
 }
 
 function daysBetween(a, b) {
@@ -72,7 +96,21 @@ export function ProgressProvider({ children }) {
         .eq("user_id", user.id)
         .single();
       if (!active) return;
-      setProgress(error ? defaultProgress : toAppProgress(data));
+      let loaded = error ? defaultProgress : toAppProgress(data);
+      if (!error && user.role === "learner") {
+        const due = rollDueForward(loaded.due);
+        if (due !== loaded.due) {
+          loaded = { ...loaded, due };
+          supabase
+            .from("progress")
+            .update({ due_owed: due.owed, due_last_date: due.lastDate })
+            .eq("user_id", user.id)
+            .then(({ error: dueError }) => {
+              if (dueError) console.warn("Could not save due lessons.", dueError);
+            });
+        }
+      }
+      setProgress(loaded);
       setIsReady(true);
     }
     loadProgress();
@@ -135,6 +173,7 @@ export function ProgressProvider({ children }) {
       completedLessons: nextCompletedLessons,
       badges,
       lessonScores,
+      due: { ...progress.due, owed: Math.max(0, progress.due.owed - 1) },
     };
     setProgress(next);
     persist(next);

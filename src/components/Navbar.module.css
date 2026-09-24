@@ -51,6 +51,19 @@
   border-radius: 999px;
 }
 
+.dueCount {
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background-color: var(--color-brand-orange);
+  color: #ffffff;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* A plain role label (e.g. "Onderwyser"/"Leerder") - not a button, so it
    skips the pill's background/border to avoid looking clickable. */
 .roleLabel {
