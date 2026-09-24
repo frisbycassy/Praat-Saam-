@@ -109,10 +109,12 @@ function Navbar() {
               <StreakFlame count={progress.streak.count} size={30} />
             </>
           )}
-          <Link to="/skenk" className={pillClass("/skenk")}>
-            <Heart size={16} aria-hidden="true" />
-            <span className="label">Skenk (Donate)</span>
-          </Link>
+          {isTeacher && (
+            <Link to="/skenk" className={pillClass("/skenk")}>
+              <Heart size={16} aria-hidden="true" />
+              <span className="label">Skenk (Donate)</span>
+            </Link>
+          )}
           <Link to="/profiel" aria-label="Profiel (Profile)">
             <Avatar name={getDisplayName(user)} photoUrl={user.photoUrl} />
           </Link>
