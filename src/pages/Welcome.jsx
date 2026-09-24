@@ -17,8 +17,8 @@ function Welcome() {
           en="Speak Along! Learn Afrikaans"
         />
         <BilingualText
-          af="Speletjies, punte en plakkers om jou te help met Graad 4 Afrikaans."
-          en="Games, points and stickers to help you with Grade 4 Afrikaans."
+          af="Daaglikse take, punte en kentekens om jou te help met Graad 4 Afrikaans."
+          en="Daily tasks, points and badges to help you with Grade 4 Afrikaans."
         />
         <div className={styles.ctaRow}>
           <Link to="/registreer?role=learner">
