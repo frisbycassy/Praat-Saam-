@@ -16,6 +16,7 @@ function toAppProfile(row) {
     username: row.username || "",
     role: row.role || "learner",
     photoUrl: row.photo_url || null,
+    createdAt: row.created_at || null,
   };
 }
 

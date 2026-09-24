@@ -91,10 +91,17 @@ export function schoolDaysBetween(lastDate, today = localDateString()) {
 }
 
 // Adds one owed lesson for each school day since the last check. The first
-// time (no last date), today counts if it's a school day.
-export function rollDueForward(due, today = localDateString()) {
+// time (no last date) it counts from the day the learner joined.
+export function rollDueForward(due, today = localDateString(), joinDate = null) {
   if (due.lastDate === today) return due;
   if (!due.lastDate) {
+    // Counting starts on the day the learner joined, so a learner who hasn't
+    // opened the app since joining still owes every school day since then.
+    if (joinDate) {
+      const dayBeforeJoin = new Date(`${joinDate}T00:00:00`);
+      dayBeforeJoin.setDate(dayBeforeJoin.getDate() - 1);
+      return { owed: due.owed + schoolDaysBetween(localDateString(dayBeforeJoin), today), lastDate: today };
+    }
     return { owed: due.owed + (isSchoolDay(new Date(`${today}T00:00:00`)) ? 1 : 0), lastDate: today };
   }
   return { owed: due.owed + schoolDaysBetween(due.lastDate, today), lastDate: today };

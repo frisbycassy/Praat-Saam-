@@ -41,17 +41,42 @@
   font-weight: 700;
 }
 
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  line-height: 1.25;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.en {
+  display: block;
+  font-size: 0.72rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
 .upToDate,
 .missed {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.4rem;
   width: 6.75rem;
+  font-weight: 700;
 }
 
 .upToDate {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  text-align: left;
   color: var(--color-text);
+}
+
+.upToDate > span:last-child {
+  display: flex;
+  flex-direction: column;
 }
 
 .missed {
@@ -67,18 +92,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.lastActive,
-.stat {
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-align: right;
-}
-
-.lastActive {
-  width: 11rem;
-  white-space: nowrap;
+.date {
+  width: 9.5rem;
 }
 
 .stat {
