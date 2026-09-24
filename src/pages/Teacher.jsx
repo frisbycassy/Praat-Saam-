@@ -76,15 +76,14 @@ function Teacher() {
             <div className={styles.info}>
               <BilingualText as="h2" af={getFullName(teacher) || teacher.username} en={teacher.email} />
             </div>
+            {learnerCount !== null && (
+              <div className={styles.stat}>
+                <span className={styles.statValue}>{learnerCount}</span>
+                <BilingualText af="Leerders in die Klas" en="Learners in the Class" />
+              </div>
+            )}
           </Card>
         ))}
-
-      {!loading && !error && learnerCount !== null && (
-        <Card className={styles.statCard}>
-          <span className={styles.statValue}>{learnerCount}</span>
-          <BilingualText af="Leerders in die Klas" en="Learners in the Class" />
-        </Card>
-      )}
     </div>
   );
 }
