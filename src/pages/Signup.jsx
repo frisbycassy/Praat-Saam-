@@ -117,11 +117,12 @@ function Signup() {
           </div>
           <div className={styles.field}>
             <label htmlFor="password">Wagwoord (Password)</label>
+            <span className={styles.hint}>Minstens 4 karakters (At least 4 characters)</span>
             <input
               id="password"
               type="password"
               required
-              minLength={6}
+              minLength={4}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />

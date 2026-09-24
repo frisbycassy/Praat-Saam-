@@ -5,6 +5,17 @@ import { supabase } from "../lib/supabaseClient";
 // any device/browser - not just the one you signed up on.
 const AuthContext = createContext(null);
 
+// Supabase itself refuses passwords under 6 characters, but we allow 4 so
+// young learners can pick something easy to type. Short passwords get a fixed
+// tail added (on sign-up and log-in alike) to reach Supabase's minimum.
+const SUPABASE_MIN_PASSWORD = 6;
+const PASSWORD_PAD = "Praat!";
+function padPassword(password) {
+  return password.length >= SUPABASE_MIN_PASSWORD
+    ? password
+    : password + PASSWORD_PAD.slice(0, SUPABASE_MIN_PASSWORD - password.length);
+}
+
 function toAppProfile(row) {
   if (!row) return null;
   return {
@@ -82,7 +93,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function signup({ firstName, lastName, nickname, email, role = "learner", username, photoUrl, password }) {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password: padPassword(password) });
     if (error) throw error;
 
     const userId = data.user.id;
@@ -97,7 +108,10 @@ export function AuthProvider({ children }) {
   }
 
   async function login(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password: padPassword(password),
+    });
     if (error) throw error;
     setUser(await fetchProfile(data.user.id));
   }

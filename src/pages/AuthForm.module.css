@@ -74,3 +74,8 @@
   font-size: 0.9rem;
   color: var(--color-text-muted);
 }
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
