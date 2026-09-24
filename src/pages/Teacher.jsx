@@ -59,10 +59,6 @@ function Teacher() {
   return (
     <div className={styles.page}>
       <BilingualText as="h1" af="My Onderwyser" en="My Teacher" />
-      <BilingualText
-        af="Alles wat jy oor jou onderwyser moet weet."
-        en="Everything you need to know about your teacher."
-      />
 
       {loading && <p className={styles.note}>Laai... (Loading...)</p>}
       {error && <p className={styles.note}>{error}</p>}
