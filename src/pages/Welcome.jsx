@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Award, Rocket, CalendarCheck, GraduationCap, User } from "lucide-react";
+import { Award, Rocket, CalendarCheck, GraduationCap, Heart, User } from "lucide-react";
 import Button from "../components/Button";
 import BilingualText from "../components/BilingualText";
 import Card from "../components/Card";
@@ -31,11 +31,6 @@ function Welcome() {
               <User size={18} /> Leerder Registreer (Student Sign Up)
             </Button>
           </Link>
-          <Link to="/registreer?role=teacher">
-            <Button variant="primary">
-              <GraduationCap size={18} /> Onderwyser Registreer (Teacher Sign Up)
-            </Button>
-          </Link>
         </div>
 
         <div className={styles.loginBlock}>
@@ -53,6 +48,18 @@ function Welcome() {
             </Link>
           </div>
         </div>
+      </section>
+
+      <section className={styles.donate}>
+        <BilingualText
+          af="Praat Saam! is gratis. Wil jy help om dit te laat groei?"
+          en="Praat Saam! is free. Would you like to help it grow?"
+        />
+        <Link to="/skenk">
+          <Button variant="accent">
+            <Heart size={18} /> Skenk (Donate)
+          </Button>
+        </Link>
       </section>
 
       <section className={styles.features}>

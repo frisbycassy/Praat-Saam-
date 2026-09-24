@@ -48,6 +48,31 @@ function Signup() {
     }
   }
 
+  // Only approved teachers exist (the database refuses any other teacher
+  // account), so the teacher sign-up form is closed.
+  if (isTeacher) {
+    return (
+      <div className={styles.page}>
+        <Card className={styles.card}>
+          <Logo size={90} />
+          <BilingualText
+            as="h2"
+            af="Onderwyser-registrasie is gesluit"
+            en="Teacher sign-up is closed"
+          />
+          <BilingualText
+            af="Nuwe onderwyserrekeninge is tans nie beskikbaar nie. Leerders kan steeds registreer."
+            en="New teacher accounts aren't available at the moment. Learners can still sign up."
+          />
+          <Link to="/registreer?role=learner">
+            <Button>Leerder Registreer (Student Sign Up)</Button>
+          </Link>
+          <Link to="/aanmeld?role=teacher">Onderwyser Meld Aan (Teacher Login)</Link>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.page}>
       <Card className={styles.card}>
