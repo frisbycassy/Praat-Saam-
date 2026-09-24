@@ -40,3 +40,48 @@
   color: var(--color-text-muted);
   flex-wrap: wrap;
 }
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.upToDate,
+.missed,
+.streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tick {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background-color: var(--color-brand-purple);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upToDate {
+  color: var(--color-text);
+}
+
+.missed {
+  color: var(--color-brand-orange);
+}
+
+.streak {
+  color: var(--color-flame);
+}
+
+.lastActive {
+  font-weight: 600;
+  color: var(--color-text-muted);
+}

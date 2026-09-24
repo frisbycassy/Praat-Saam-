@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { PASS_THRESHOLD } from "../utils/lessonAccess";
 import { topics } from "../data/topics";
 import { lessonCountForTopic } from "../data/lessons";
-import { isSchoolDay } from "../utils/schoolDay";
+import { isSchoolDay, liveStreak, localDateString, rollDueForward } from "../utils/schoolDay";
 import { useAuth } from "./AuthContext";
 import { supabase } from "../lib/supabaseClient";
 
@@ -45,46 +45,6 @@ function toDbProgress(userId, progress) {
     due_owed: progress.due.owed,
     due_last_date: progress.due.lastDate,
   };
-}
-
-function todayString() {
-  return new Date().toISOString().slice(0, 10);
-}
-
-// The learner's own calendar day (not UTC), so a new day starts at their
-// local midnight.
-function localDateString() {
-  const now = new Date();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${now.getFullYear()}-${month}-${day}`;
-}
-
-// Adds one owed lesson for each school day (Monday to Friday) since the
-// last check. Weekends add nothing. The first time, today counts if it's
-// a weekday.
-function rollDueForward(due) {
-  const today = localDateString();
-  if (due.lastDate === today) return due;
-
-  const todayDate = new Date(`${today}T00:00:00`);
-  if (!due.lastDate) {
-    return { owed: due.owed + (isSchoolDay(todayDate) ? 1 : 0), lastDate: today };
-  }
-
-  let added = 0;
-  const day = new Date(`${due.lastDate}T00:00:00`);
-  day.setDate(day.getDate() + 1);
-  while (day <= todayDate) {
-    if (isSchoolDay(day)) added++;
-    day.setDate(day.getDate() + 1);
-  }
-  return { owed: due.owed + added, lastDate: today };
-}
-
-function daysBetween(a, b) {
-  const msPerDay = 1000 * 60 * 60 * 24;
-  return Math.round((new Date(b) - new Date(a)) / msPerDay);
 }
 
 const ProgressContext = createContext(null);
@@ -149,12 +109,13 @@ export function ProgressProvider({ children }) {
 
   function markVisitToday() {
     if (!isReady) return;
-    const today = todayString();
+    const today = localDateString();
     const { lastActiveDate, count } = progress.streak;
     if (lastActiveDate === today) return;
 
-    const gap = lastActiveDate ? daysBetween(lastActiveDate, today) : null;
-    const nextCount = gap === 1 ? count + 1 : 1;
+    // Weekends don't break a streak - only skipping a whole school day does.
+    const alive = liveStreak(count, lastActiveDate, today);
+    const nextCount = alive > 0 && isSchoolDay(new Date(`${today}T00:00:00`)) ? alive + 1 : alive > 0 ? alive : 1;
 
     const next = { ...progress, streak: { count: nextCount, lastActiveDate: today } };
     setProgress(next);
