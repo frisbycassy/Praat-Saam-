@@ -5,6 +5,7 @@ import { useProgress } from "../context/ProgressContext";
 import { topics } from "../data/topics";
 import { findLesson } from "../data/lessons";
 import { canAccessLesson, isLessonPassed, PASS_THRESHOLD } from "../utils/lessonAccess";
+import { isSchoolDay } from "../utils/schoolDay";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import styles from "./DueToday.module.css";
@@ -37,13 +38,23 @@ function DueToday() {
   const choices = nextLessonsToDo(progress);
   const today = new Date().getDay();
   const nextIsMonday = today === 5 || today === 6 || today === 0;
+  const schoolDay = isSchoolDay();
+  const dueNow = schoolDay && owed > 0;
 
   return (
     <div className={styles.page}>
-      <BilingualText as="h1" af="Vandag Verskuldig" en="Due Today" />
+      <BilingualText as="h1" af="Take" en="Tasks" />
 
       <Card className={styles.summary}>
-        {owed > 0 ? (
+        {!schoolDay && owed > 0 ? (
+          <>
+            <CheckCircle2 size={44} className={styles.done} aria-hidden="true" />
+            <BilingualText
+              af={`Geen take oor die naweek nie! Jou ${owed === 1 ? "les wag" : `${owed} lesse wag`} vir jou Maandag.`}
+              en={`No tasks over the weekend! ${owed === 1 ? "Your lesson is" : `Your ${owed} lessons are`} waiting for Monday.`}
+            />
+          </>
+        ) : dueNow ? (
           <>
             <span className={styles.count}>{owed}</span>
             <BilingualText
@@ -74,8 +85,8 @@ function DueToday() {
 
       <BilingualText
         as="h3"
-        af={owed > 0 ? "Kies 'n les" : "Wil jy meer doen?"}
-        en={owed > 0 ? "Pick a lesson" : "Want to do more?"}
+        af={dueNow ? "Kies 'n les" : "Wil jy meer doen?"}
+        en={dueNow ? "Pick a lesson" : "Want to do more?"}
       />
 
       {choices.length === 0 ? (

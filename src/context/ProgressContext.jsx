@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { PASS_THRESHOLD } from "../utils/lessonAccess";
 import { topics } from "../data/topics";
 import { lessonCountForTopic } from "../data/lessons";
+import { isSchoolDay } from "../utils/schoolDay";
 import { useAuth } from "./AuthContext";
 import { supabase } from "../lib/supabaseClient";
 
@@ -59,11 +60,6 @@ function localDateString() {
   return `${now.getFullYear()}-${month}-${day}`;
 }
 
-function isWeekday(date) {
-  const day = date.getDay();
-  return day >= 1 && day <= 5;
-}
-
 // Adds one owed lesson for each school day (Monday to Friday) since the
 // last check. Weekends add nothing. The first time, today counts if it's
 // a weekday.
@@ -73,14 +69,14 @@ function rollDueForward(due) {
 
   const todayDate = new Date(`${today}T00:00:00`);
   if (!due.lastDate) {
-    return { owed: due.owed + (isWeekday(todayDate) ? 1 : 0), lastDate: today };
+    return { owed: due.owed + (isSchoolDay(todayDate) ? 1 : 0), lastDate: today };
   }
 
   let added = 0;
   const day = new Date(`${due.lastDate}T00:00:00`);
   day.setDate(day.getDate() + 1);
   while (day <= todayDate) {
-    if (isWeekday(day)) added++;
+    if (isSchoolDay(day)) added++;
     day.setDate(day.getDate() + 1);
   }
   return { owed: due.owed + added, lastDate: today };
