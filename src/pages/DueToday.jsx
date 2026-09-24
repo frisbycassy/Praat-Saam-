@@ -4,7 +4,14 @@ import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { topics } from "../data/topics";
 import { findLesson } from "../data/lessons";
-import { canAccessLesson, isLessonPassed, PASS_THRESHOLD } from "../utils/lessonAccess";
+import {
+  canAccessLesson,
+  DAILY_NEW_LESSON_LIMIT,
+  isLessonPassed,
+  newLessonsPassedToday,
+  PASS_THRESHOLD,
+  reachedDailyLimit,
+} from "../utils/lessonAccess";
 import { isSchoolDay, publicHolidayName } from "../utils/schoolDay";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
@@ -41,6 +48,8 @@ function DueToday() {
   const schoolDay = isSchoolDay();
   const holiday = publicHolidayName();
   const dueNow = schoolDay && owed > 0;
+  const newToday = newLessonsPassedToday(progress);
+  const limitReached = reachedDailyLimit(progress);
 
   return (
     <div className={styles.page}>
@@ -89,6 +98,9 @@ function DueToday() {
             />
           </>
         )}
+        <p className={styles.dailyCount}>
+          Nuwe lesse vandag: {newToday}/{DAILY_NEW_LESSON_LIMIT} (New lessons today)
+        </p>
       </Card>
 
       <BilingualText
@@ -97,7 +109,14 @@ function DueToday() {
         en={dueNow ? "Pick a lesson" : "Want to do more?"}
       />
 
-      {choices.length === 0 ? (
+      {limitReached ? (
+        <Card className={styles.summary}>
+          <BilingualText
+            af={`Jy het vandag ${DAILY_NEW_LESSON_LIMIT} nuwe lesse geslaag. Mooi so! Kom môre terug vir meer.`}
+            en={`You've passed ${DAILY_NEW_LESSON_LIMIT} new lessons today. Well done! Come back tomorrow for more.`}
+          />
+        </Card>
+      ) : choices.length === 0 ? (
         <Link to="/onderwerpe" className={styles.choice}>
           <BilingualText
             af="Jy het al die lesse geslaag! Oefen weer by Onderwerpe."

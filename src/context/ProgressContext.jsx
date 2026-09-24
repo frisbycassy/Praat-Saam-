@@ -17,6 +17,8 @@ const defaultProgress = {
   // Lessons a learner still owes: +1 for every school day, -1 for every new
   // lesson passed, never below 0. Missed days stack up.
   due: { owed: 0, lastDate: null },
+  // New lessons passed on `date` - learners get at most 3 a day.
+  dailyNew: { count: 0, date: null },
 };
 
 function toAppProgress(row) {
@@ -32,6 +34,7 @@ function toAppProgress(row) {
       lastActiveDate: row.streak_last_date ?? null,
     },
     due: { owed: row.due_owed ?? 0, lastDate: row.due_last_date ?? null },
+    dailyNew: { count: row.daily_new_count ?? 0, date: row.daily_new_date ?? null },
   };
 }
 

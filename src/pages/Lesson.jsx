@@ -5,7 +5,13 @@ import { findLesson } from "../data/lessons";
 import { findBadge } from "../data/badges";
 import { useProgress } from "../context/ProgressContext";
 import { useAuth } from "../context/AuthContext";
-import { canAccessLesson, PASS_THRESHOLD } from "../utils/lessonAccess";
+import {
+  canAccessLesson,
+  DAILY_NEW_LESSON_LIMIT,
+  isWaitingForTomorrow,
+  PASS_THRESHOLD,
+  reachedDailyLimit,
+} from "../utils/lessonAccess";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import BilingualText from "../components/BilingualText";
@@ -30,14 +36,24 @@ function Lesson() {
   const lesson = findLesson(topicId, index);
   const isAccessible = canAccessLesson(progress, topicId, index, isTeacher);
 
-  if (!topic || !lesson || !isAccessible) {
+  // Only block before starting: passing today's last new lesson mustn't swap
+  // the results screen for the "come back tomorrow" message.
+  if (!topic || !lesson || (!isAccessible && stage === "intro")) {
+    let message = {
+      af: "Jy moet eers die vorige les slaag",
+      en: "You need to pass the previous lesson first",
+    };
+    if (!lesson) {
+      message = { af: "Hierdie les is nog nie gereed nie", en: "This lesson isn't ready yet" };
+    } else if (isWaitingForTomorrow(progress, topicId, index, isTeacher)) {
+      message = {
+        af: `Jy het vandag klaar ${DAILY_NEW_LESSON_LIMIT} nuwe lesse geslaag. Mooi so! Kom môre terug vir hierdie een.`,
+        en: `You've already passed ${DAILY_NEW_LESSON_LIMIT} new lessons today. Well done! Come back tomorrow for this one.`,
+      };
+    }
     return (
       <div className={styles.page}>
-        <BilingualText
-          as="h1"
-          af={isAccessible ? "Hierdie les is nog nie gereed nie" : "Jy moet eers die vorige les slaag"}
-          en={isAccessible ? "This lesson isn't ready yet" : "You need to pass the previous lesson first"}
-        />
+        <BilingualText as="h1" af={message.af} en={message.en} />
         <Button onClick={() => navigate(`/onderwerp/${topicId}`)}>
           Terug na {topic ? topic.title : "Onderwerpe"} (Back)
         </Button>
@@ -164,6 +180,13 @@ function Lesson() {
             </>
           )}
 
+          {result.newlyUnlockedBadge && reachedDailyLimit(progress) && (
+            <BilingualText
+              af={`Dis jou ${DAILY_NEW_LESSON_LIMIT} nuwe lesse vir vandag! Kom môre terug vir meer.`}
+              en={`That's your ${DAILY_NEW_LESSON_LIMIT} new lessons for today! Come back tomorrow for more.`}
+            />
+          )}
+
           {result.correctCount < PASS_THRESHOLD && (
             <BilingualText
               af={`Jy het ten minste ${PASS_THRESHOLD}/10 nodig om die volgende les te ontsluit.`}
@@ -195,4 +218,11 @@ function Lesson() {
   );
 }
 
-export default Lesson;
+// Keyed by the lesson so moving straight to another lesson starts fresh
+// instead of keeping the previous lesson's quiz or results.
+function LessonPage() {
+  const { topicId, lessonIndex } = useParams();
+  return <Lesson key={`${topicId}:${lessonIndex}`} />;
+}
+
+export default LessonPage;
