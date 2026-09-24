@@ -245,6 +245,153 @@ function Turtle() {
   );
 }
 
+function Dragon() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#c9d9ff" />
+      <path d="M30 34 L24 10 L44 26 Z" fill="#ffd166" {...line} />
+      <path d="M70 34 L76 10 L56 26 Z" fill="#ffd166" {...line} />
+      <path d="M40 30 L50 16 L60 30 Z" fill="#f2811d" {...line} />
+      <ellipse cx="50" cy="56" rx="30" ry="27" fill="#5cc26a" {...line} />
+      <ellipse cx="50" cy="69" rx="18" ry="13" fill="#a6e8ab" {...line} strokeWidth="2.5" />
+      <ellipse cx="43" cy="66" rx="2.4" ry="3.4" fill={INK} />
+      <ellipse cx="57" cy="66" rx="2.4" ry="3.4" fill={INK} />
+      <Eye x={37} y={48} />
+      <Eye x={63} y={48} />
+      <path d="M42 75 Q50 81 58 75" fill="none" {...line} strokeWidth="2.5" />
+      <path d="M47 77 L49 82 L51 77 Z" fill="#ffffff" {...line} strokeWidth="1.5" />
+    </>
+  );
+}
+
+function Unicorn() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#ffe0f0" />
+      <path d="M50 4 L43 34 L57 34 Z" fill="#ffd166" {...line} />
+      <path d="M46 24 L54 22 M45 30 L55 28" {...line} strokeWidth="1.8" />
+      <path d="M26 44 L24 22 L42 34 Z" fill="#ffffff" {...line} />
+      <path d="M74 44 L76 22 L58 34 Z" fill="#ffffff" {...line} />
+      <path d="M22 50 Q10 60 16 80 Q24 66 30 60 Z" fill="#b48cff" {...line} />
+      <path d="M78 50 Q90 60 84 80 Q76 66 70 60 Z" fill="#ff8fbb" {...line} />
+      <ellipse cx="50" cy="58" rx="28" ry="26" fill="#ffffff" {...line} />
+      <ellipse cx="50" cy="70" rx="15" ry="11" fill="#ffd6e6" {...line} strokeWidth="2.5" />
+      <ellipse cx="45" cy="70" rx="2" ry="2.6" fill={INK} />
+      <ellipse cx="55" cy="70" rx="2" ry="2.6" fill={INK} />
+      <path d="M32 55 Q38 49 44 55 M56 55 Q62 49 68 55" fill="none" {...line} />
+      <circle cx="30" cy="64" r="4" fill="#ff8fbb" opacity="0.6" />
+      <circle cx="70" cy="64" r="4" fill="#ff8fbb" opacity="0.6" />
+    </>
+  );
+}
+
+function Dinosaur() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#e4d5ff" />
+      <path d="M36 32 L40 20 L46 30 L52 18 L58 30 L64 20 L66 32 Z" fill="#3f9a5b" {...line} />
+      <ellipse cx="50" cy="56" rx="32" ry="26" fill="#5cc26a" {...line} />
+      <path d="M26 44 Q36 38 46 46 M74 44 Q64 38 54 46" fill="none" {...line} strokeWidth="3.5" />
+      <Eye x={37} y={51} r={4.5} />
+      <Eye x={63} y={51} r={4.5} />
+      <circle cx="44" cy="60" r="1.8" fill={INK} />
+      <circle cx="56" cy="60" r="1.8" fill={INK} />
+      <path d="M28 68 Q50 86 72 68 Q50 76 28 68 Z" fill="#c8323c" {...line} strokeWidth="2.5" />
+      <path d="M36 70 L39 75 L42 71 M46 72 L50 77 L54 72 M58 71 L61 75 L64 70" fill="#ffffff" {...line} strokeWidth="2" />
+      <circle cx="26" cy="58" r="3" fill="#3f9a5b" />
+      <circle cx="74" cy="58" r="3" fill="#3f9a5b" />
+    </>
+  );
+}
+
+function Ghost() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#3a4a7a" />
+      <path d="M22 88 L22 46 Q22 14 50 14 Q78 14 78 46 L78 88 L67 79 L58 88 L50 79 L42 88 L33 79 Z" fill="#eaf3ff" {...line} />
+      <path d="M32 46 Q37 40 42 46 M58 46 Q63 40 68 46" fill="none" {...line} />
+      <path d="M36 58 Q50 76 64 58 Z" fill="#c8323c" {...line} />
+      <path d="M45 66 Q50 76 55 66 Q50 63 45 66 Z" fill="#ff7a93" />
+      <circle cx="30" cy="58" r="4.5" fill="#ff8fbb" opacity="0.6" />
+      <circle cx="70" cy="58" r="4.5" fill="#ff8fbb" opacity="0.6" />
+    </>
+  );
+}
+
+function Monster() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#ffe9b8" />
+      <path d="M28 34 L22 14 L40 26 Z" fill="#ffd166" {...line} />
+      <path d="M72 34 L78 14 L60 26 Z" fill="#ffd166" {...line} />
+      <path d="M18 56 Q16 22 50 22 Q84 22 82 56 Q82 88 50 88 Q18 88 18 56 Z" fill="#9b6bff" {...line} />
+      <circle cx="50" cy="42" r="12" fill="#ffffff" {...line} />
+      <circle cx="50" cy="43" r="6" fill={INK} />
+      <circle cx="52" cy="40" r="2" fill="#ffffff" />
+      <circle cx="30" cy="52" r="7" fill="#ffffff" {...line} strokeWidth="2.5" />
+      <circle cx="70" cy="52" r="7" fill="#ffffff" {...line} strokeWidth="2.5" />
+      <circle cx="31" cy="53" r="3.2" fill={INK} />
+      <circle cx="69" cy="53" r="3.2" fill={INK} />
+      <path d="M32 68 Q50 86 68 68 Z" fill="#c8323c" {...line} />
+      <path d="M38 69 L41 75 L44 70 M56 70 L59 75 L62 69" fill="#ffffff" {...line} strokeWidth="2" />
+    </>
+  );
+}
+
+function Wizard() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#d6f0ff" />
+      <path d="M50 4 L72 44 L28 44 Z" fill="#8a5cf6" {...line} />
+      <path d="M50 20 l2.4 5 5.4 .6 -4 3.8 1 5.4 -4.8 -2.7 -4.8 2.7 1 -5.4 -4 -3.8 5.4 -.6 Z" fill="#ffd166" />
+      <ellipse cx="50" cy="46" rx="34" ry="8" fill="#8a5cf6" {...line} />
+      <path d="M30 50 Q50 40 70 50 Q74 74 50 84 Q26 74 30 50 Z" fill="#ffd9b8" {...line} />
+      <path d="M32 66 Q50 96 68 66 Q60 74 50 72 Q40 74 32 66 Z" fill="#f4f4fa" {...line} />
+      <path d="M36 57 Q40 52 44 57 M56 57 Q60 52 64 57" fill="none" {...line} />
+      <ellipse cx="50" cy="63" rx="4" ry="3" fill="#f0a98a" {...line} strokeWidth="2" />
+    </>
+  );
+}
+
+function Robot() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#c9efd2" />
+      <path d="M50 22 L50 10" {...line} />
+      <circle cx="50" cy="8" r="5" fill="#f2811d" {...line} strokeWidth="2.5" />
+      <rect x="18" y="44" width="8" height="18" rx="3" fill="#7f93b8" {...line} strokeWidth="2.5" />
+      <rect x="74" y="44" width="8" height="18" rx="3" fill="#7f93b8" {...line} strokeWidth="2.5" />
+      <rect x="24" y="22" width="52" height="56" rx="14" fill="#b9c9e8" {...line} />
+      <rect x="32" y="36" width="36" height="18" rx="8" fill="#2b2140" />
+      <circle cx="42" cy="45" r="5" fill="#5be3ff" />
+      <circle cx="58" cy="45" r="5" fill="#5be3ff" />
+      <circle cx="43.5" cy="43.5" r="1.8" fill="#ffffff" />
+      <circle cx="59.5" cy="43.5" r="1.8" fill="#ffffff" />
+      <rect x="38" y="62" width="24" height="9" rx="4" fill="#ffffff" {...line} strokeWidth="2.5" />
+      <path d="M44 62 L44 71 M50 62 L50 71 M56 62 L56 71" {...line} strokeWidth="1.8" />
+    </>
+  );
+}
+
+function Alien() {
+  return (
+    <>
+      <circle cx="50" cy="50" r="50" fill="#d9c7ff" />
+      <path d="M34 26 L28 8 M66 26 L72 8" {...line} />
+      <circle cx="27" cy="7" r="4.5" fill="#ffd166" {...line} strokeWidth="2.5" />
+      <circle cx="73" cy="7" r="4.5" fill="#ffd166" {...line} strokeWidth="2.5" />
+      <path d="M50 22 Q82 22 78 54 Q74 86 50 88 Q26 86 22 54 Q18 22 50 22 Z" fill="#8bd28f" {...line} />
+      <ellipse cx="36" cy="52" rx="10" ry="13" fill={INK} transform="rotate(20 36 52)" />
+      <ellipse cx="64" cy="52" rx="10" ry="13" fill={INK} transform="rotate(-20 64 52)" />
+      <circle cx="33" cy="48" r="3" fill="#ffffff" />
+      <circle cx="61" cy="48" r="3" fill="#ffffff" />
+      <path d="M43 74 Q50 80 57 74" fill="none" {...line} />
+      <circle cx="46" cy="64" r="1.2" fill={INK} />
+      <circle cx="54" cy="64" r="1.2" fill={INK} />
+    </>
+  );
+}
+
 export const AVATAR_ICONS = [
   { id: "kat", label: "Kat (Cat)", Icon: Cat },
   { id: "hond", label: "Hond (Dog)", Icon: Dog },
@@ -259,6 +406,14 @@ export const AVATAR_ICONS = [
   { id: "pikkewyn", label: "Pikkewyn (Penguin)", Icon: Penguin },
   { id: "koala", label: "Koala", Icon: Koala },
   { id: "skilpad", label: "Skilpad (Turtle)", Icon: Turtle },
+  { id: "draak", label: "Draak (Dragon)", Icon: Dragon },
+  { id: "eenhoring", label: "Eenhoring (Unicorn)", Icon: Unicorn },
+  { id: "dinosourus", label: "Dinosourus (Dinosaur)", Icon: Dinosaur },
+  { id: "spook", label: "Spook (Ghost)", Icon: Ghost },
+  { id: "monster", label: "Monster", Icon: Monster },
+  { id: "towenaar", label: "Towenaar (Wizard)", Icon: Wizard },
+  { id: "robot", label: "Robot", Icon: Robot },
+  { id: "ruimtemannetjie", label: "Ruimtemannetjie (Alien)", Icon: Alien },
 ];
 
 const PREFIX = "avatar:";
