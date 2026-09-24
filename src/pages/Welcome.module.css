@@ -54,3 +54,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+.brandPurple {
+  color: var(--color-brand-purple);
+}
+
+.brandOrange {
+  color: var(--color-brand-orange);
+}
