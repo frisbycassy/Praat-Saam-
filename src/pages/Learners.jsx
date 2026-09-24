@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { Check, Flame } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
 import { badges } from "../data/badges";
@@ -7,7 +8,16 @@ import Card from "../components/Card";
 import Avatar from "../components/Avatar";
 import BilingualText from "../components/BilingualText";
 import { getFullName, getDisplayName } from "../utils/user";
+import { liveStreak, rollDueForward } from "../utils/schoolDay";
 import styles from "./Learners.module.css";
+
+function formatDay(dateString) {
+  return new Date(`${dateString}T00:00:00`).toLocaleDateString("en-ZA", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  });
+}
 
 function Learners() {
   const { user } = useAuth();
@@ -44,6 +54,14 @@ function Learners() {
           photoUrl: profile.photo_url || null,
           points: progress?.points ?? 0,
           badgeCount: (progress?.badges || []).length,
+          streak: liveStreak(progress?.streak_count ?? 0, progress?.streak_last_date ?? null),
+          lastActive: progress?.streak_last_date ?? null,
+          // Roll forward from the last check so learners who haven't logged in
+          // recently still show the tasks they've missed since.
+          missedTasks: rollDueForward({
+            owed: progress?.due_owed ?? 0,
+            lastDate: progress?.due_last_date ?? null,
+          }).owed,
         };
       });
       setLearners(merged);
@@ -80,6 +98,30 @@ function Learners() {
             <Avatar name={getDisplayName(learner)} photoUrl={learner.photoUrl} size={56} />
             <div className={styles.info}>
               <BilingualText as="h3" af={getFullName(learner) || learner.username} en={learner.email} />
+              <div className={styles.status}>
+                {learner.missedTasks === 0 ? (
+                  <span className={styles.upToDate}>
+                    <span className={styles.tick}>
+                      <Check size={12} strokeWidth={3.5} aria-hidden="true" />
+                    </span>
+                    Op datum (Up to date)
+                  </span>
+                ) : (
+                  <span className={styles.missed}>
+                    {learner.missedTasks} {learner.missedTasks === 1 ? "taak" : "take"} gemis (
+                    {learner.missedTasks === 1 ? "task" : "tasks"} missed)
+                  </span>
+                )}
+                <span className={styles.streak}>
+                  <Flame size={14} aria-hidden="true" />
+                  {learner.streak} {learner.streak === 1 ? "dag" : "dae"} vlam (day streak)
+                </span>
+                <span className={styles.lastActive}>
+                  {learner.lastActive
+                    ? `Laas aktief (Last active): ${formatDay(learner.lastActive)}`
+                    : "Nog nie aktief nie (Not active yet)"}
+                </span>
+              </div>
               <div className={styles.stats}>
                 <span>{learner.points} punte (points)</span>
                 <span>
