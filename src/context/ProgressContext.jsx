@@ -84,7 +84,8 @@ export function ProgressProvider({ children }) {
         },
       };
       if (!error && user.role === "learner") {
-        const due = rollDueForward(loaded.due);
+        const joinDate = user.createdAt ? localDateString(new Date(user.createdAt)) : null;
+        const due = rollDueForward(loaded.due, localDateString(), joinDate);
         if (due !== loaded.due) {
           loaded = { ...loaded, due };
           supabase
