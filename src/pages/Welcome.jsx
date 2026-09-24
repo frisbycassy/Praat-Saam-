@@ -13,7 +13,12 @@ function Welcome() {
         <Logo size={110} />
         <BilingualText
           as="h1"
-          af="Praat Saam! Leer Afrikaans"
+          af={
+            <>
+              <span className={styles.brandPurple}>Praat</span>{" "}
+              <span className={styles.brandOrange}>Saam!</span> Leer Afrikaans
+            </>
+          }
           en="Speak Along! Learn Afrikaans"
         />
         <BilingualText
