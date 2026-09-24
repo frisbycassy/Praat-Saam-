@@ -1,6 +1,6 @@
 .wrap {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-sm);
 }
 
@@ -14,4 +14,30 @@
 .hint {
   font-size: 0.75rem;
   color: var(--color-text-muted);
+}
+
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 52px);
+  gap: 0.5rem;
+  max-width: 300px;
+  margin-top: 0.35rem;
+}
+
+.iconOption {
+  padding: 0;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.iconOption:hover {
+  transform: scale(1.08);
+}
+
+.iconChosen {
+  border-color: var(--color-brand-purple);
 }
