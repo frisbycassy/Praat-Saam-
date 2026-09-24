@@ -1,7 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
-import { CalendarCheck, GraduationCap, Home, LayoutGrid, LogOut, User, Users } from "lucide-react";
+import {
+  CalendarCheck,
+  Check,
+  GraduationCap,
+  Home,
+  LayoutGrid,
+  LogOut,
+  User,
+  Users,
+} from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
+import { isSchoolDay } from "../utils/schoolDay";
 import { getDisplayName } from "../utils/user";
 import Avatar from "./Avatar";
 import StreakFlame from "./StreakFlame";
@@ -10,7 +20,7 @@ import styles from "./Navbar.module.css";
 
 function Navbar() {
   const { user, logout } = useAuth();
-  const { progress } = useProgress();
+  const { progress, isReady } = useProgress();
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -39,8 +49,15 @@ function Navbar() {
           {!isTeacher && (
             <Link to="/verskuldig" className={styles.pill}>
               <CalendarCheck size={16} aria-hidden="true" />
-              <span className="label">Vandag Verskuldig (Due Today)</span>
-              {progress.due.owed > 0 && <span className={styles.dueCount}>{progress.due.owed}</span>}
+              <span className="label">Take (Tasks)</span>
+              {isReady && progress.due.owed === 0 && (
+                <span className={styles.dueDone} aria-label="Alles klaar (All done)">
+                  <Check size={12} strokeWidth={3.5} aria-hidden="true" />
+                </span>
+              )}
+              {isReady && progress.due.owed > 0 && isSchoolDay() && (
+                <span className={styles.dueCount}>{progress.due.owed}</span>
+              )}
             </Link>
           )}
           <Link to="/onderwerpe" className={styles.pill}>

@@ -64,6 +64,17 @@
   justify-content: center;
 }
 
+.dueDone {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background-color: var(--color-brand-purple);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* A plain role label (e.g. "Onderwyser"/"Leerder") - not a button, so it
    skips the pill's background/border to avoid looking clickable. */
 .roleLabel {
