@@ -24,7 +24,7 @@ function Avatar({ name, photoUrl, size = 36 }) {
         <preset.Icon />
       </svg>
     );
-  } else if (photoUrl) {
+  } else if (photoUrl && !photoUrl.startsWith("avatar:")) {
     content = <img src={photoUrl} alt="" />;
   }
 
