@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { topics } from "../data/topics";
 import { useProgress } from "../context/ProgressContext";
+import { useAuth } from "../context/AuthContext";
 import { TOPIC_ICONS } from "../utils/topicIcons";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
@@ -11,11 +12,16 @@ const LESSONS_PER_TOPIC = 5;
 function TopicsOverview() {
   const navigate = useNavigate();
   const { progress } = useProgress();
+  const { user } = useAuth();
+  const isTeacher = user.role === "teacher";
 
   return (
     <div className={styles.page}>
       <BilingualText as="h1" af="Onderwerpe" en="Topics" />
-      <BilingualText af="Kies 'n onderwerp om te begin oefen." en="Choose a topic to start practising." />
+      <BilingualText
+        af={isTeacher ? "Kies 'n onderwerp om die lesse te bekyk." : "Kies 'n onderwerp om te begin oefen."}
+        en={isTeacher ? "Choose a topic to view its lessons." : "Choose a topic to start practising."}
+      />
 
       <div className={styles.grid}>
         {topics.map((topic) => {
@@ -32,7 +38,9 @@ function TopicsOverview() {
               <div className={styles.topicInfo}>
                 <BilingualText as="h3" af={topic.title} en={topic.englishTitle} />
                 <span className={styles.progress}>
-                  {completedCount} / {LESSONS_PER_TOPIC} lesse (lessons)
+                  {isTeacher
+                    ? `${LESSONS_PER_TOPIC} lesse (lessons)`
+                    : `${completedCount} / ${LESSONS_PER_TOPIC} lesse (lessons)`}
                 </span>
               </div>
             </Card>

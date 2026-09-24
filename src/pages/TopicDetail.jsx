@@ -39,23 +39,33 @@ function TopicDetail() {
       </Button>
 
       <BilingualText as="h1" af={topic.title} en={topic.englishTitle} />
-      <BilingualText
-        af={`Kry ten minste ${PASS_THRESHOLD}/10 reg om die volgende les te ontsluit.`}
-        en={`Score at least ${PASS_THRESHOLD}/10 to unlock the next lesson.`}
-      />
+      {isTeacher ? (
+        <BilingualText
+          af="Bekyk al die lesse wat leerders doen."
+          en="View all the lessons the learners do."
+        />
+      ) : (
+        <BilingualText
+          af={`Kry ten minste ${PASS_THRESHOLD}/10 reg om die volgende les te ontsluit.`}
+          en={`Score at least ${PASS_THRESHOLD}/10 to unlock the next lesson.`}
+        />
+      )}
 
       <div className={styles.list}>
         {badges.map((badge, index) => {
           const lesson = findLesson(topic.id, index);
           const hasContent = Boolean(lesson);
           const isUnlocked = canAccessLesson(progress, topic.id, index, isTeacher);
-          const isCompleted = progress.completedLessons.includes(badge.id);
-          const passed = isLessonPassed(progress, topic.id, index);
+          // Teachers only view lessons, so no completed or passed marks for them.
+          const isCompleted = !isTeacher && progress.completedLessons.includes(badge.id);
+          const passed = !isTeacher && isLessonPassed(progress, topic.id, index);
           const score = progress.lessonScores[badge.id];
 
           let statusLabel = null;
           if (!hasContent) {
             statusLabel = isTeacher ? "Voorskou (Preview)" : "Kom binnekort (Coming soon)";
+          } else if (isTeacher) {
+            statusLabel = "Bekyk (View)";
           } else if (!isUnlocked) {
             statusLabel = `Slaag Les ${index} eers (Pass Lesson ${index} first)`;
           } else if (isCompleted) {
