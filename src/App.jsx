@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Learners from "./pages/Learners";
 import Teacher from "./pages/Teacher";
 import DueToday from "./pages/DueToday";
+import Donate from "./pages/Donate";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/aanmeld" element={<Login />} />
         <Route path="/registreer" element={<Signup />} />
+        <Route path="/skenk" element={<Donate />} />
         <Route
           path="/tuisblad"
           element={

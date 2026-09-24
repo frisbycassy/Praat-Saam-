@@ -3,6 +3,7 @@ import {
   CalendarCheck,
   Check,
   GraduationCap,
+  Heart,
   Home,
   LayoutGrid,
   LogOut,
@@ -50,6 +51,15 @@ function Navbar() {
       </Link>
 
       {user && <HolidayBanner />}
+
+      {!user && (
+        <div className={styles.right}>
+          <Link to="/skenk" className={pillClass("/skenk")}>
+            <Heart size={16} aria-hidden="true" />
+            <span className="label">Skenk (Donate)</span>
+          </Link>
+        </div>
+      )}
 
       {user && (
         <div className={styles.right}>
@@ -99,6 +109,10 @@ function Navbar() {
               <StreakFlame count={progress.streak.count} size={30} />
             </>
           )}
+          <Link to="/skenk" className={pillClass("/skenk")}>
+            <Heart size={16} aria-hidden="true" />
+            <span className="label">Skenk (Donate)</span>
+          </Link>
           <Link to="/profiel" aria-label="Profiel (Profile)">
             <Avatar name={getDisplayName(user)} photoUrl={user.photoUrl} />
           </Link>
