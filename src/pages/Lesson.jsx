@@ -51,7 +51,7 @@ function Lesson() {
 
   return (
     <div className={styles.page}>
-      <Button variant="ghost" className={styles.back} onClick={() => navigate(`/onderwerp/${topicId}`)}>
+      <Button variant="accent" className={styles.back} onClick={() => navigate(`/onderwerp/${topicId}`)}>
         &larr; Terug na {topic.title} (Back)
       </Button>
 

@@ -54,3 +54,15 @@
 .ghost:not(:disabled):hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+
+.accent {
+  background-color: var(--color-brand-orange);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.accent:not(:disabled):hover {
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-md);
+}
