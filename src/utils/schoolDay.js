@@ -21,7 +21,7 @@ function keyOf(date) {
   return `${date.getMonth() + 1}-${date.getDate()}`;
 }
 
-// South African public holidays for a year, as "month-day" -> Afrikaans name.
+// South African public holidays for a year, as "month-day" -> { af, en } names.
 // A holiday that lands on a Sunday is observed on the Monday after.
 const holidayCache = {};
 function holidaysForYear(year) {
@@ -29,33 +29,38 @@ function holidaysForYear(year) {
   const easter = easterSunday(year);
   const fromEaster = (days) => new Date(year, easter.getMonth(), easter.getDate() + days);
   const holidays = [
-    [new Date(year, 0, 1), "Nuwejaarsdag"],
-    [new Date(year, 2, 21), "Menseregtedag"],
-    [fromEaster(-2), "Goeie Vrydag"],
-    [fromEaster(1), "Gesinsdag"],
-    [new Date(year, 3, 27), "Vryheidsdag"],
-    [new Date(year, 4, 1), "Werkersdag"],
-    [new Date(year, 5, 16), "Jeugdag"],
-    [new Date(year, 7, 9), "Nasionale Vrouedag"],
-    [new Date(year, 8, 24), "Erfenisdag"],
-    [new Date(year, 11, 16), "Versoeningsdag"],
-    [new Date(year, 11, 25), "Kersdag"],
-    [new Date(year, 11, 26), "Welwillendheidsdag"],
+    [new Date(year, 0, 1), "Nuwejaarsdag", "New Year's Day"],
+    [new Date(year, 2, 21), "Menseregtedag", "Human Rights Day"],
+    [fromEaster(-2), "Goeie Vrydag", "Good Friday"],
+    [fromEaster(1), "Gesinsdag", "Family Day"],
+    [new Date(year, 3, 27), "Vryheidsdag", "Freedom Day"],
+    [new Date(year, 4, 1), "Werkersdag", "Workers' Day"],
+    [new Date(year, 5, 16), "Jeugdag", "Youth Day"],
+    [new Date(year, 7, 9), "Nasionale Vrouedag", "National Women's Day"],
+    [new Date(year, 8, 24), "Erfenisdag", "Heritage Day"],
+    [new Date(year, 11, 16), "Versoeningsdag", "Day of Reconciliation"],
+    [new Date(year, 11, 25), "Kersdag", "Christmas Day"],
+    [new Date(year, 11, 26), "Welwillendheidsdag", "Day of Goodwill"],
   ];
   const map = {};
-  for (const [date, name] of holidays) {
-    map[keyOf(date)] = name;
+  for (const [date, name, english] of holidays) {
+    map[keyOf(date)] = { af: name, en: english };
     if (date.getDay() === 0) {
-      map[keyOf(new Date(year, date.getMonth(), date.getDate() + 1))] = `${name} (vakansiedag)`;
+      map[keyOf(new Date(year, date.getMonth(), date.getDate() + 1))] = { af: name, en: english };
     }
   }
   holidayCache[year] = map;
   return map;
 }
 
-// The Afrikaans name of the South African public holiday on this day, or null.
-export function publicHolidayName(date = new Date()) {
+// The public holiday on this day as { af, en } names, or null.
+export function publicHoliday(date = new Date()) {
   return holidaysForYear(date.getFullYear())[keyOf(date)] ?? null;
+}
+
+// The Afrikaans name of the public holiday on this day, or null.
+export function publicHolidayName(date = new Date()) {
+  return publicHoliday(date)?.af ?? null;
 }
 
 // Tasks are only due Monday to Friday, and not on public holidays - children
