@@ -11,6 +11,7 @@ import Lesson from "./pages/Lesson";
 import Profile from "./pages/Profile";
 import Learners from "./pages/Learners";
 import Teacher from "./pages/Teacher";
+import DueToday from "./pages/DueToday";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -66,6 +67,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Learners />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/verskuldig"
+          element={
+            <ProtectedRoute>
+              <DueToday />
             </ProtectedRoute>
           }
         />

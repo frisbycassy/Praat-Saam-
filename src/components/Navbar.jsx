@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { GraduationCap, Home, LayoutGrid, LogOut, User, Users } from "lucide-react";
+import { CalendarCheck, GraduationCap, Home, LayoutGrid, LogOut, User, Users } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { getDisplayName } from "../utils/user";
@@ -36,6 +36,13 @@ function Navbar() {
             <Home size={16} aria-hidden="true" />
             <span className="label">Huis</span>
           </Link>
+          {!isTeacher && (
+            <Link to="/verskuldig" className={styles.pill}>
+              <CalendarCheck size={16} aria-hidden="true" />
+              <span className="label">Vandag Verskuldig (Due Today)</span>
+              {progress.due.owed > 0 && <span className={styles.dueCount}>{progress.due.owed}</span>}
+            </Link>
+          )}
           <Link to="/onderwerpe" className={styles.pill}>
             <LayoutGrid size={16} aria-hidden="true" />
             <span className="label">Onderwerpe</span>
