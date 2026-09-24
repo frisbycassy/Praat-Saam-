@@ -43,7 +43,7 @@ function DueToday() {
 
   return (
     <div className={styles.page}>
-      <BilingualText as="h1" af="Take" en="Tasks" />
+      <BilingualText as="h1" af="Take" />
 
       <Card className={styles.summary}>
         {!schoolDay && owed > 0 ? (
