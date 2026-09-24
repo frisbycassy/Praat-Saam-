@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useProgress } from "../context/ProgressContext";
 import { topics } from "../data/topics";
 import { findLesson } from "../data/lessons";
-import { canAccessLesson, isLessonPassed } from "../utils/lessonAccess";
+import { canAccessLesson, isLessonPassed, PASS_THRESHOLD } from "../utils/lessonAccess";
 import Card from "../components/Card";
 import BilingualText from "../components/BilingualText";
 import styles from "./DueToday.module.css";
@@ -35,6 +35,8 @@ function DueToday() {
 
   const owed = progress.due.owed;
   const choices = nextLessonsToDo(progress);
+  const today = new Date().getDay();
+  const nextIsMonday = today === 5 || today === 6 || today === 0;
 
   return (
     <div className={styles.page}>
@@ -54,13 +56,17 @@ function DueToday() {
                 up.)
               </p>
             )}
+            <p className={styles.note}>
+              Slaag 'n nuwe les met ten minste {PASS_THRESHOLD}/10 om een af te merk. (Pass a new
+              lesson with at least {PASS_THRESHOLD}/10 to tick one off.)
+            </p>
           </>
         ) : (
           <>
             <CheckCircle2 size={44} className={styles.done} aria-hidden="true" />
             <BilingualText
-              af="Jy is klaar vir vandag! Kom môre terug."
-              en="You're all done for today! Come back tomorrow."
+              af={`Jy is klaar vir vandag! Kom ${nextIsMonday ? "Maandag" : "môre"} terug.`}
+              en={`You're all done for today! Come back ${nextIsMonday ? "on Monday" : "tomorrow"}.`}
             />
           </>
         )}

@@ -1,7 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { PASS_THRESHOLD } from "../utils/lessonAccess";
+import { topics } from "../data/topics";
+import { lessonCountForTopic } from "../data/lessons";
 import { useAuth } from "./AuthContext";
 import { supabase } from "../lib/supabaseClient";
+
+const totalWrittenLessons = topics.reduce((sum, topic) => sum + lessonCountForTopic(topic.id), 0);
 
 // Progress now lives in Supabase, keyed to the signed-in user, so it
 // follows a learner to any device instead of staying on one browser.
@@ -55,13 +59,31 @@ function localDateString() {
   return `${now.getFullYear()}-${month}-${day}`;
 }
 
-// Adds one owed lesson for each day since the last check (or one to
-// start, the first time).
+function isWeekday(date) {
+  const day = date.getDay();
+  return day >= 1 && day <= 5;
+}
+
+// Adds one owed lesson for each school day (Monday to Friday) since the
+// last check. Weekends add nothing. The first time, today counts if it's
+// a weekday.
 function rollDueForward(due) {
   const today = localDateString();
   if (due.lastDate === today) return due;
-  if (!due.lastDate) return { owed: due.owed + 1, lastDate: today };
-  return { owed: due.owed + daysBetween(due.lastDate, today), lastDate: today };
+
+  const todayDate = new Date(`${today}T00:00:00`);
+  if (!due.lastDate) {
+    return { owed: due.owed + (isWeekday(todayDate) ? 1 : 0), lastDate: today };
+  }
+
+  let added = 0;
+  const day = new Date(`${due.lastDate}T00:00:00`);
+  day.setDate(day.getDate() + 1);
+  while (day <= todayDate) {
+    if (isWeekday(day)) added++;
+    day.setDate(day.getDate() + 1);
+  }
+  return { owed: due.owed + added, lastDate: today };
 }
 
 function daysBetween(a, b) {
@@ -167,13 +189,20 @@ export function ProgressProvider({ children }) {
     const newlyUnlockedBadge = hasPassed && !progress.badges.includes(lessonKey) ? lessonKey : null;
     const badges = newlyUnlockedBadge ? [...progress.badges, newlyUnlockedBadge] : progress.badges;
 
+    // Only a pass on a lesson not passed before pays off a due lesson. Once
+    // every lesson is passed there's nothing new left, so any pass counts.
+    const allLessonsPassed = badges.length >= totalWrittenLessons;
+    const paysOffDue = hasPassed && (newlyUnlockedBadge !== null || allLessonsPassed);
+
     const next = {
       ...progress,
       points: progress.points + pointsEarned,
       completedLessons: nextCompletedLessons,
       badges,
       lessonScores,
-      due: { ...progress.due, owed: Math.max(0, progress.due.owed - 1) },
+      due: paysOffDue
+        ? { ...progress.due, owed: Math.max(0, progress.due.owed - 1) }
+        : progress.due,
     };
     setProgress(next);
     persist(next);
