@@ -49,7 +49,7 @@ function Navbar() {
           {!isTeacher && (
             <Link to="/verskuldig" className={styles.pill}>
               <CalendarCheck size={16} aria-hidden="true" />
-              <span className="label">Take (Tasks)</span>
+              <span className="label">Take</span>
               {isReady && progress.due.owed === 0 && (
                 <span className={styles.dueDone} aria-label="Alles klaar (All done)">
                   <Check size={12} strokeWidth={3.5} aria-hidden="true" />
