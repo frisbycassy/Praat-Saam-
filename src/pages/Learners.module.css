@@ -27,7 +27,7 @@
 }
 
 .info {
-  flex: 1 1 220px;
+  flex: 1 1 140px;
   min-width: 0;
 }
 
@@ -36,7 +36,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.5rem var(--space-md);
+  gap: 0.5rem 0.75rem;
   font-size: 0.85rem;
   font-weight: 700;
 }
@@ -47,7 +47,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.4rem;
-  width: 7.5rem;
+  width: 6.75rem;
 }
 
 .upToDate {
@@ -77,9 +77,10 @@
 }
 
 .lastActive {
-  width: 10.5rem;
+  width: 11rem;
+  white-space: nowrap;
 }
 
 .stat {
-  width: 6.5rem;
+  width: 6rem;
 }
