@@ -77,7 +77,34 @@ function Lesson() {
             <p className={`${styles.passage} ${styles.enText}`}>{lesson.passage.en}</p>
           </Card>
 
-          <Button onClick={() => setStage("quiz")}>Begin Vasvra (Start Quiz)</Button>
+          {isTeacher ? (
+            <Card className={styles.section}>
+              <BilingualText
+                as="h3"
+                af="Vasvraag (Onderwyser-aansig)"
+                en="Quiz questions (teacher view - the correct answer is highlighted)"
+              />
+              <ol className={styles.questionList}>
+                {lesson.questions.map((question) => (
+                  <li key={question.af} className={styles.questionItem}>
+                    <span className={styles.questionText}>{question.af}</span>
+                    <ul className={styles.optionList}>
+                      {question.options.map((option, optionIndex) => (
+                        <li
+                          key={option}
+                          className={optionIndex === question.correctIndex ? styles.correctOption : undefined}
+                        >
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ol>
+            </Card>
+          ) : (
+            <Button onClick={() => setStage("quiz")}>Begin Vasvra (Start Quiz)</Button>
+          )}
         </>
       )}
 
