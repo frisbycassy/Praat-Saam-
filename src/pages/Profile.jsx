@@ -11,6 +11,7 @@ import StreakFlame from "../components/StreakFlame";
 import Avatar from "../components/Avatar";
 import PhotoPicker from "../components/PhotoPicker";
 import Button from "../components/Button";
+import ClassSummary from "../components/ClassSummary";
 import { getFullName, getDisplayName } from "../utils/user";
 import { TITLES } from "../data/titles";
 import styles from "./Profile.module.css";
@@ -115,37 +116,41 @@ function Profile() {
         )}
       </Card>
 
-      <div className={styles.statsRow}>
-        <Card className={styles.statCard}>
-          <span className={styles.statValue}>
-            {progress.points}/{totalPossiblePoints()}
-          </span>
-          <BilingualText af="Punte" en="Points" />
-        </Card>
-        <Card className={styles.statCard}>
-          <span className={styles.statValue}>
-            {progress.badges.length}/{badges.length}
-          </span>
-          <BilingualText af="Kentekens Ontsluit" en="Badges Unlocked" />
-        </Card>
-        {!isTeacher && (
-          <Card className={styles.statCard}>
-            <StreakFlame count={progress.streak.count} size={48} />
-            <BilingualText af="Dae Vlam" en="Day Streak" />
-          </Card>
-        )}
-      </div>
+      {isTeacher ? (
+        <ClassSummary />
+      ) : (
+        <>
+          <div className={styles.statsRow}>
+            <Card className={styles.statCard}>
+              <span className={styles.statValue}>
+                {progress.points}/{totalPossiblePoints()}
+              </span>
+              <BilingualText af="Punte" en="Points" />
+            </Card>
+            <Card className={styles.statCard}>
+              <span className={styles.statValue}>
+                {progress.badges.length}/{badges.length}
+              </span>
+              <BilingualText af="Kentekens Ontsluit" en="Badges Unlocked" />
+            </Card>
+            <Card className={styles.statCard}>
+              <StreakFlame count={progress.streak.count} size={48} />
+              <BilingualText af="Dae Vlam" en="Day Streak" />
+            </Card>
+          </div>
 
-      <Card className={styles.stickerCard}>
-        <BilingualText
-          as="h3"
-          af={`Al My Kentekens (${progress.badges.length}/${badges.length})`}
-          en="All My Badges"
-        />
-        {topics.map((topic) => (
-          <TopicBadgeRow key={topic.id} topic={topic} unlockedBadgeIds={progress.badges} />
-        ))}
-      </Card>
+          <Card className={styles.stickerCard}>
+            <BilingualText
+              as="h3"
+              af={`Al My Kentekens (${progress.badges.length}/${badges.length})`}
+              en="All My Badges"
+            />
+            {topics.map((topic) => (
+              <TopicBadgeRow key={topic.id} topic={topic} unlockedBadgeIds={progress.badges} />
+            ))}
+          </Card>
+        </>
+      )}
     </div>
   );
 }
