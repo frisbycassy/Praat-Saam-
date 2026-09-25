@@ -103,7 +103,7 @@ function DonationDetails() {
 
   return (
     <>
-      <Card className={styles.section}>
+      <Card className={`${styles.section} ${styles.highlight}`}>
         <BilingualText
           af="Praat Saam! is en bly gratis vir elke leerder. As jy die onderwyser graag wil ondersteun, is 'n skenking baie welkom, maar glad nie nodig nie."
           en="Praat Saam! is and stays free for every learner. If you'd like to support the teacher, a donation is very welcome, but never required."
