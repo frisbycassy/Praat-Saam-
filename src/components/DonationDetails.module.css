@@ -124,17 +124,12 @@
   align-self: flex-start;
 }
 
-/* The free-to-use message, in brand orange so it stands out. */
-.section.highlight {
-  background-color: var(--color-brand-orange);
-  border-color: var(--color-brand-orange);
-}
-
+/* The free-to-use message, in orange text so it stands out. */
 .highlight p {
-  color: #ffffff;
+  color: var(--color-brand-orange);
 }
 
 /* The English line under each Afrikaans one. */
 .highlight p + p {
-  color: rgba(255, 255, 255, 0.88);
+  opacity: 0.85;
 }
