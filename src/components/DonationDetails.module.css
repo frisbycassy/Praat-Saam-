@@ -123,3 +123,18 @@
 .editButton {
   align-self: flex-start;
 }
+
+/* The free-to-use message, in brand orange so it stands out. */
+.section.highlight {
+  background-color: var(--color-brand-orange);
+  border-color: var(--color-brand-orange);
+}
+
+.highlight p {
+  color: #ffffff;
+}
+
+/* The English line under each Afrikaans one. */
+.highlight p + p {
+  color: rgba(255, 255, 255, 0.88);
+}
