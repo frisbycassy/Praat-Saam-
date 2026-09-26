@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, Copy, Landmark } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
 import Card from "./Card";
@@ -54,6 +54,8 @@ function DonationDetails() {
 
   const [details, setDetails] = useState(EMPTY_DETAILS);
   const [loading, setLoading] = useState(true);
+  // The banking details stay tucked away until someone asks to see them.
+  const [showDetails, setShowDetails] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(EMPTY_DETAILS);
   const [saveError, setSaveError] = useState("");
@@ -109,70 +111,85 @@ function DonationDetails() {
           en="Praat Saam! is and stays free for every learner. If you'd like to support the teacher, a donation is very welcome, but never required."
         />
         <BilingualText af="Baie dankie vir jou ondersteuning!" en="Thank you for your support!" />
+        <Button
+          variant="accent"
+          className={styles.showButton}
+          onClick={() => setShowDetails((shown) => !shown)}
+          aria-expanded={showDetails}
+        >
+          <Landmark size={18} aria-hidden="true" />
+          {showDetails
+            ? "Versteek Bankbesonderhede (Hide Banking Details)"
+            : "Wys Bankbesonderhede (Show Banking Details)"}
+          {showDetails ? (
+            <ChevronUp size={18} aria-hidden="true" />
+          ) : (
+            <ChevronDown size={18} aria-hidden="true" />
+          )}
+        </Button>
       </Card>
 
-      <Card className={styles.section}>
-        <BilingualText as="h3" af="Bankbesonderhede" en="Banking Details" />
+      {showDetails && (
+        <Card className={styles.section}>
+          <BilingualText as="h3" af="Bankbesonderhede" en="Banking Details" />
 
-        {loading ? (
-          <BilingualText af="Laai..." en="Loading..." />
-        ) : isEditing ? (
-          <form className={styles.form} onSubmit={handleSave}>
-            {FIELDS.map((field) => (
-              <div key={field.key} className={styles.field}>
-                <label htmlFor={`donate-${field.key}`}>
-                  {field.af} ({field.en})
-                </label>
-                <input
-                  id={`donate-${field.key}`}
-                  type="text"
-                  value={draft[field.key]}
-                  onChange={(event) => setDraft({ ...draft, [field.key]: event.target.value })}
-                />
+          {loading ? (
+            <BilingualText af="Laai..." en="Loading..." />
+          ) : isEditing ? (
+            <form className={styles.form} onSubmit={handleSave}>
+              {FIELDS.map((field) => (
+                <div key={field.key} className={styles.field}>
+                  <label htmlFor={`donate-${field.key}`}>
+                    {field.af} ({field.en})
+                  </label>
+                  <input
+                    id={`donate-${field.key}`}
+                    type="text"
+                    value={draft[field.key]}
+                    onChange={(event) => setDraft({ ...draft, [field.key]: event.target.value })}
+                  />
+                </div>
+              ))}
+              <p className={styles.note}>
+                Hierdie besonderhede is sigbaar vir enigiemand met die skakel na die webwerf. (These
+                details are visible to anyone with the link to the website.)
+              </p>
+              {saveError && <p className={styles.error}>{saveError}</p>}
+              <div className={styles.actions}>
+                <Button type="submit" disabled={isSaving}>
+                  {isSaving ? "Stoor..." : "Stoor (Save)"}
+                </Button>
+                <Button type="button" variant="ghost" onClick={() => setIsEditing(false)}>
+                  Kanselleer (Cancel)
+                </Button>
               </div>
-            ))}
-            <p className={styles.note}>
-              Hierdie besonderhede is sigbaar vir enigiemand met die skakel na die webwerf. (These
-              details are visible to anyone with the link to the website.)
-            </p>
-            {saveError && <p className={styles.error}>{saveError}</p>}
-            <div className={styles.actions}>
-              <Button type="submit" disabled={isSaving}>
-                {isSaving ? "Stoor..." : "Stoor (Save)"}
-              </Button>
-              <Button type="button" variant="ghost" onClick={() => setIsEditing(false)}>
-                Kanselleer (Cancel)
-              </Button>
-            </div>
-          </form>
-        ) : hasDetails ? (
-          <dl className={styles.details}>
-            {FIELDS.filter((field) => details[field.key]).map((field) => (
-              <div key={field.key} className={styles.row}>
-                <dt>
-                  <span>{field.af}</span>
-                  <span className={styles.en}>{field.en}</span>
-                </dt>
-                <dd>
-                  <span className={styles.value}>{details[field.key]}</span>
-                  {field.copy && <CopyButton value={details[field.key]} />}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        ) : (
-          <BilingualText
-            af="Bankbesonderhede kom binnekort."
-            en="Banking details coming soon."
-          />
-        )}
+            </form>
+          ) : hasDetails ? (
+            <dl className={styles.details}>
+              {FIELDS.filter((field) => details[field.key]).map((field) => (
+                <div key={field.key} className={styles.row}>
+                  <dt>
+                    <span>{field.af}</span>
+                    <span className={styles.en}>{field.en}</span>
+                  </dt>
+                  <dd>
+                    <span className={styles.value}>{details[field.key]}</span>
+                    {field.copy && <CopyButton value={details[field.key]} />}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <BilingualText af="Bankbesonderhede kom binnekort." en="Banking details coming soon." />
+          )}
 
-        {isTeacher && !isEditing && !loading && (
-          <Button variant="secondary" className={styles.editButton} onClick={startEditing}>
-            Wysig Bankbesonderhede (Edit Banking Details)
-          </Button>
-        )}
-      </Card>
+          {isTeacher && !isEditing && !loading && (
+            <Button variant="secondary" className={styles.editButton} onClick={startEditing}>
+              Wysig Bankbesonderhede (Edit Banking Details)
+            </Button>
+          )}
+        </Card>
+      )}
     </>
   );
 }

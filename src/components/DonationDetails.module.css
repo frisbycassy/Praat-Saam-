@@ -133,3 +133,7 @@
 .highlight p + p {
   opacity: 0.85;
 }
+
+.showButton {
+  align-self: flex-start;
+}
